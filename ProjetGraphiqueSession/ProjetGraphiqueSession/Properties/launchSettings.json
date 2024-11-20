@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ProjetGraphiqueSession (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ProjetGraphiqueSession (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
