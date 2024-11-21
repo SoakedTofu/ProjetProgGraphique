@@ -30,3 +30,4 @@ CREATE TRIGGER after_insert_adherents_seances_noteappreciation
             SET nbPlaces = nbPlaces + 1;
     END;
 DELIMITER //
+
