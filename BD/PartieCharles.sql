@@ -31,3 +31,4 @@ CREATE TRIGGER after_insert_adherents_seances_noteappreciation
     END;
 DELIMITER //
 
+
