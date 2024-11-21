@@ -59,3 +59,4 @@ CREATE TABLE Seances_Adherents_NoteAppreciation (
   CONSTRAINT fk_SANA_Seances FOREIGN KEY (idSeance) REFERENCES Seances(idSeance),
   CONSTRAINT fk_SANA_Adherents FOREIGN KEY (numeroIdentification) REFERENCES Adherents(numeroIdentification)
 );
+
