@@ -28,26 +28,23 @@
         <mxCell id="BuNsxfQuBpjJDQfjEr5u-9" value="Administrateur" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="450" y="290" width="140" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="BuNsxfQuBpjJDQfjEr5u-10" value="&lt;u&gt;nomUtilisateur&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="BuNsxfQuBpjJDQfjEr5u-9">
+        <mxCell id="BuNsxfQuBpjJDQfjEr5u-10" value="&lt;u&gt;nomAdministrateur&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="BuNsxfQuBpjJDQfjEr5u-9">
           <mxGeometry y="30" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="BuNsxfQuBpjJDQfjEr5u-11" value="motDePasse" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="BuNsxfQuBpjJDQfjEr5u-9">
           <mxGeometry y="60" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="BuNsxfQuBpjJDQfjEr5u-12" value="Activités" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="50" y="260" width="140" height="150" as="geometry" />
+          <mxGeometry x="50" y="260" width="140" height="120" as="geometry" />
         </mxCell>
         <mxCell id="BuNsxfQuBpjJDQfjEr5u-13" value="&lt;u&gt;nom&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="BuNsxfQuBpjJDQfjEr5u-12">
           <mxGeometry y="30" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="BuNsxfQuBpjJDQfjEr5u-14" value="type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="BuNsxfQuBpjJDQfjEr5u-12">
+        <mxCell id="BuNsxfQuBpjJDQfjEr5u-15" value="prixOrganisation" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="BuNsxfQuBpjJDQfjEr5u-12">
           <mxGeometry y="60" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="BuNsxfQuBpjJDQfjEr5u-15" value="prixOrganisation" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="BuNsxfQuBpjJDQfjEr5u-12">
-          <mxGeometry y="90" width="140" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="BuNsxfQuBpjJDQfjEr5u-16" value="pirxVente" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="BuNsxfQuBpjJDQfjEr5u-12">
-          <mxGeometry y="120" width="140" height="30" as="geometry" />
+          <mxGeometry y="90" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="BuNsxfQuBpjJDQfjEr5u-17" value="Seances" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="50" y="520" width="140" height="180" as="geometry" />
@@ -67,7 +64,7 @@
         <mxCell id="BuNsxfQuBpjJDQfjEr5u-22" value="nbPlaces" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="BuNsxfQuBpjJDQfjEr5u-17">
           <mxGeometry y="150" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="BuNsxfQuBpjJDQfjEr5u-24" value="noteApperciation" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="BuNsxfQuBpjJDQfjEr5u-24" value="noteAppreciation" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="230" y="840" width="140" height="90" as="geometry" />
         </mxCell>
         <mxCell id="BuNsxfQuBpjJDQfjEr5u-25" value="&lt;u&gt;idNote&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="BuNsxfQuBpjJDQfjEr5u-24">
@@ -136,9 +133,9 @@
         <mxCell id="BuNsxfQuBpjJDQfjEr5u-42" value="Avoir" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="200" y="190" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="BuNsxfQuBpjJDQfjEr5u-43" value="" style="endArrow=none;html=1;rounded=0;exitX=1.008;exitY=0.789;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.015;entryY=0.789;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="BuNsxfQuBpjJDQfjEr5u-14" target="BuNsxfQuBpjJDQfjEr5u-10">
+        <mxCell id="BuNsxfQuBpjJDQfjEr5u-43" value="" style="endArrow=none;html=1;rounded=0;exitX=1.008;exitY=0.789;exitDx=0;exitDy=0;exitPerimeter=0;entryX=-0.015;entryY=0.789;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="BuNsxfQuBpjJDQfjEr5u-10">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="310" y="370" as="sourcePoint" />
+            <mxPoint x="191.1199999999999" y="343.6700000000001" as="sourcePoint" />
             <mxPoint x="360" y="320" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -196,7 +193,7 @@
         <mxCell id="BuNsxfQuBpjJDQfjEr5u-56" value="1..1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="200" y="90" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="BuNsxfQuBpjJDQfjEr5u-57" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Schéma relationnel&lt;br&gt;&lt;/h1&gt;&lt;p&gt;Activites (&lt;u&gt;nom,&lt;/u&gt; type, prixOrganisation, prixVente&lt;/p&gt;&lt;p&gt;Categories (nom&lt;/p&gt;&lt;p&gt;Seances (idSeance, date, heureDebut, nbPlaces, heureFin&lt;br&gt;&lt;/p&gt;&lt;div&gt;Adherents (numeroIdentification, nom, prenom, adresse, dateNaissance, age&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;NoteAppreciation (idNote, note&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Administrateurs (nomUtilisateur, motDePasse&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+        <mxCell id="BuNsxfQuBpjJDQfjEr5u-57" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Schéma relationnel&lt;br&gt;&lt;/h1&gt;&lt;p&gt;Activites (&lt;u&gt;nom&lt;/u&gt;, prixOrganisation, prixVente, #nomAdministrateur)&lt;/p&gt;&lt;p&gt;Categories (&lt;u&gt;nom,&lt;/u&gt; #nomAdministrateur)&lt;/p&gt;&lt;p&gt;Seances (&lt;u&gt;idSeance&lt;/u&gt;, date, heureDebut, nbPlaces, heureFin, #nomActivite, #nomAdministrateur)&lt;/p&gt;&lt;div&gt;Adherents (&lt;u&gt;numeroIdentification&lt;/u&gt;, nom, prenom, adresse, dateNaissance, age, #nomAdministrateur)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;NoteAppreciation (&lt;u&gt;idNote&lt;/u&gt;, note)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Administrateurs (&lt;u&gt;nomAdministrateur&lt;/u&gt;, motDePasse)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Categories_Activites (#&lt;u&gt;nomCategorie&lt;/u&gt;, #&lt;u&gt;nomActivite&lt;/u&gt;)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Seances_Adherents_NoteAppreciation (#&lt;u&gt;idNote&lt;/u&gt;, #&lt;u&gt;idSeance&lt;/u&gt;, #&lt;u&gt;numeroIdentification)&lt;/u&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="40" y="1010" width="880" height="310" as="geometry" />
         </mxCell>
       </root>
