@@ -1,4 +1,4 @@
--- Projet de session Base de Données
+-- Projet de session: Base de Données
 -- Charles Ouellet & Bryan Dyvan lando Longmene
 
 CREATE TABLE Administrateur (
