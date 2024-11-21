@@ -90,7 +90,8 @@ CREATE TRIGGER after_insert_adherents_seances_noteappreciation
     FOR EACH ROW
     BEGIN
         UPDATE seances
-            SET nbPlaces = nbPlaces + 1;
+            SET nbPlaces = nbPlaces + 1
+            WHERE idSeance = NEW.idSeance;
     END;
 DELIMITER //
 
