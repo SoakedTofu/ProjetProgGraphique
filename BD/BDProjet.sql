@@ -15,6 +15,7 @@ CREATE TABLE Activites (
     prixOrganisation DOUBLE,
     prixVente DOUBLE,
     nomAdministrateur VARCHAR(50),
+    nbPlacesMax INT,
     CONSTRAINT fk_admin_activites FOREIGN KEY (nomAdministrateur) REFERENCES Administrateur(nomAdministrateur)
 );
 
