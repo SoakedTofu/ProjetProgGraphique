@@ -33,25 +33,25 @@ namespace ProjetGraphiqueSession
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            var item = args.SelectedItem;
+            var item = (NavigationViewItem)args.SelectedItem;
 
             // Déterminer la page courrante et y naviguer seulement si elle est différente de la page sélectionnée
 
             var pageCourante = mainFrame.Content?.GetType();
 
-            //switch (item.Name)
-            //{
-            //    case "Affichage":
-            //        if (pageCourante != typeof(PageAffichage))
-            //            mainFrame.Navigate(typeof(PageAffichage));
-            //        break;
-            //    case "Stats":
-            //        if (pageCourante != typeof(PageStats))
-            //            mainFrame.Navigate(typeof(PageStats));
-            //        break;
-            //    default:
-            //        break;
-            //}
+            switch (item.Name)
+            {
+                case "Affichage":
+                    if (pageCourante != typeof(Affichage))
+                        mainFrame.Navigate(typeof(Affichage));
+                    break;
+                case "Stats":
+                    //if (pageCourante != typeof(PageStats))
+                    //    mainFrame.Navigate(typeof(PageStats));
+                    break;
+                default:
+                    break;
+            }
         }
 
         // Ouvre la boîte de dialogue de connexion
