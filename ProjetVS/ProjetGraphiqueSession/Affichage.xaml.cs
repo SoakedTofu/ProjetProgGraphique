@@ -26,6 +26,7 @@ namespace ProjetGraphiqueSession
         public Affichage()
         {
             this.InitializeComponent();
+            liste_activites.ItemsSource = Singleton.getInstance().listeActivite();
         }
 
         private void delete_Click(object sender, RoutedEventArgs e)

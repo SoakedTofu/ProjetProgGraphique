@@ -331,7 +331,7 @@ SELECT * FROM nbParticipantMoyParMois;
 DELIMITER //
 CREATE  PROCEDURE AffActivite ()
 BEGIN
-   SELECT nomActivite "Nom de l'activité",
+   SELECT nomActivite "NomActivite",
            ROUND( AVG(note),2) moyenneNote
 FROM seances
 INNER JOIN seances_adherents_noteappreciation san on seances.idSeance = san.idSeance
