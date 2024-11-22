@@ -28,9 +28,29 @@ namespace ProjetGraphiqueSession
             this.InitializeComponent();
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+
+
+        private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            myButton.Content = "fgfg";
+            var item = (NavigationViewItem)args.SelectedItem;
+
+            // Déterminer la page courrante et y naviguer seulement si elle est différente de la page sélectionnée
+
+            var pageCourante = mainFrame.Content?.GetType();
+
+            switch (item.Name)
+            {
+                case "Affichage":
+                    if (pageCourante != typeof(PageAffichage))
+                        mainFrame.Navigate(typeof(PageAffichage));
+                    break;
+                case "Stats":
+                    if (pageCourante != typeof(PageStats))
+                        mainFrame.Navigate(typeof(PageStats));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
