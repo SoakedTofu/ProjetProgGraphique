@@ -300,3 +300,23 @@ FROM seances
 INNER JOIN seances_adherents_noteappreciation san on seances.idSeance = san.idSeance
 INNER JOIN noteappreciation n on san.idNote = n.idNote
 GROUP BY nomActivite;
+
+
+/*Procedures*/
+
+
+--Procedure qui permet d'afficher les activites avec leurs moyennes de notes 
+
+DELIMITER //
+CREATE  PROCEDURE AffActivite ()
+BEGIN
+   SELECT nomActivite "Nom de l'activité",
+           ROUND( AVG(note),2) moyenneNote
+FROM seances
+INNER JOIN seances_adherents_noteappreciation san on seances.idSeance = san.idSeance
+INNER JOIN noteappreciation n on san.idNote = n.idNote
+GROUP BY nomActivite;
+end //
+DELIMITER ;
+
+CALL AffActivite();
