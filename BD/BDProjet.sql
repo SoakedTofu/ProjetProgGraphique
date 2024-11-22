@@ -302,6 +302,22 @@ INNER JOIN noteappreciation n on san.idNote = n.idNote
 GROUP BY nomActivite;
 
 
+
+-- Afficher le nombre de participant pour chaque activité
+
+
+CREATE VIEW nbParticipant AS
+    SELECT SUM(nbPlaces) AS nbParticipant,nomActivite FROM seances GROUP BY nomActivite;
+
+SELECT * FROM nbParticipant;
+
+-- Afficher le nombre de participant moyen pour chaque mois
+
+CREATE VIEW nbParticipantMoyParMois AS
+    SELECT FLOOR( AVG(nbPlaces)) AS nbParticipant,date FROM seances GROUP BY MONTH(date);
+
+SELECT * FROM nbParticipantMoyParMois;
+
 /*Procedures*/
 
 
@@ -320,17 +336,3 @@ end //
 DELIMITER ;
 
 CALL AffActivite();
--- Afficher le nombre de participant pour chaque activité
-
-
-CREATE VIEW nbParticipant AS
-    SELECT SUM(nbPlaces) AS nbParticipant,nomActivite FROM seances GROUP BY nomActivite;
-
-SELECT * FROM nbParticipant;
-
--- Afficher le nombre de participant moyen pour chaque mois
-
-CREATE VIEW nbParticipantMoyParMois AS
-    SELECT FLOOR( AVG(nbPlaces)) AS nbParticipant,date FROM seances GROUP BY MONTH(date);
-
-SELECT * FROM nbParticipantMoyParMois;
