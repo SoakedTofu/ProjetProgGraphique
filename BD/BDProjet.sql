@@ -267,3 +267,26 @@ FROM seances_adherents_noteappreciation
 GROUP BY numeroIdentification
 ORDER BY `Nombre de séances` DESC
 LIMIT 1;
+
+-- Trouver le participant ayant le nombre de séances le plus élevé
+
+SELECT nom "Nom de l'activité",
+       numeroIdentification "Numéro d'identification du participant",
+       note "Note du participant"
+FROM activites
+INNER JOIN seances s on activites.nom = s.nomActivite
+INNER JOIN seances_adherents_noteappreciation san on s.idSeance = san.idSeance
+INNER JOIN noteappreciation n on san.idNote = n.idNote;
+
+
+
+
+-- Afficher les notes d’appréciation pour chaque activité
+
+SELECT nom "Nom de l'activité",
+       numeroIdentification "Numéro d'identification du participant",
+       note "Note du participant"
+FROM activites
+INNER JOIN seances s on activites.nom = s.nomActivite
+INNER JOIN seances_adherents_noteappreciation san on s.idSeance = san.idSeance
+INNER JOIN noteappreciation n on san.idNote = n.idNote;

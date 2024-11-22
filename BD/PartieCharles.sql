@@ -48,6 +48,19 @@ GROUP BY numeroIdentification
 ORDER BY `Nombre de séances` DESC
 LIMIT 1;
 
+-- Trouver le prix moyen par activité pour chaque participant
 
 
 
+-- Afficher les notes d’appréciation pour chaque activité
+
+SELECT nom "Nom de l'activité",
+       numeroIdentification "Numéro d'identification du participant",
+       note "Note du participant"
+FROM activites
+INNER JOIN seances s on activites.nom = s.nomActivite
+INNER JOIN seances_adherents_noteappreciation san on s.idSeance = san.idSeance
+INNER JOIN noteappreciation n on san.idNote = n.idNote;
+
+
+-- Affiche la moyenne des notes d’appréciations pour toutes les activités
