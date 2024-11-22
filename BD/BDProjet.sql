@@ -261,24 +261,24 @@ VALUES
 
 -- Vues
 
-SELECT *,
+-- Trouver le participant ayant le nombre de séances le plus élevé
+
+SELECT numeroIdentification "Numéro d'identification du participant",
        COUNT(*) 'Nombre de séance'
 FROM seances_adherents_noteappreciation
 GROUP BY numeroIdentification
-ORDER BY `Nombre de séances` DESC
+ORDER BY `Nombre de séance` DESC
 LIMIT 1;
 
--- Trouver le participant ayant le nombre de séances le plus élevé
+-- Trouver le prix moyen par activité pour chaque participant
 
-SELECT nom "Nom de l'activité",
-       numeroIdentification "Numéro d'identification du participant",
-       note "Note du participant"
-FROM activites
-INNER JOIN seances s on activites.nom = s.nomActivite
-INNER JOIN seances_adherents_noteappreciation san on s.idSeance = san.idSeance
-INNER JOIN noteappreciation n on san.idNote = n.idNote;
-
-
+SELECT CONCAT(prenom, ' ', adherents.nom) "Nom de l'adhérent",
+       avg(prixVente) "Moyenne du prix des activités"
+FROM adherents
+INNER JOIN seances_adherents_noteappreciation san on adherents.numeroIdentification = san.numeroIdentification
+INNER JOIN seances s on san.idSeance = s.idSeance
+INNER JOIN activites a on s.nomActivite = a.nom
+GROUP BY CONCAT(prenom, ' ', adherents.nom);
 
 
 -- Afficher les notes d’appréciation pour chaque activité
@@ -290,3 +290,13 @@ FROM activites
 INNER JOIN seances s on activites.nom = s.nomActivite
 INNER JOIN seances_adherents_noteappreciation san on s.idSeance = san.idSeance
 INNER JOIN noteappreciation n on san.idNote = n.idNote;
+
+
+-- Affiche la moyenne des notes d’appréciations pour toutes les activités
+
+SELECT nomActivite "Nom de l'activité",
+            avg(note)
+FROM seances
+INNER JOIN seances_adherents_noteappreciation san on seances.idSeance = san.idSeance
+INNER JOIN noteappreciation n on san.idNote = n.idNote
+GROUP BY nomActivite;
