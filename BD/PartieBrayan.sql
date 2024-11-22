@@ -158,3 +158,17 @@ VALUES
 (8, 8, 'MD-1995-691'),
 (9, 9, 'PB-2000-637'),
 (10, 10, 'SR-1991-518');
+
+-----VUES
+
+CREATE VIEW nbParticipant AS
+    SELECT SUM(nbPlaces) AS nbParticipant,nomActivite FROM seances GROUP BY nomActivite;
+
+SELECT * FROM nbParticipant;
+
+CREATE VIEW nbParticipantMoyParMois AS
+    SELECT FLOOR( AVG(nbPlaces)) AS nbParticipant,date FROM seances GROUP BY MONTH(date);
+
+SELECT * FROM nbParticipantMoyParMois;
+
+
