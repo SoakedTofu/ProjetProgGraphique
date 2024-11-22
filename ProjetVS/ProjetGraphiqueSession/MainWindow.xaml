@@ -7,16 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <NavigationView PaneDisplayMode="Left" PaneTitle="Nos Activites" x:Name="navView" SelectionChanged="navView_SelectionChanged" >
-        <NavigationView.MenuItems>
-            <NavigationViewItem Content="Liste des Activites" x:Name="Affichage" Icon="Home"/>
-            <NavigationViewItem Content="Statistiques" x:Name="Stats" Icon="Calculator" Visibility="Collapsed"/>
-            <Button
-            Content="Connexion"
-            x:Name="btn_Connexion"
-            Click="btn_Connexion_Click"
-            />
-        </NavigationView.MenuItems>
-        <Frame x:Name="mainFrame" Grid.Row="1" />
-    </NavigationView>
+    <Grid>
+        <NavigationView PaneDisplayMode="Left" PaneTitle="Nos Activites" x:Name="navView" SelectionChanged="navView_SelectionChanged" >
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Liste des Activites" x:Name="Affichage" Icon="Home"/>
+                <NavigationViewItem Content="Statistiques" x:Name="Stats" Icon="Calculator" Visibility="Collapsed"/>
+            </NavigationView.MenuItems>
+
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="Connexion" x:Name="Connexion" Icon="Contact2"/>
+                <NavigationViewItem Content="Deconnexion" x:Name="Deconnexion" Icon="Clear" Visibility="Visible"/>
+            </NavigationView.FooterMenuItems>
+            
+            <Frame x:Name="mainFrame" Grid.Row="1" />
+        </NavigationView>
+    </Grid>
 </Window>
