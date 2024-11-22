@@ -2,6 +2,9 @@
 
 -- Trigger
 
+
+-- Créer un déclencheur qui permet de construire le numéro d’identification
+
 DELIMITER //
 CREATE TRIGGER before_insert_adherent_matricule
     BEFORE INSERT ON adherents
@@ -21,6 +24,8 @@ CREATE TRIGGER before_insert_adherent_matricule
     END;
 DELIMITER //
 
+-- Créer un déclencheur qui permet de gérer le nombre de places disponibles
+
 DELIMITER //
 CREATE TRIGGER after_insert_adherents_seances_noteappreciation
     AFTER INSERT ON seances_adherents_noteappreciation
@@ -31,5 +36,18 @@ CREATE TRIGGER after_insert_adherents_seances_noteappreciation
             WHERE idSeance = NEW.idSeance;
     END;
 DELIMITER //
+
+-- Vues
+
+-- Trouver le participant ayant le nombre de séances le plus élevé
+
+SELECT *,
+       COUNT(*) 'Nombre de séance'
+FROM seances_adherents_noteappreciation
+GROUP BY numeroIdentification
+ORDER BY `Nombre de séances` DESC
+LIMIT 1;
+
+
 
 
