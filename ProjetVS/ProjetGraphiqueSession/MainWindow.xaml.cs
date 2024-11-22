@@ -32,7 +32,7 @@ namespace ProjetGraphiqueSession
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            var item = (NavigationViewItem)args.SelectedItem;
+            var item = args.SelectedItem;
 
             // Déterminer la page courrante et y naviguer seulement si elle est différente de la page sélectionnée
 
@@ -51,6 +51,21 @@ namespace ProjetGraphiqueSession
             //    default:
             //        break;
             //}
+        }
+
+        // Ouvre la boîte de dialogue de connexion
+
+        private async void btn_Connexion_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialogConnexion dialog = new ContentDialogConnexion();
+            dialog.XamlRoot = this.Content.XamlRoot;
+            dialog.Title = "Conneztez-vous";
+            dialog.PrimaryButtonText = "Se connecter";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Close;
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
+
         }
     }
 }
