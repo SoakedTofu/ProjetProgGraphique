@@ -259,5 +259,11 @@ VALUES
 (9, 9, 'PB-2000-637'),
 (10, 10, 'SR-1991-518');
 
+-- Vues
 
-
+SELECT *,
+       COUNT(*) 'Nombre de séance'
+FROM seances_adherents_noteappreciation
+GROUP BY numeroIdentification
+ORDER BY `Nombre de séances` DESC
+LIMIT 1;
