@@ -13,6 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Affichage.xaml" />
+    <None Remove="ContentDialogConnexion.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Affichage.xaml">
+    <Page Update="ContentDialogConnexion.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

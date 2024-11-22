@@ -13,6 +13,8 @@
             <NavigationViewItem Content="Statistiques" x:Name="Stats" Icon="Calculator" Visibility="Collapsed"/>
             <Button
             Content="Connexion"
+            x:Name="btn_Connexion"
+            Click="btn_Connexion_Click"
             />
         </NavigationView.MenuItems>
         <Frame x:Name="mainFrame" Grid.Row="1" />
