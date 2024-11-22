@@ -7,9 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <NavigationView PaneDisplayMode="Left" PaneTitle="Nos produits" x:Name="navView" SelectionChanged="navView_SelectionChanged" >
+    <NavigationView PaneDisplayMode="Left" PaneTitle="Nos Activites" x:Name="navView" SelectionChanged="navView_SelectionChanged" >
         <NavigationView.MenuItems>
-            <NavigationViewItem Content="Liste des produits" x:Name="Affichage" Icon="Home"/>
+            <NavigationViewItem Content="Liste des Activites" x:Name="Affichage" Icon="Home"/>
             <NavigationViewItem Content="Statistiques" x:Name="Stats" Icon="Calculator" Visibility="Collapsed"/>
             <Button
             Content="Connexion"

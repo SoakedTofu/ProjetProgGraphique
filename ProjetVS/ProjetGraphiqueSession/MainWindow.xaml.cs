@@ -26,6 +26,7 @@ namespace ProjetGraphiqueSession
         public MainWindow()
         {
             this.InitializeComponent();
+            mainFrame.Navigate(typeof(Affichage));
         }
 
 
@@ -41,12 +42,12 @@ namespace ProjetGraphiqueSession
             switch (item.Name)
             {
                 case "Affichage":
-                    if (pageCourante != typeof(PageAffichage))
-                        mainFrame.Navigate(typeof(PageAffichage));
+                    if (pageCourante != typeof(Affichage))
+                        mainFrame.Navigate(typeof(Affichage));
                     break;
                 case "Stats":
-                    if (pageCourante != typeof(PageStats))
-                        mainFrame.Navigate(typeof(PageStats));
+                    //if (pageCourante != typeof(PageStats))
+                    //    mainFrame.Navigate(typeof(PageStats));
                     break;
                 default:
                     break;
