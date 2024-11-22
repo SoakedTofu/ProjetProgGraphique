@@ -38,19 +38,19 @@ namespace ProjetGraphiqueSession
 
             var pageCourante = mainFrame.Content?.GetType();
 
-            switch (item.Name)
-            {
-                case "Affichage":
-                    if (pageCourante != typeof(PageAffichage))
-                        mainFrame.Navigate(typeof(PageAffichage));
-                    break;
-                case "Stats":
-                    if (pageCourante != typeof(PageStats))
-                        mainFrame.Navigate(typeof(PageStats));
-                    break;
-                default:
-                    break;
-            }
+            //switch (item.Name)
+            //{
+            //    case "Affichage":
+            //        if (pageCourante != typeof(PageAffichage))
+            //            mainFrame.Navigate(typeof(PageAffichage));
+            //        break;
+            //    case "Stats":
+            //        if (pageCourante != typeof(PageStats))
+            //            mainFrame.Navigate(typeof(PageStats));
+            //        break;
+            //    default:
+            //        break;
+            //}
         }
     }
 }

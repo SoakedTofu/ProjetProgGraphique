@@ -41,6 +41,7 @@ DELIMITER //
 
 -- Trouver le participant ayant le nombre de séances le plus élevé
 
+CREATE VIEW ParticipantPlusActif AS
 SELECT numeroIdentification "Numéro d'identification du participant",
        COUNT(*) 'Nombre de séance'
 FROM seances_adherents_noteappreciation
@@ -50,6 +51,7 @@ LIMIT 1;
 
 -- Trouver le prix moyen par activité pour chaque participant
 
+CREATE VIEW PrixMoyenParParticipant AS
 SELECT CONCAT(prenom, ' ', adherents.nom) "Nom de l'adhérent",
        avg(prixVente) "Moyenne du prix des activités"
 FROM adherents
@@ -61,6 +63,7 @@ GROUP BY CONCAT(prenom, ' ', adherents.nom);
 
 -- Afficher les notes d’appréciation pour chaque activité
 
+CREATE VIEW NotesDesActivités AS
 SELECT nom "Nom de l'activité",
        numeroIdentification "Numéro d'identification du participant",
        note "Note du participant"
@@ -72,6 +75,7 @@ INNER JOIN noteappreciation n on san.idNote = n.idNote;
 
 -- Affiche la moyenne des notes d’appréciations pour toutes les activités
 
+CREATE VIEW MoyenneDesNotes AS
 SELECT nomActivite "Nom de l'activité",
             avg(note)
 FROM seances
