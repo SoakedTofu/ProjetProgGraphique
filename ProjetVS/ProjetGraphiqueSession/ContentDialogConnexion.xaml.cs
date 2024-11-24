@@ -24,5 +24,20 @@ namespace ProjetGraphiqueSession
         {
             this.InitializeComponent();
         }
+
+        private void ContentDialog_Closing(ContentDialog sender, ContentDialogClosingEventArgs args)
+        {
+            NavigationViewItem navItem;
+
+            foreach (var item in SingletonNavigation.getInstance().NavigationView.MenuItems)
+            {
+                navItem = item as NavigationViewItem;
+                if (navItem.Name == "Affichage")
+                {
+                    SingletonNavigation.getInstance().NavigationView.SelectedItem = navItem;
+                    break;
+                }
+            }
+        }
     }
 }

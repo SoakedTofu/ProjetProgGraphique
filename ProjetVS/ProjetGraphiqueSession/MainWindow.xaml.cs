@@ -26,7 +26,8 @@ namespace ProjetGraphiqueSession
         public MainWindow()
         {
             this.InitializeComponent();
-            mainFrame.Navigate(typeof(Affichage));
+            SingletonNavigation.getInstance().NavigationView = navView;     // Assigner l'attribut de la NavigationView
+            mainFrame.Navigate(typeof(Affichage));      // Naviguer à la page d'affichage
         }
 
 
@@ -39,26 +40,30 @@ namespace ProjetGraphiqueSession
 
             var pageCourante = mainFrame.Content?.GetType();
 
-            switch (item.Name)
+            if (item != null)   // Pour gérer les cas où le SelectedItem est mis à null
             {
-                case "Affichage":
-                    if (pageCourante != typeof(Affichage))
-                        mainFrame.Navigate(typeof(Affichage));
-                    break;
-                case "Connexion": // Pour la boîte de dialogue
+                switch (item.Name)
+                {
+                    case "Affichage":
+                        if (pageCourante != typeof(Affichage))
+                            mainFrame.Navigate(typeof(Affichage));
+                        break;
+                    case "Connexion": // Pour la boîte de dialogue
 
-                    ContentDialogConnexion dialog = new ContentDialogConnexion();
-                    dialog.XamlRoot = this.Content.XamlRoot;
-                    dialog.Title = "Conneztez-vous";
-                    dialog.PrimaryButtonText = "Se connecter";
-                    dialog.CloseButtonText = "Annuler";
-                    dialog.DefaultButton = ContentDialogButton.Primary;
+                        ContentDialogConnexion dialog = new ContentDialogConnexion();
+                        dialog.XamlRoot = this.Content.XamlRoot;
+                        dialog.Title = "Conneztez-vous";
+                        dialog.PrimaryButtonText = "Se connecter";
+                        dialog.CloseButtonText = "Annuler";
+                        dialog.DefaultButton = ContentDialogButton.Primary;
 
-                    ContentDialogResult resultat = await dialog.ShowAsync();
-                    break;
-                default:
-                    break;
+                        ContentDialogResult resultat = await dialog.ShowAsync();
+                        break;
+                    default:
+                        break;
+                }
             }
+
         }
 
     }

@@ -29,6 +29,24 @@ namespace ProjetGraphiqueSession
             liste_activites.ItemsSource = Singleton.getInstance().listeActivite();
         }
 
+        // Pour gérer la NavigationView
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            NavigationViewItem navItem;
+
+            foreach (var item in SingletonNavigation.getInstance().NavigationView.MenuItems)
+            {
+                navItem = item as NavigationViewItem;
+                if (navItem.Name == "Affichage")
+                {
+                    SingletonNavigation.getInstance().NavigationView.SelectedItem = navItem;
+                    break;
+                }
+            }
+        }
+
         private void delete_Click(object sender, RoutedEventArgs e)
         {
 
