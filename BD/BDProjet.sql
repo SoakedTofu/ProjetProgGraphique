@@ -1,6 +1,8 @@
 -- Projet de session: Base de Données
 -- Charles Ouellet & Bryan Dyvan lando Longmene
 
+/********************** TABLES **********************/
+
 CREATE TABLE Administrateur (
   nomAdministrateur VARCHAR(50) PRIMARY KEY,
   motDePasse VARCHAR(50)
@@ -63,7 +65,7 @@ CREATE TABLE Seances_Adherents_NoteAppreciation (
   CONSTRAINT fk_SANA_Adherents FOREIGN KEY (numeroIdentification) REFERENCES Adherents(numeroIdentification)
 );
 
--- Triggers
+/********************** TRIGGERS  **********************/
 
 DELIMITER //
 CREATE TRIGGER before_insert_adherent_matricule
@@ -153,12 +155,10 @@ DELIMITER ;
 
 drop trigger nbAdherentMaxi;
 
-/*Insert*/
+/********************** INSERTION **********************/
 
 /*Charger la base avec des données réalistes (chaque base devra comporter entre 50 et 100
 occurrences) à partir des sites web fournis dans le cours (10 données par table à peu près)*/
-
-
 
 -- Insertion dans la table Administrateur (seul administrateur)
 
@@ -259,7 +259,7 @@ VALUES
 (9, 9, 'PB-2000-637'),
 (10, 10, 'SR-1991-518');
 
--- Vues
+/********************** VUES **********************/
 
 -- Trouver le participant ayant le nombre de séances le plus élevé
 
@@ -323,8 +323,7 @@ CREATE VIEW nbParticipantMoyParMois AS
 SELECT * FROM nbParticipantMoyParMois;
 
 
-/*Procedures*/
-
+/********************** PROCEDURES **********************/
 
 --Procedure qui permet d'afficher les activites avec leurs moyennes de notes 
 
@@ -341,3 +340,75 @@ end //
 DELIMITER ;
 
 CALL AffActivite();
+
+
+
+
+/********************** FONCTIONS **********************/
+
+-- Fonction qui vérifie qu'un adhérent existe
+
+DELIMITER //
+CREATE function f_verifier_adherent (numIdentification VARCHAR(11)) RETURNS BOOLEAN
+BEGIN
+    DECLARE present BOOLEAN;
+
+    SELECT COUNT(*) > 0 INTO present
+    FROM adherents
+    WHERE numeroIdentification = numIdentification;
+
+    RETURN present;
+end//
+Delimiter ;
+
+-- Fonction qui donne le nom complet à partir du numéro d'identification
+
+DELIMITER //
+CREATE function f_get_Nom (numIdentification VARCHAR(11)) RETURNS VARCHAR(50)
+BEGIN
+    DECLARE nomComplet VARCHAR(50);
+
+    SELECT CONCAT(
+           prenom,
+           ' ',
+           nom
+           ) INTO nomComplet
+    FROM adherents
+    WHERE numeroIdentification = numIdentification;
+
+    RETURN nomComplet;
+end//
+Delimiter ;
+
+-- Fonction qui vérifie le nom de l'administrateur
+
+DELIMITER //
+CREATE function f_verifier_admin (nomAdmin VARCHAR(50)) RETURNS BOOLEAN
+BEGIN
+    DECLARE present BOOLEAN;
+
+    SELECT COUNT(*) > 0 INTO present
+    FROM administrateur
+    WHERE nomAdministrateur = nomAdmin;
+
+    RETURN present;
+end//
+Delimiter ;
+
+-- Fonction qui vérifie la connexion de l'administrateur
+
+DELIMITER //
+CREATE function f_verifier_admin_MDP (nomAdmin VARCHAR(50), MDP VARCHAR(50)) RETURNS BOOLEAN
+BEGIN
+    DECLARE present BOOLEAN;
+
+    SELECT COUNT(*) > 0 INTO present
+    FROM administrateur
+    WHERE nomAdministrateur = nomAdmin AND
+          motDePasse = MDP;
+
+    RETURN present;
+end//
+Delimiter ;
+
+

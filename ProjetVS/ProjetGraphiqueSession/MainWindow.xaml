@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid>
-        <NavigationView PaneDisplayMode="Left" PaneTitle="Nos Activites" x:Name="navView" SelectionChanged="navView_SelectionChanged" >
+        <NavigationView PaneDisplayMode="Left" PaneTitle="Nos Activites" x:Name="navView" SelectionChanged="navView_SelectionChanged" IsSettingsVisible="False" >
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Liste des Activites" x:Name="Affichage" Icon="Home"/>
                 <NavigationViewItem Content="Statistiques" x:Name="Stats" Icon="Calculator" Visibility="Collapsed"/>
@@ -18,7 +18,18 @@
                 <NavigationViewItem Content="Connexion" x:Name="Connexion" Icon="Contact2"/>
                 <NavigationViewItem Content="Deconnexion" x:Name="Deconnexion" Icon="Clear" Visibility="Visible"/>
             </NavigationView.FooterMenuItems>
-            
+
+            <NavigationView.PaneFooter>
+                <StackPanel Margin="12">
+                    <TextBlock 
+                        Text="" 
+                        IsHitTestVisible="False" 
+                        FontSize="14"
+                        x:Name="tbl_usager"
+                        />
+                </StackPanel>
+            </NavigationView.PaneFooter>
+
             <Frame x:Name="mainFrame" Grid.Row="1" />
         </NavigationView>
     </Grid>

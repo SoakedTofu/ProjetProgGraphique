@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.UI.Xaml.Controls;
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,9 +19,16 @@ namespace ProjetGraphiqueSession
 
         static Singleton instance = null;
 
+        TextBlock TB_Utilisateur;       // Pour montrer l'utilsateur dans l'inferface apès la connexion
+
+        String utilisateur;             // Nom de l'utilisateur
+
+        Boolean admin;                  // Pour savoir si l'utilisateur est un admin
+
+        Boolean connecte;               // Pour savoir si un utilisateur est connecté
+
         public Singleton()
         {
-
             listeActivites = new ObservableCollection<Activite>();
             getListeActivites();
         }
@@ -66,5 +75,200 @@ namespace ProjetGraphiqueSession
         {
             return listeActivites;
         }
+
+
+        // Fonction pour vérifier qu'un adhérent existe
+
+        public Boolean VerifierAdherent(String utilisateur)
+        {
+            // Boolean qui indique si l'utilisateur est présent
+
+            Boolean present = false;
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT f_verifier_Adherent(@numeroUtil)";
+                commande.Parameters.AddWithValue("@numeroUtil", utilisateur);
+
+                con.Open();
+                commande.Prepare();
+
+                var resultat = commande.ExecuteScalar();
+
+                // Vérifier que la commande renvoie bien un résultat
+
+                if (resultat != null)
+                {
+                    present = Convert.ToBoolean(resultat);
+                }
+
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();   
+            }
+
+            return present;
+        }
+
+        // Fonction pour aller chercher le nom de l'adhérent
+
+        public String GetNomAdherent(String utilisateur)
+        {
+            String NomComplet = "";
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT f_get_Nom(@numeroUtil)";
+                commande.Parameters.AddWithValue("@numeroUtil", utilisateur);
+
+                con.Open();
+                commande.Prepare();
+
+                NomComplet = commande.ExecuteScalar().ToString();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return NomComplet;
+        }
+
+        // Fonction pour vérifier le nom de l'admin
+
+        public Boolean VerififierAdmin(String utilisateur)
+        {
+            // Boolean qui indique si l'utilisateur est présent
+
+            Boolean present = false;
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT f_verifier_admin(@numeroUtil)";
+                commande.Parameters.AddWithValue("@numeroUtil", utilisateur);
+
+                con.Open();
+                commande.Prepare();
+
+                var resultat = commande.ExecuteScalar();
+
+                // Vérifier que la commande renvoie bien un résultat
+
+                if (resultat != null)
+                {
+                    present = Convert.ToBoolean(resultat);
+                }
+
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return present;
+        }
+
+        // Fonction pour vérifier la connexion de l'admin
+
+        public Boolean VerififierConnexionAdmin(String utilisateur, String MDP)
+        {
+            // Boolean qui indique si l'utilisateur est présent
+
+            Boolean present = false;
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT f_verifier_admin_MDP(@numeroUtil, @MDP)";
+                commande.Parameters.AddWithValue("@numeroUtil", utilisateur);
+                commande.Parameters.AddWithValue("@MDP", MDP);
+
+                con.Open();
+                commande.Prepare();
+
+                var resultat = commande.ExecuteScalar();
+
+                // Vérifier que la commande renvoie bien un résultat
+
+                if (resultat != null)
+                {
+                    present = Convert.ToBoolean(resultat);
+                }
+
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return present;
+        }
+
+        // Fonction qui réfère le textblock de connexion
+
+        public void SetTextblock(TextBlock tb)
+        {
+            TB_Utilisateur = tb;
+        }
+
+        // Fonction qui change le nom de connection dans l'interface
+
+        public void SetTBUtilisateur(String nom)
+        {
+            TB_Utilisateur.Text = nom;
+        }
+
+        // Variable utilsateur
+
+        public void SetUtilisateur(String utilisateur2)
+        {
+            utilisateur = utilisateur2;
+        }
+
+        public String GetUtilisateur()
+        {
+            return utilisateur;
+        }
+
+        // Variable connecté
+
+        public void SetConnecte(bool valeur)
+        {
+            connecte = valeur;
+        }
+
+        public bool GetConnecte()
+        {
+            return connecte;
+        }
+
+        // Variable admin
+
+        public void SetAdmin(bool valeur)
+        {
+            admin = valeur;
+        }
+
+        public bool GetAdmin()
+        {
+            return admin;
+        }
+
     }
 }

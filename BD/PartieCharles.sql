@@ -1,7 +1,6 @@
 -- Charles Ouellet
 
--- Trigger
-
+/********************** TRIGGERS  **********************/
 
 -- Créer un déclencheur qui permet de construire le numéro d’identification
 
@@ -37,7 +36,7 @@ CREATE TRIGGER after_insert_adherents_seances_noteappreciation
     END;
 DELIMITER //
 
--- Vues
+/********************** VUES **********************/
 
 -- Trouver le participant ayant le nombre de séances le plus élevé
 
@@ -82,3 +81,71 @@ FROM seances
 INNER JOIN seances_adherents_noteappreciation san on seances.idSeance = san.idSeance
 INNER JOIN noteappreciation n on san.idNote = n.idNote
 GROUP BY nomActivite;
+
+
+/********************** FONCTIONS **********************/
+
+-- Fonction qui vérifie qu'un adhérent existe
+
+DELIMITER //
+CREATE function f_verifier_adherent (numIdentification VARCHAR(11)) RETURNS BOOLEAN
+BEGIN
+    DECLARE present BOOLEAN;
+
+    SELECT COUNT(*) > 0 INTO present
+    FROM adherents
+    WHERE numeroIdentification = numIdentification;
+
+    RETURN present;
+end//
+Delimiter ;
+
+-- Fonction qui donne le nom complet à partir du numéro d'identification
+
+DELIMITER //
+CREATE function f_get_Nom (numIdentification VARCHAR(11)) RETURNS VARCHAR(50)
+BEGIN
+    DECLARE nomComplet VARCHAR(50);
+
+    SELECT CONCAT(
+           prenom,
+           ' ',
+           nom
+           ) INTO nomComplet
+    FROM adherents
+    WHERE numeroIdentification = numIdentification;
+
+    RETURN nomComplet;
+end//
+Delimiter ;
+
+-- Fonction qui vérifie le nom de l'administrateur
+
+DELIMITER //
+CREATE function f_verifier_admin (nomAdmin VARCHAR(50)) RETURNS BOOLEAN
+BEGIN
+    DECLARE present BOOLEAN;
+
+    SELECT COUNT(*) > 0 INTO present
+    FROM administrateur
+    WHERE nomAdministrateur = nomAdmin;
+
+    RETURN present;
+end//
+Delimiter ;
+
+-- Fonction qui vérifie la connexion de l'administrateur
+
+DELIMITER //
+CREATE function f_verifier_admin_MDP (nomAdmin VARCHAR(50), MDP VARCHAR(50)) RETURNS BOOLEAN
+BEGIN
+    DECLARE present BOOLEAN;
+
+    SELECT COUNT(*) > 0 INTO present
+    FROM administrateur
+    WHERE nomAdministrateur = nomAdmin AND
+          motDePasse = MDP;
+
+    RETURN present;
+end//
+Delimiter ;

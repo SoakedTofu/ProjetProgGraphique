@@ -28,11 +28,15 @@
         <TextBlock 
             x:Name="tbl_erreurIdentification"
             Visibility="Collapsed"
+            Margin="5"
+            Foreground="PaleVioletRed"
             />
 
         <StackPanel
             Orientation="Vertical"
             HorizontalAlignment="Center"
+            x:Name="sp_MDP"
+            Visibility="Collapsed"
             >
             
             <TextBlock 
@@ -46,14 +50,12 @@
             />
 
             <TextBlock 
-            x:Name="tbl_erreurMDP"
-            Visibility="Collapsed"
+                x:Name="tbl_erreurMDP"                
+                Margin="5"
+                Foreground="PaleVioletRed"
             />
             
         </StackPanel>
-
-
-
 
     </StackPanel>
 </ContentDialog>
