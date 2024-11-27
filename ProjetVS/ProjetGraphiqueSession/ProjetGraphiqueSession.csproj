@@ -14,6 +14,7 @@
   <ItemGroup>
     <None Remove="Affichage.xaml" />
     <None Remove="ModifActivites.xaml" />
+    <None Remove="PageStatistiques.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="ModifActivites.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="PageStatistiques.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

@@ -44,7 +44,7 @@
             Margin="15"
             />
 
-            <TextBox 
+            <PasswordBox 
             Width="300"
             x:Name="tb_MDP"
             />
