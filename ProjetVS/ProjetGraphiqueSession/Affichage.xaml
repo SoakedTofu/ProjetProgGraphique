@@ -37,7 +37,7 @@
             </Grid.ColumnDefinitions>
 
             <Border  BorderBrush="Black" BorderThickness="2" >
-                <TextBlock Text="Nom de l'activité" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center" />
+                <TextBlock Text="Activité" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center" />
             </Border>
             <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="1">
                 <TextBlock Text="Note d'appréciation"  FontSize="20" HorizontalAlignment="Center"/>
@@ -48,7 +48,7 @@
 
         </Grid>
 
-        <ListView x:Name="liste_activites" Grid.Row="2" Margin="0 20 0 0">
+        <ListView x:Name="liste_activites" Grid.Row="2" Margin="0 20 0 0" SelectionChanged="liste_activites_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Activite">
                     <Grid >
@@ -73,7 +73,7 @@
 
                         <StackPanel Orientation="Horizontal" Width="200"  Grid.Column="3" >
 
-                            <Button x:Name="edit" Click="edit_Click"   HorizontalAlignment="Left" Foreground="Red">
+                            <Button x:Name="edit" Click="edit_Click"   HorizontalAlignment="Left" Foreground="Green">
                                 <SymbolIcon Symbol="Edit"/>
                             </Button>
                             <Button x:Name="delete" Click="delete_Click"  Margin="100 0 0 0" HorizontalAlignment="Right" Foreground="Red">

@@ -70,7 +70,7 @@ namespace ProjetGraphiqueSession
 
                     uneActivite = btn.DataContext as Activite;
 
-                    //Singleton.getInstance().supprimerActivite(uneActivite);
+                    Singleton.getInstance().supprimerActivite(uneActivite);
 
                 }
             
@@ -81,6 +81,12 @@ namespace ProjetGraphiqueSession
             Button btn = sender as Button;
             uneActivite = btn.DataContext as Activite;
             Frame.Navigate(typeof(ModifActivites), Singleton.getInstance().GetActiviteForm(uneActivite.Nom));
+        }
+
+        private void liste_activites_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            uneActivite = liste_activites.SelectedItem as Activite;
+            Frame.Navigate(typeof(Seances), uneActivite);
         }
     }
 }

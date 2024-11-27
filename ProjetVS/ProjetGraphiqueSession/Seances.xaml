@@ -1,0 +1,111 @@
+﻿<Page
+    x:Class="ProjetGraphiqueSession.Seances"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProjetGraphiqueSession"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="titre" Text="Séances"
+                   HorizontalAlignment="Center" Grid.Row="0" Margin="0 20 0 0" FontWeight="Black" FontSize="50" Foreground="Gray"/>
+
+            <Grid Grid.Row="1" Margin="0 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Border  BorderBrush="Black" BorderThickness="2" >
+                    <TextBlock Text="Date" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center" />
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="1">
+                    <TextBlock Text="heure de debut"  FontSize="20" HorizontalAlignment="Center"/>
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="2">
+                    <TextBlock Text="heure de Fin"  FontSize="20" HorizontalAlignment="Center"/>
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="3">
+                    <TextBlock Text="Nombre de places disponibles"  FontSize="20" HorizontalAlignment="Center" TextWrapping="wrap" TextAlignment="Center"/>
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="4" >
+                    <TextBlock Text="Operations"  FontSize="20" HorizontalAlignment="Center" />
+                </Border>
+
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="5" >
+                    <TextBlock Text="Inscriptions"  FontSize="20" HorizontalAlignment="Center" />
+                </Border>
+
+            </Grid>
+
+            <ListView x:Name="liste_Seances" Grid.Row="2" Margin="0 20 0 0">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Seance">
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+
+
+                            </Grid.ColumnDefinitions>
+
+
+
+                            <TextBlock Text="{x:Bind Date}" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind HeureDebut}" FontSize="20"  Grid.Column="1" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind HeureFin}" FontSize="20"  Grid.Column="2" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind NbPlaces}" FontSize="20"  Grid.Column="3" HorizontalAlignment="Center"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Column="4" >
+
+                                <Button x:Name="edit" Click="edit_Click"   HorizontalAlignment="Left" Foreground="Green">
+                                    <SymbolIcon Symbol="Edit"/>
+                                </Button>
+                                <Button x:Name="delete" Click="delete_Click" Margin="20 0 0 0"  HorizontalAlignment="Right" Foreground="Red">
+                                    <SymbolIcon Symbol="Delete"/>
+                                </Button>
+
+                            </StackPanel>
+                           
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="retour" Click="retour_Click"  Margin="20 0 0 0"  VerticalAlignment="Bottom"  >
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+        </Grid>
+    </ScrollViewer>
+</Page>
