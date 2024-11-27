@@ -5,7 +5,8 @@
 
 CREATE TABLE Administrateur (
   nomAdministrateur VARCHAR(50) PRIMARY KEY,
-  motDePasse VARCHAR(50)
+  motDePasse VARCHAR(50),
+  connecte BOOLEAN DEFAULT 0
 );
 
 CREATE TABLE Categories (
