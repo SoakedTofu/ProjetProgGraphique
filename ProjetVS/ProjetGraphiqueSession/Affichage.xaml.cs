@@ -23,10 +23,12 @@ namespace ProjetGraphiqueSession
     /// </summary>
     public sealed partial class Affichage : Page
     {
+        Activite uneActivite;
         public Affichage()
         {
             this.InitializeComponent();
-            liste_activites.ItemsSource = Singleton.getInstance().listeActivite();
+            liste_activites.ItemsSource = Singleton.getInstance().getListeActivites();
+            uneActivite = new Activite("sport", 2);
         }
 
         // Pour gérer la NavigationView
@@ -47,9 +49,38 @@ namespace ProjetGraphiqueSession
             }
         }
 
-        private void delete_Click(object sender, RoutedEventArgs e)
+        private async void delete_Click(object sender, RoutedEventArgs e)
         {
+            
+                ContentDialog dialog = new ContentDialog();
+                dialog.XamlRoot = liste_activites.XamlRoot;
+                dialog.Title = "Suppression";
+                dialog.Content = "Voulez vous vraiment supprimer l'activité?";
+                dialog.PrimaryButtonText = "Oui";
+                // dialog.SecondaryButtonText = "Non";
+                dialog.CloseButtonText = "Non";
 
+                dialog.DefaultButton = ContentDialogButton.Close;
+
+                var resultat = await dialog.ShowAsync();
+
+                if (resultat == ContentDialogResult.Primary)
+                {
+                    Button btn = sender as Button;
+
+                    uneActivite = btn.DataContext as Activite;
+
+                    //Singleton.getInstance().supprimerActivite(uneActivite);
+
+                }
+            
+        }
+
+        private void edit_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            uneActivite = btn.DataContext as Activite;
+            Frame.Navigate(typeof(ModifActivites), Singleton.getInstance().GetActiviteForm(uneActivite.Nom));
         }
     }
 }

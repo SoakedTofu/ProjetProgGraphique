@@ -8,7 +8,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <ScrollViewer>
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -41,8 +42,8 @@
             <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="1">
                 <TextBlock Text="Note d'appréciation"  FontSize="20" HorizontalAlignment="Center"/>
             </Border>
-            <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="2" Visibility="Collapsed">
-                <TextBlock Text="Operations"  FontSize="20" HorizontalAlignment="Center" Visibility="Collapsed"/>
+            <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="2" >
+                <TextBlock Text="Operations"  FontSize="20" HorizontalAlignment="Center" />
             </Border>
 
         </Grid>
@@ -70,9 +71,12 @@
                        
 
 
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Column="3" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal" Width="200"  Grid.Column="3" >
 
-                            <Button x:Name="delete" Click="delete_Click"  Margin="5,5,5,10" HorizontalAlignment="Center" Foreground="Red">
+                            <Button x:Name="edit" Click="edit_Click"   HorizontalAlignment="Left" Foreground="Red">
+                                <SymbolIcon Symbol="Edit"/>
+                            </Button>
+                            <Button x:Name="delete" Click="delete_Click"  Margin="100 0 0 0" HorizontalAlignment="Right" Foreground="Red">
                                 <SymbolIcon Symbol="Delete"/>
                             </Button>
 
@@ -84,4 +88,5 @@
             </ListView.ItemTemplate>
         </ListView>
     </Grid>
+    </ScrollViewer>
 </Page>

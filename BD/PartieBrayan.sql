@@ -180,7 +180,7 @@ SELECT * FROM nbParticipantMoyParMois;
 DELIMITER //
 CREATE  PROCEDURE AffActivite ()
 BEGIN
-   SELECT nomActivite "NomActivite",
+   SELECT nomActivite "nomActivite",
            ROUND( AVG(note),2) moyenneNote
 FROM seances
 INNER JOIN seances_adherents_noteappreciation san on seances.idSeance = san.idSeance
@@ -190,3 +190,44 @@ end //
 DELIMITER ;
 
 CALL AffActivite();
+
+--Procedure qui permet d'afficher une acivite a partir de son nom
+
+DELIMITER //
+CREATE  PROCEDURE Activite (IN  nomAct varchar(50))
+BEGIN
+   SELECT * FROM activites where nom=nomAct;
+
+end //
+DELIMITER ;
+
+CALL Activite("Football");
+
+
+--Procedure qui permet de modifier une acivite à partir de son nom
+
+DELIMITER //
+CREATE  PROCEDURE ModifActivite (IN  nomAct varchar(50),IN prixOrg double,
+IN prixVt double,IN nomAdmin VARCHAR(50),IN nbPlaces INT ,IN nomActPrec varchar(50))
+BEGIN
+
+    alter table seances
+    drop FOREIGN KEY fk_Seances_Activites;
+
+  update activites
+      SET nom=nomAct,prixOrganisation=prixOrg,prixVente=prixVt,nomAdministrateur=nomAdmin,nbPlacesMax=nbPlaces
+  where nom=nomActPrec;
+
+    update seances
+    SET nomActivite=nomAct
+    where nomActivite=nomActPrec;
+
+    ALTER TABLE seances
+    ADD  CONSTRAINT fk_Seances_Activites FOREIGN KEY (nomActivite) REFERENCES Activites(nom);
+
+end //
+DELIMITER ;
+
+
+
+CALL ModifActivite("Football",20,10,"admin_unique",2,"Soccer");

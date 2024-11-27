@@ -13,6 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Affichage.xaml" />
+    <None Remove="ModifActivites.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +40,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ModifActivites.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Affichage.xaml">

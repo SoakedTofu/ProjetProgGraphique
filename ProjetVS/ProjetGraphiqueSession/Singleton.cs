@@ -270,5 +270,65 @@ namespace ProjetGraphiqueSession
             return admin;
         }
 
+        //methode qui recupere les attributs d'une activite
+
+        public ActiviteForm GetActiviteForm(string nomActivite)
+        {
+            ActiviteForm uneActivite=new ActiviteForm("aucun",1,1, "admin_unique",1);
+
+            MySqlCommand commande = new MySqlCommand("Activite");
+            commande.Connection = con;
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+            commande.Parameters.AddWithValue("nomAct", nomActivite);
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+
+
+                //int id = (int)r["id"];
+                string nom = r["nom"].ToString();
+                Double prixOrg = Convert.ToDouble(r["prixOrganisation"].ToString());
+                Double prixVente = Convert.ToDouble(r["prixVente"].ToString());
+                string nomAdmin = r["nomAdministrateur"].ToString();
+                int nbPlacesMaxi = Convert.ToInt32(r["nbPlacesMax"].ToString());
+
+
+                uneActivite=new ActiviteForm(nom, prixOrg, prixVente, nomAdmin, nbPlacesMaxi);
+            }
+
+
+            con.Close();
+            return uneActivite;
+        }
+
+
+        //methode qui modifie une activité
+
+        public void modifierActivite(ActiviteForm activiteForm ,string nomActPrec)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("ModifActivite");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("nomAct", activiteForm.Nom);
+                commande.Parameters.AddWithValue("prixOrg", activiteForm.PrixOrg);
+                commande.Parameters.AddWithValue("prixVt", activiteForm.PrixVente);
+                commande.Parameters.AddWithValue("nomAdmin", activiteForm.NomAdmin);
+                commande.Parameters.AddWithValue("nbPlaces", activiteForm.NbPlacesMaxi);
+                commande.Parameters.AddWithValue("nomActPrec", nomActPrec);
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+        }
     }
 }
