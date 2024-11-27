@@ -16,7 +16,7 @@
 
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem Content="Connexion" x:Name="Connexion" Icon="Contact2"/>
-                <NavigationViewItem Content="Deconnexion" x:Name="Deconnexion" Icon="Clear" Visibility="Visible"/>
+                <NavigationViewItem Content="Déconnexion" x:Name="Deconnexion" Icon="Clear" Visibility="Collapsed"/>
             </NavigationView.FooterMenuItems>
 
             <NavigationView.PaneFooter>

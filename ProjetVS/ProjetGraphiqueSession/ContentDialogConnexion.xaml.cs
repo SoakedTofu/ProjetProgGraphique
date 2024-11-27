@@ -52,7 +52,16 @@ namespace ProjetGraphiqueSession
 
                         args.Cancel = false;
 
+                        // Cacher l'invitation de connexion, montre celle de déconnexion
+
                         SingletonNavigation.getInstance().VisibiliteConnexion(true);
+
+                        // Mettre à jour les variables de connexion
+
+                        Singleton.getInstance().SetConnecte(true);
+                        Singleton.getInstance().SetUtilisateur(tb_identification.Text);
+
+                        // Remettre la navigation à la page d'accueil
 
                         ChangerNavigation();
 
@@ -68,7 +77,7 @@ namespace ProjetGraphiqueSession
 
                         // Si le mot de passe est entré ou non
 
-                        if(String.IsNullOrWhiteSpace(tb_MDP.Text))
+                        if(String.IsNullOrWhiteSpace(tb_MDP.Password))
                         {
                             // Message pour demander le mot de passe
 
@@ -79,7 +88,7 @@ namespace ProjetGraphiqueSession
                         {
                             // Vérifier si les données de connexion sont exacts
 
-                            if (Singleton.getInstance().VerififierConnexionAdmin(tb_identification.Text, tb_MDP.Text))
+                            if (Singleton.getInstance().VerififierConnexionAdmin(tb_identification.Text, tb_MDP.Password))
                             {
                                 // Mettre à jour les informations de connexions
 
@@ -87,7 +96,16 @@ namespace ProjetGraphiqueSession
 
                                 args.Cancel = false;
 
+                                // Cacher l'invitation de connexion, montre celle de déconnexion
+
                                 SingletonNavigation.getInstance().VisibiliteConnexion(true);
+
+                                // Mettre à jour les variables de connexion
+
+                                Singleton.getInstance().SetConnecte(true);
+                                Singleton.getInstance().SetUtilisateur(tb_identification.Text);
+
+                                // Remettre la navigation à la page d'accueil
 
                                 ChangerNavigation();
                             }
