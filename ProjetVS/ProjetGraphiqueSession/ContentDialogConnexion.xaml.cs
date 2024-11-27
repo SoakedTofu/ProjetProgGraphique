@@ -63,7 +63,7 @@ namespace ProjetGraphiqueSession
 
                         // Remettre la navigation à la page d'accueil
 
-                        ChangerNavigation();
+                        SingletonNavigation.getInstance().ChangerNavigation();
 
                     }
 
@@ -103,11 +103,16 @@ namespace ProjetGraphiqueSession
                                 // Mettre à jour les variables de connexion
 
                                 Singleton.getInstance().SetConnecte(true);
+                                Singleton.getInstance().SetAdmin(true);
                                 Singleton.getInstance().SetUtilisateur(tb_identification.Text);
+
+                                // Montrer les pages exclusives à l'admin
+
+                                SingletonNavigation.getInstance().VisibiliteAdmin(true);
 
                                 // Remettre la navigation à la page d'accueil
 
-                                ChangerNavigation();
+                                SingletonNavigation.getInstance().ChangerNavigation();
                             }
 
                             else
@@ -135,7 +140,7 @@ namespace ProjetGraphiqueSession
             else
             {
                 args.Cancel = false;
-                ChangerNavigation();
+                SingletonNavigation.getInstance().ChangerNavigation();
 
             }
 
@@ -151,21 +156,6 @@ namespace ProjetGraphiqueSession
             sp_MDP.Visibility = Visibility.Collapsed;
         }
 
-        // Pour changer la NavigationView lors de la fermeture du ContentDialog
-        public void ChangerNavigation()
-        {
-            
-            NavigationViewItem navItem;
 
-            foreach (var item in SingletonNavigation.getInstance().NavigationView.MenuItems)
-            {
-                navItem = item as NavigationViewItem;
-                if (navItem.Name == "Affichage")
-                {
-                    SingletonNavigation.getInstance().NavigationView.SelectedItem = navItem;
-                    break;
-                }
-            }
-        }
     }
 }

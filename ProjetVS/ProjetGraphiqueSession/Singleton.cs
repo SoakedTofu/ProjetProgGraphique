@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using MySql.Data.MySqlClient;
+using Mysqlx.Session;
 using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
@@ -269,6 +270,125 @@ namespace ProjetGraphiqueSession
         {
             return admin;
         }
+
+        // Procédures des statistiques
+
+        public String StatTotalAdherents()  // Nombre total d'adhérents
+        {
+
+            string stat = "";
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "NbTotalAdherents";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                stat = commande.ExecuteScalar().ToString();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return stat;
+        }
+
+        public String StatTotalActivites()  // Nombre total d'activités
+        {
+
+            string stat = "";
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "NbTotalActivites";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                stat = commande.ExecuteScalar().ToString();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return stat;
+        }
+
+        public String StatAdherentsParActivite()  // Nombre d'adhérents par activité
+        {
+
+            string stat = "";
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "NbAdherentsParActivite";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                MySqlDataReader r = commande.ExecuteReader();
+
+                while(r.Read())
+                {
+                    stat += r[0] + ": " + r[1] + "\n";
+                }
+
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return stat;
+        }
+        
+        public String StatMoyenneNote()  // Moyenne des notes d'appréciation par activité
+        {
+
+            string stat = "";
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "AffActivite";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                MySqlDataReader r = commande.ExecuteReader();
+
+                while (r.Read())
+                {
+                    stat += r[0] + ": " + r[1] + "\n";
+                }
+
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return stat;
+        }
+
 
     }
 }

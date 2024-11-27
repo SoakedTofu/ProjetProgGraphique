@@ -73,6 +73,17 @@ namespace ProjetGraphiqueSession
                         Singleton.getInstance().SetAdmin(false);
                         Singleton.getInstance().SetUtilisateur("");
 
+                        // Cacher les pages de l'administrateur
+
+                        SingletonNavigation.getInstance().VisibiliteAdmin(false);
+
+                        // Mettre à jour la navigation
+
+                        SingletonNavigation.getInstance().ChangerNavigation();
+                        break;
+                    case "Stats":
+                        if (pageCourante != typeof(PageStatistiques))
+                            mainFrame.Navigate(typeof(PageStatistiques));
                         break;
                     default:
                         break;

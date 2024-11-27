@@ -340,8 +340,42 @@ GROUP BY nomActivite;
 end //
 DELIMITER ;
 
-CALL AffActivite();
+-- Nombre total d'adhérents
 
+DELIMITER //
+CREATE  PROCEDURE NbTotalAdherents ()
+BEGIN
+    SELECT COUNT(*)
+    FROM adherents;
+end //
+DELIMITER ;
+
+-- Nombre total d'activités
+
+DELIMITER //
+CREATE  PROCEDURE NbTotalActivites ()
+BEGIN
+    SELECT COUNT(*)
+    FROM activites;
+end //
+DELIMITER ;
+
+-- Nombre d'adhérents par activité
+
+DELIMITER //
+CREATE  PROCEDURE NbAdherentsParActivite ()
+BEGIN
+SELECT
+    a.nom,
+    (SELECT COUNT(*)
+     FROM seances_adherents_noteappreciation san
+     INNER JOIN seances s ON san.idSeance = s.idSeance
+     WHERE s.nomActivite = a.nom AND s.idSeance = san.idSeance) AS nombreParticipants
+    FROM activites a
+    LEFT JOIN seances s ON a.nom = s.nomActivite
+    GROUP BY a.nom;
+end //
+DELIMITER ;
 
 
 
