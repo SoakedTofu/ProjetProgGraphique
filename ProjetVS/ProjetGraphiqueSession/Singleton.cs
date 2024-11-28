@@ -29,6 +29,10 @@ namespace ProjetGraphiqueSession
 
         Boolean connecte;               // Pour savoir si un utilisateur est connecté
 
+        ObservableCollection<String> exportActivites = new ObservableCollection<String>(); // Pour exporter les activités
+
+        MainWindow window;
+
         public Singleton()
         {
             listeActivites = new ObservableCollection<Activite>();
@@ -495,97 +499,220 @@ namespace ProjetGraphiqueSession
             return stat;
         }
 
-    public String StatTotalActivites()  // Nombre total d'activités
-    {
-
-        string stat = "";
-
-        try
+        public String StatTotalActivites()  // Nombre total d'activités
         {
-            MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
-            commande.CommandText = "NbTotalActivites";
-            commande.CommandType = System.Data.CommandType.StoredProcedure;
 
-            con.Open();
-            commande.Prepare();
-            stat = commande.ExecuteScalar().ToString();
+            string stat = "";
 
-            con.Close();
-        }
-        catch (Exception ex)
-        {
-            con.Close();
-        }
-
-        return stat;
-    }
-
-    public String StatAdherentsParActivite()  // Nombre d'adhérents par activité
-    {
-
-        string stat = "";
-
-        try
-        {
-            MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
-            commande.CommandText = "NbAdherentsParActivite";
-            commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-            con.Open();
-            commande.Prepare();
-            MySqlDataReader r = commande.ExecuteReader();
-
-            while (r.Read())
+            try
             {
-                stat += r[0] + ": " + r[1] + "\n";
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "NbTotalActivites";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                stat = commande.ExecuteScalar().ToString();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
             }
 
-
-            con.Close();
-        }
-        catch (Exception ex)
-        {
-            con.Close();
+            return stat;
         }
 
-        return stat;
-    }
-
-    public String StatMoyenneNote()  // Moyenne des notes d'appréciation par activité
-    {
-
-        string stat = "";
-
-        try
+        public String StatAdherentsParActivite()  // Nombre d'adhérents par activité
         {
-            MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
-            commande.CommandText = "AffActivite";
-            commande.CommandType = System.Data.CommandType.StoredProcedure;
 
-            con.Open();
-            commande.Prepare();
-            MySqlDataReader r = commande.ExecuteReader();
+            string stat = "";
 
-            while (r.Read())
+            try
             {
-                stat += r[0] + ": " + r[1] + "\n";
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "NbAdherentsParActivite";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                MySqlDataReader r = commande.ExecuteReader();
+
+                while (r.Read())
+                {
+                    stat += r[0] + ": " + r[1] + "\n";
+                }
+
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
             }
 
-
-            con.Close();
+            return stat;
         }
-        catch (Exception ex)
+
+        public String StatMoyenneNote()  // Moyenne des notes d'appréciation par activité
         {
-            con.Close();
+
+            string stat = "";
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "AffActivite";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                MySqlDataReader r = commande.ExecuteReader();
+
+                while (r.Read())
+                {
+                    stat += r[0] + ": " + r[1] + "\n";
+                }
+
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return stat;
         }
 
-        return stat;
+
+        public String StatParticipantPopulaire()  // Participant suivant le plus d'activite 
+        {
+
+            string stat = "";
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "ParticipantPopulaire";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                stat = commande.ExecuteScalar().ToString();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return stat;
+        }
+
+        public String StatActivitePopulaire()  // Activite la mieux notée
+        {
+
+            string stat = "";
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "ActiviteMieuxNote";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                stat = commande.ExecuteScalar().ToString();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return stat;
+        }
+
+        public String StatActivitePlusSeances()  // Activite avec le plus de séances
+        {
+
+            string stat = "";
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SeancePopulaire";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                stat = commande.ExecuteScalar().ToString();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return stat;
+        }
+
+        // Fonction qui retourne la collection des activités
+
+        public ObservableCollection<String> GetActivites()
+        {
+            exportActivites.Clear();
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "ListeActivites";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                MySqlDataReader r = commande.ExecuteReader();
+
+                while (r.Read())
+                {
+                    exportActivites.Add(r[0].ToString());
+                }
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return exportActivites;
+        }
+
+        // Pour assigner la mainwindow
+
+        public void SetMainWindow(MainWindow mainwindow)
+        {
+            window = mainwindow;
+        }
+
+        public MainWindow GetMainWindow()
+        {
+            return window;
+        }
+
+
+
     }
-
-
-
-}
 }

@@ -475,6 +475,93 @@ DELIMITER ;
 
 CALL AffSeance('Yoga');
 
+-- Participant qui suit le plus de séances
+
+DELIMITER //
+CREATE PROCEDURE ParticipantPopulaire()
+BEGIN
+    SELECT
+        CONCAT(a.prenom, " ", a.nom) AS participant_name,
+        COUNT(sa.numeroIdentification) AS entries_count
+    FROM seances_adherents_noteappreciation sa
+    INNER JOIN adherents a ON sa.numeroIdentification = a.numeroIdentification
+    GROUP BY sa.numeroIdentification
+    ORDER BY entries_count DESC
+    LIMIT 1;
+END //
+DELIMITER ;
+
+-- Activité la mieux noté
+
+DELIMITER //
+CREATE PROCEDURE ActiviteMieuxNote()
+BEGIN
+    SELECT
+        nomActivite,
+        AVG(note)
+    FROM seances
+    INNER JOIN seances_adherents_noteappreciation san on seances.idSeance = san.idSeance
+    INNER JOIN noteappreciation n on san.idNote = n.idNote
+    GROUP BY seances.nomActivite
+    HAVING
+        AVG(n.note) = (
+            SELECT MAX(avg_note)
+            FROM (
+                SELECT AVG(n.note) AS avg_note
+                FROM seances
+                INNER JOIN seances_adherents_noteappreciation san
+                ON seances.idSeance = san.idSeance
+                INNER JOIN noteappreciation n
+                ON san.idNote = n.idNote
+                GROUP BY seances.nomActivite
+            ) AS maxNotes
+        )
+    LIMIT 1;
+END //
+DELIMITER ;
+
+-- Activité avec le plus de séances
+
+DELIMITER //
+CREATE PROCEDURE SeancePopulaire()
+BEGIN
+    SELECT
+        nomActivite,
+        COUNT(*)
+    FROM seances
+    GROUP BY nomActivite
+    HAVING
+    COUNT(*) = (
+        SELECT MAX(seance_count)
+        FROM (
+            SELECT COUNT(*) AS seance_count
+            FROM seances
+            GROUP BY nomActivite
+        ) AS subquery
+    )
+    LIMIT 1;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE ListeActivites()
+BEGIN
+    SELECT nom
+    FROM activites;
+END //
+DELIMITER ;
+
+-- Fonction qui vérifie si quelqu'un est connecté
+
+DELIMITER //
+CREATE PROCEDURE VerifierConnecte()
+BEGIN
+    SELECT connecte
+    FROM administrateur;
+END //
+DELIMITER ;
+
+
 
 --Procédure qui permet de modifier une séance a partir de son id
 

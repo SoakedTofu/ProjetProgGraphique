@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -87,6 +88,25 @@ namespace ProjetGraphiqueSession
         {
             uneActivite = liste_activites.SelectedItem as Activite;
             Frame.Navigate(typeof(Seances), uneActivite);
+        }
+
+        private async void btn_Exporter_Click(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
+
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(Singleton.getInstance().GetMainWindow());
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+
+            picker.SuggestedFileName = "activites";
+            picker.FileTypeChoices.Add("Fichier texte", new List<string>() { ".csv" });
+
+            Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+
+
+            // La fonction ToString de la classe Client retourne: nom + ";" + prenom
+
+            await Windows.Storage.FileIO.WriteLinesAsync(monFichier, Singleton.getInstance().GetActivites(), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+
         }
     }
 }

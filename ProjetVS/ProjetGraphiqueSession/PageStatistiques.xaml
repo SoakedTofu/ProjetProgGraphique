@@ -21,6 +21,8 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <TextBlock 
@@ -142,11 +144,89 @@
                     />
             </Border>
 
+            <Border  
+                BorderBrush="Black" 
+                BorderThickness="2 0 2 2" 
+                Grid.Row="5"
+                >
+                <TextBlock 
+                    Text="Participant(e) suivant le plus de séances" 
+                    FontSize="20"  
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="5"
+                    />
+            </Border>
 
+            <Border  
+                BorderBrush="Black" 
+                BorderThickness="0 0 2 2"  
+                Grid.Column="1"
+                Grid.Row="5"
+                >
+                <TextBlock 
+                    FontSize="20"
+                    Margin="5"
+                    HorizontalAlignment="left"
+                    x:Name="tbl_participantPopulaire"
+                    />
+            </Border>
 
+            <Border  
+                BorderBrush="Black" 
+                BorderThickness="2 0 2 2" 
+                Grid.Row="6"
+                >
+                <TextBlock 
+                    Text="Activité la mieux notée" 
+                    FontSize="20"  
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="5"
+                    />
+            </Border>
 
+            <Border  
+                BorderBrush="Black" 
+                BorderThickness="0 0 2 2"  
+                Grid.Column="1"
+                Grid.Row="6"
+                >
+                <TextBlock 
+                    FontSize="20"
+                    Margin="5"
+                    HorizontalAlignment="left"
+                    x:Name="tbl_activitePopulaire"
+                    />
+            </Border>
 
+            <Border  
+                BorderBrush="Black" 
+                BorderThickness="2 0 2 2" 
+                Grid.Row="7"
+                >
+                <TextBlock 
+                    Text="Activité avec le plus de séances" 
+                    FontSize="20"  
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="5"
+                    />
+            </Border>
 
+            <Border  
+                BorderBrush="Black" 
+                BorderThickness="0 0 2 2"  
+                Grid.Column="1"
+                Grid.Row="7"
+                >
+                <TextBlock 
+                    FontSize="20"
+                    Margin="5"
+                    HorizontalAlignment="left"
+                    x:Name="tbl_ActivitePlusSeances"
+                    />
+            </Border>
 
         </Grid>
     </ScrollViewer>
