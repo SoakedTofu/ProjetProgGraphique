@@ -51,13 +51,13 @@ namespace ProjetGraphiqueSession
                 Activite seanceNomActivite=nomActivite.SelectedItem as Activite;
                 uneSeanceForm.NomActivite=seanceNomActivite.Nom;
                 Singleton.getInstance().modifierSeance(uneSeanceForm,Singleton.getInstance().idSeance(uneSeance));
-                Frame.Navigate(typeof(Affichage));
+               
             }
         }
 
         private void retour_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(Affichage));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

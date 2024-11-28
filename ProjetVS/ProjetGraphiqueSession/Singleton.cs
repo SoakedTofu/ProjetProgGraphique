@@ -415,7 +415,7 @@ namespace ProjetGraphiqueSession
 
                
                 }
-
+                con.Close();
 
             }
             catch (Exception ex)
@@ -424,6 +424,8 @@ namespace ProjetGraphiqueSession
             }
 
             return idSeance;
+
+          
         }
 
         //methode qui modifie une seance

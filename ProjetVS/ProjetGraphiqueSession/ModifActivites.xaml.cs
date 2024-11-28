@@ -51,6 +51,7 @@ namespace ProjetGraphiqueSession
         }
         private void modifier_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
             if (validation())
             {
                 activite.Nom = nom.Text;
@@ -65,6 +66,7 @@ namespace ProjetGraphiqueSession
 
         private void retour_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
             Frame.Navigate(typeof(Affichage));
         }
 
