@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="ProjetGraphiqueSession.ModifActivites"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProjetGraphiqueSession"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Modifier une activité" Grid.Row="0" Margin="0 20 0 20" HorizontalAlignment="Center"
+                FontWeight="Black" FontSize="50"/>
+
+        <TextBox x:Name="nom" Header="Entrer le nom de l'activité:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="1" Width="500"/>
+        <TextBlock x:Name="erreurNom" Foreground="red" Grid.Row="2" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+
+        <TextBox x:Name="prixOrg" Header="Entrer le prix d'organisation de l'activité:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="3" Width="500"/>
+        <TextBlock x:Name="erreurPrixOrg" Foreground="red" Grid.Row="4" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+
+        <TextBox x:Name="prixVente" Header="Entrer le prix de vente de l'activité:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="5" Width="500"/>
+        <TextBlock x:Name="erreurPrixVente" Foreground="red" Grid.Row="6" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+
+        <ComboBox x:Name="nomAdmin" Header="nom Administrateur:" Grid.Row="7" Margin="40 0 0 20" HorizontalAlignment="Center"  Width="500">
+            <x:String>admin_unique</x:String>
+        </ComboBox>
+
+        <TextBox x:Name="nbPlacesMax" Header="Entrer le nombre de places maximum de l'activité:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="8" Width="500"/>
+        <TextBlock x:Name="erreurNbPlacesMax" Foreground="red" Grid.Row="9" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="10" HorizontalAlignment="Center" Margin="40 30 0 0" Width="500">
+
+            <Button x:Name="modifier" Click="modifier_Click"  Content="sauvegarder"   Background="ForestGreen" HorizontalAlignment="Left"/>
+            <Button x:Name="retour" Click="retour_Click"  Content="Retour"   Background="Red" HorizontalAlignment="Right" Margin="330 0 0 0"/>
+        </StackPanel>
+    </Grid>
+</Page>

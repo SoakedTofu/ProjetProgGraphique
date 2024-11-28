@@ -13,7 +13,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Affichage.xaml" />
+    <None Remove="ModifActivites.xaml" />
     <None Remove="PageStatistiques.xaml" />
+    <None Remove="Seances.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +44,14 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Seances.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ModifActivites.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="PageStatistiques.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

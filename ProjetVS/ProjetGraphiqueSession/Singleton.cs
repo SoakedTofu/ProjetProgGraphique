@@ -15,6 +15,7 @@ namespace ProjetGraphiqueSession
     {
 
         ObservableCollection<Activite> listeActivites;
+        ObservableCollection<Seance> listeSeances;
         MySqlConnection con = new MySqlConnection
             ("Server=cours.cegep3r.info;Database=a2024_420335ri_eq2;Uid='2309444';Pwd='2309444';");
 
@@ -31,6 +32,7 @@ namespace ProjetGraphiqueSession
         public Singleton()
         {
             listeActivites = new ObservableCollection<Activite>();
+            listeSeances = new ObservableCollection<Seance>();
             getListeActivites();
         }
 
@@ -69,6 +71,37 @@ namespace ProjetGraphiqueSession
 
             con.Close();
             return listeActivites;
+
+        }
+
+        public ObservableCollection<Seance> getListeSeances(Activite uneActivite)
+        {
+            listeSeances.Clear();
+            MySqlCommand commande = new MySqlCommand("AffSeance");
+            commande.Connection = con;
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+            commande.Parameters.AddWithValue("nomAct", uneActivite.Nom);
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+
+
+
+                
+                string date = r["date"].ToString();
+                string heureDebut = r["heureDebut"].ToString();
+                string heureFin = r["heureFin"].ToString();
+                int  nbPlaces =Convert.ToInt32( r["nbPMax"].ToString());
+
+
+                listeSeances.Add(new Seance(date, heureDebut,heureFin,nbPlaces));
+            }
+
+
+            con.Close();
+            return listeSeances;
 
         }
 
@@ -271,6 +304,93 @@ namespace ProjetGraphiqueSession
             return admin;
         }
 
+        //methode qui recupere les attributs d'une activite
+
+        public ActiviteForm GetActiviteForm(string nomActivite)
+        {
+            ActiviteForm uneActivite=new ActiviteForm("aucun",1,1, "admin_unique",1);
+
+            MySqlCommand commande = new MySqlCommand("Activite");
+            commande.Connection = con;
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+            commande.Parameters.AddWithValue("nomAct", nomActivite);
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+
+
+                //int id = (int)r["id"];
+                string nom = r["nom"].ToString();
+                Double prixOrg = Convert.ToDouble(r["prixOrganisation"].ToString());
+                Double prixVente = Convert.ToDouble(r["prixVente"].ToString());
+                string nomAdmin = r["nomAdministrateur"].ToString();
+                int nbPlacesMaxi = Convert.ToInt32(r["nbPlacesMax"].ToString());
+
+
+                uneActivite=new ActiviteForm(nom, prixOrg, prixVente, nomAdmin, nbPlacesMaxi);
+            }
+
+
+            con.Close();
+            return uneActivite;
+        }
+
+
+        //methode qui modifie une activité
+
+        public void modifierActivite(ActiviteForm activiteForm, string nomActPrec)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("ModifActivite");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("nomAct", activiteForm.Nom);
+                commande.Parameters.AddWithValue("prixOrg", activiteForm.PrixOrg);
+                commande.Parameters.AddWithValue("prixVt", activiteForm.PrixVente);
+                commande.Parameters.AddWithValue("nomAdmin", activiteForm.NomAdmin);
+                commande.Parameters.AddWithValue("nbPlaces", activiteForm.NbPlacesMaxi);
+                commande.Parameters.AddWithValue("nomActPrec", nomActPrec);
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+
+        }
+
+        //Methode suppression des activités
+
+        public void supprimerActivite( Activite uneActivite)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("SuppActivite");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("nomAct", uneActivite.Nom);
+
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            listeActivites.Remove(uneActivite);
+        }
+
         // Procédures des statistiques
 
         public String StatTotalAdherents()  // Nombre total d'adhérents
@@ -295,100 +415,102 @@ namespace ProjetGraphiqueSession
             {
                 con.Close();
             }
-
-            return stat;
-        }
-
-        public String StatTotalActivites()  // Nombre total d'activités
-        {
-
-            string stat = "";
-
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "NbTotalActivites";
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-                con.Open();
-                commande.Prepare();
-                stat = commande.ExecuteScalar().ToString();
-
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-
-            return stat;
-        }
-
-        public String StatAdherentsParActivite()  // Nombre d'adhérents par activité
-        {
-
-            string stat = "";
-
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "NbAdherentsParActivite";
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-                con.Open();
-                commande.Prepare();
-                MySqlDataReader r = commande.ExecuteReader();
-
-                while(r.Read())
-                {
-                    stat += r[0] + ": " + r[1] + "\n";
-                }
-
-
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-
-            return stat;
-        }
         
-        public String StatMoyenneNote()  // Moyenne des notes d'appréciation par activité
-        {
-
-            string stat = "";
-
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "AffActivite";
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-                con.Open();
-                commande.Prepare();
-                MySqlDataReader r = commande.ExecuteReader();
-
-                while (r.Read())
-                {
-                    stat += r[0] + ": " + r[1] + "\n";
-                }
-
-
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-            }
 
             return stat;
         }
 
+    public String StatTotalActivites()  // Nombre total d'activités
+    {
 
+        string stat = "";
+
+        try
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "NbTotalActivites";
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+            con.Open();
+            commande.Prepare();
+            stat = commande.ExecuteScalar().ToString();
+
+            con.Close();
+        }
+        catch (Exception ex)
+        {
+            con.Close();
+        }
+
+        return stat;
     }
+
+    public String StatAdherentsParActivite()  // Nombre d'adhérents par activité
+    {
+
+        string stat = "";
+
+        try
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "NbAdherentsParActivite";
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+
+            while (r.Read())
+            {
+                stat += r[0] + ": " + r[1] + "\n";
+            }
+
+
+            con.Close();
+        }
+        catch (Exception ex)
+        {
+            con.Close();
+        }
+
+        return stat;
+    }
+
+    public String StatMoyenneNote()  // Moyenne des notes d'appréciation par activité
+    {
+
+        string stat = "";
+
+        try
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "AffActivite";
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+
+            while (r.Read())
+            {
+                stat += r[0] + ": " + r[1] + "\n";
+            }
+
+
+            con.Close();
+        }
+        catch (Exception ex)
+        {
+            con.Close();
+        }
+
+        return stat;
+    }
+
+
+
+}
 }

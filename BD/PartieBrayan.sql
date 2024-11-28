@@ -180,7 +180,7 @@ SELECT * FROM nbParticipantMoyParMois;
 DELIMITER //
 CREATE  PROCEDURE AffActivite ()
 BEGIN
-   SELECT nomActivite "NomActivite",
+   SELECT nomActivite,
            ROUND( AVG(note),2) moyenneNote
 FROM seances
 INNER JOIN seances_adherents_noteappreciation san on seances.idSeance = san.idSeance
@@ -190,3 +190,85 @@ end //
 DELIMITER ;
 
 CALL AffActivite();
+
+--Procedure qui permet d'afficher une acivite a partir de son nom
+
+DELIMITER //
+CREATE  PROCEDURE Activite (IN  nomAct varchar(50))
+BEGIN
+   SELECT * FROM activites where nom=nomAct;
+
+end //
+DELIMITER ;
+
+CALL Activite("Football");
+
+
+--Procedure qui permet de modifier une acivite à partir de son nom
+
+DELIMITER //
+CREATE  PROCEDURE ModifActivite (IN  nomAct varchar(50),IN prixOrg double,
+IN prixVt double,IN nomAdmin VARCHAR(50),IN nbPlaces INT ,IN nomActPrec varchar(50))
+BEGIN
+
+    alter table seances
+    drop FOREIGN KEY fk_Seances_Activites;
+
+  update activites
+      SET nom=nomAct,prixOrganisation=prixOrg,prixVente=prixVt,nomAdministrateur=nomAdmin,nbPlacesMax=nbPlaces
+  where nom=nomActPrec;
+
+    update seances
+    SET nomActivite=nomAct
+    where nomActivite=nomActPrec;
+
+    ALTER TABLE seances
+    ADD  CONSTRAINT fk_Seances_Activites FOREIGN KEY (nomActivite) REFERENCES Activites(nom);
+
+end //
+DELIMITER ;
+
+
+
+CALL ModifActivite("Football",20,10,"admin_unique",2,"Soccer");
+
+--Procedure qui permet de supprimer une acivite à partir de son nom
+
+DELIMITER //
+CREATE  PROCEDURE SuppActivite (IN  nomAct varchar(50))
+BEGIN
+
+    alter table seances
+    drop FOREIGN KEY  fk_Seances_Activites ;
+
+     alter table seances_adherents_noteappreciation
+    drop FOREIGN KEY fk_SANA_Seances ;
+
+    DELETE FROM activites WHERE nom=nomAct;
+
+    DELETE FROM seances WHERE nomActivite=nomAct;
+
+    SET FOREIGN_KEY_CHECKS=0;
+
+    ALTER TABLE seances
+    ADD  CONSTRAINT fk_Seances_Activites FOREIGN KEY (nomActivite) REFERENCES Activites(nom);
+
+      ALTER TABLE seances_adherents_noteappreciation
+    ADD   CONSTRAINT fk_SANA_Seances FOREIGN KEY (idSeance) REFERENCES Seances(idSeance);
+end //
+DELIMITER ;
+
+call SuppActivite("Chanson Française");
+
+--Procedure qui permet d'afficher une seance avec son nombre de places restantes à partir de son nom d'activité
+
+DELIMITER //
+CREATE  PROCEDURE AffSeance (IN nomAct VARCHAR(50))
+BEGIN
+   SELECT *,(SELECT nbPlacesMax FROM activites where nom=seances.nomActivite)-nbPlaces AS nbPMax from seances
+   where nomActivite=nomAct;
+end //
+DELIMITER ;
+
+
+CALL AffSeance('Yoga');
