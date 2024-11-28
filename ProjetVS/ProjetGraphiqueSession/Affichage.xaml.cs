@@ -28,7 +28,7 @@ namespace ProjetGraphiqueSession
         public Affichage()
         {
             this.InitializeComponent();
-            liste_activites.ItemsSource = Singleton.getInstance().listeActivite();
+            liste_activites.ItemsSource = Singleton.getInstance().getListeActivites();
             uneActivite = new Activite("sport", 2);
         }
 

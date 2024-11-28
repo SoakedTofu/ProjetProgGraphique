@@ -41,9 +41,30 @@ namespace ProjetGraphiqueSession
             Frame.Navigate(typeof(ModifierSeance), uneSeance) ;
         }
 
-        private void delete_Click(object sender, RoutedEventArgs e)
+        private async void delete_Click(object sender, RoutedEventArgs e)
         {
 
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = liste_Seances.XamlRoot;
+            dialog.Title = "Suppression";
+            dialog.Content = "Voulez vous vraiment supprimer la séance?";
+            dialog.PrimaryButtonText = "Oui";
+            // dialog.SecondaryButtonText = "Non";
+            dialog.CloseButtonText = "Non";
+
+            dialog.DefaultButton = ContentDialogButton.Close;
+
+            var resultat = await dialog.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+            {
+                Button btn = sender as Button;
+
+                uneSeance = btn.DataContext as Seance;
+
+              //  Singleton.getInstance().supprimerActivite(uneActivite);
+
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
