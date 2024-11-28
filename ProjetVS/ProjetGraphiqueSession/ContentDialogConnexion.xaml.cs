@@ -34,117 +34,130 @@ namespace ProjetGraphiqueSession
 
             ReinitialiserContentDialog();
 
-            if (args.Result == ContentDialogResult.Primary)
+            // Vérifier si quelqu'un d'autre est connecté
+
+            if (Singleton.getInstance().VerifierConnecte())
             {
-
-                // Vérifier si le champs est remplis
-
-                if (!String.IsNullOrWhiteSpace(tb_identification.Text))
+                
+                if (args.Result == ContentDialogResult.Primary)
                 {
 
-                    // Vérifier si le numéro d'identification appartient à un adhérent
+                    // Vérifier si le champs est remplis
 
-                    if (Singleton.getInstance().VerifierAdherent(tb_identification.Text))
+                    if (!String.IsNullOrWhiteSpace(tb_identification.Text))
                     {
-                        // Mettre à jour les informations de connexions
 
-                        Singleton.getInstance().SetTBUtilisateur(Singleton.getInstance().GetNomAdherent(tb_identification.Text));
+                        // Vérifier si le numéro d'identification appartient à un adhérent
 
-                        args.Cancel = false;
-
-                        // Cacher l'invitation de connexion, montre celle de déconnexion
-
-                        SingletonNavigation.getInstance().VisibiliteConnexion(true);
-
-                        // Mettre à jour les variables de connexion
-
-                        Singleton.getInstance().SetConnecte(true);
-                        Singleton.getInstance().SetUtilisateur(tb_identification.Text);
-
-                        // Remettre la navigation à la page d'accueil
-
-                        SingletonNavigation.getInstance().ChangerNavigation();
-
-                    }
-
-                    // Vérifier si c'est un admin
-
-                    else if (Singleton.getInstance().VerififierAdmin(tb_identification.Text))
-                    {
-                        // Montrer le champ du mot de passe
-
-                        sp_MDP.Visibility = Visibility.Visible;
-
-                        // Si le mot de passe est entré ou non
-
-                        if(String.IsNullOrWhiteSpace(tb_MDP.Password))
+                        if (Singleton.getInstance().VerifierAdherent(tb_identification.Text))
                         {
-                            // Message pour demander le mot de passe
+                            // Mettre à jour les informations de connexions
 
-                            tbl_erreurMDP.Text = "Veuillez entrer votre mot de passe";
+                            Singleton.getInstance().SetTBUtilisateur(Singleton.getInstance().GetNomAdherent(tb_identification.Text));
+
+                            args.Cancel = false;
+
+                            // Cacher l'invitation de connexion, montre celle de déconnexion
+
+                            SingletonNavigation.getInstance().VisibiliteConnexion(true);
+
+                            // Mettre à jour les variables de connexion
+
+                            Singleton.getInstance().SetConnecte(true);
+                            Singleton.getInstance().SetUtilisateur(tb_identification.Text);
+
+                            // Remettre la navigation à la page d'accueil
+
+                            SingletonNavigation.getInstance().ChangerNavigation();
+
                         }
 
-                        else
+                        // Vérifier si c'est un admin
+
+                        else if (Singleton.getInstance().VerififierAdmin(tb_identification.Text))
                         {
-                            // Vérifier si les données de connexion sont exacts
+                            // Montrer le champ du mot de passe
 
-                            if (Singleton.getInstance().VerififierConnexionAdmin(tb_identification.Text, tb_MDP.Password))
+                            sp_MDP.Visibility = Visibility.Visible;
+
+                            // Si le mot de passe est entré ou non
+
+                            if(String.IsNullOrWhiteSpace(tb_MDP.Password))
                             {
-                                // Mettre à jour les informations de connexions
+                                // Message pour demander le mot de passe
 
-                                Singleton.getInstance().SetTBUtilisateur(tb_identification.Text);
-
-                                args.Cancel = false;
-
-                                // Cacher l'invitation de connexion, montre celle de déconnexion
-
-                                SingletonNavigation.getInstance().VisibiliteConnexion(true);
-
-                                // Mettre à jour les variables de connexion
-
-                                Singleton.getInstance().SetConnecte(true);
-                                Singleton.getInstance().SetAdmin(true);
-                                Singleton.getInstance().SetUtilisateur(tb_identification.Text);
-
-                                // Montrer les pages exclusives à l'admin
-
-                                SingletonNavigation.getInstance().VisibiliteAdmin(true);
-
-                                // Remettre la navigation à la page d'accueil
-
-                                SingletonNavigation.getInstance().ChangerNavigation();
+                                tbl_erreurMDP.Text = "Veuillez entrer votre mot de passe";
                             }
 
                             else
                             {
-                                tbl_erreurMDP.Visibility = Visibility.Visible;
-                                tbl_erreurMDP.Text = "Le mot de passe est incorrect";
+                                // Vérifier si les données de connexion sont exacts
+
+                                if (Singleton.getInstance().VerififierConnexionAdmin(tb_identification.Text, tb_MDP.Password))
+                                {
+                                    // Mettre à jour les informations de connexions
+
+                                    Singleton.getInstance().SetTBUtilisateur(tb_identification.Text);
+
+                                    args.Cancel = false;
+
+                                    // Cacher l'invitation de connexion, montre celle de déconnexion
+
+                                    SingletonNavigation.getInstance().VisibiliteConnexion(true);
+
+                                    // Mettre à jour les variables de connexion
+
+                                    Singleton.getInstance().SetConnecte(true);
+                                    Singleton.getInstance().SetAdmin(true);
+                                    Singleton.getInstance().SetUtilisateur(tb_identification.Text);
+
+                                    // Montrer les pages exclusives à l'admin
+
+                                    SingletonNavigation.getInstance().VisibiliteAdmin(true);
+
+                                    // Remettre la navigation à la page d'accueil
+
+                                    SingletonNavigation.getInstance().ChangerNavigation();
+                                }
+
+                                else
+                                {
+                                    tbl_erreurMDP.Visibility = Visibility.Visible;
+                                    tbl_erreurMDP.Text = "Le mot de passe est incorrect";
+                                }
                             }
+                        }
+
+                        else
+                        {
+                            tbl_erreurIdentification.Visibility = Visibility.Visible;
+                            tbl_erreurIdentification.Text = "Le numéro d'utilisateur est incorrect";
                         }
                     }
 
                     else
                     {
                         tbl_erreurIdentification.Visibility = Visibility.Visible;
-                        tbl_erreurIdentification.Text = "Le numéro d'utilisateur est incorrect";
+                        tbl_erreurIdentification.Text = "Ce champ est obligatoire";
                     }
-                }
 
+                }
                 else
                 {
-                    tbl_erreurIdentification.Visibility = Visibility.Visible;
-                    tbl_erreurIdentification.Text = "Ce champ est obligatoire";
+                    args.Cancel = false;
+                    SingletonNavigation.getInstance().ChangerNavigation();
+
                 }
 
             }
             else
             {
-                args.Cancel = false;
-                SingletonNavigation.getInstance().ChangerNavigation();
-
+                tbl_erreurIdentification.Visibility = Visibility.Visible;
+                tbl_erreurIdentification.Text = "Un utilisateur est déjà connecté. Veuillez réessayer plus tard.";
             }
 
         }
+       
 
         // Réinitialiser les champs du ContentDialog
 
