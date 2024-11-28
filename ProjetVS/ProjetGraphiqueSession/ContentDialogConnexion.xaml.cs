@@ -34,12 +34,13 @@ namespace ProjetGraphiqueSession
 
             ReinitialiserContentDialog();
 
-            // Vérifier si quelqu'un d'autre est connecté
+           
 
-            if (Singleton.getInstance().VerifierConnecte())
+
+            if (args.Result == ContentDialogResult.Primary)
             {
-                
-                if (args.Result == ContentDialogResult.Primary)
+
+                if (!Singleton.getInstance().VerifierConnecte())
                 {
 
                     // Vérifier si le champs est remplis
@@ -148,16 +149,14 @@ namespace ProjetGraphiqueSession
                     SingletonNavigation.getInstance().ChangerNavigation();
 
                 }
-
             }
             else
             {
                 tbl_erreurIdentification.Visibility = Visibility.Visible;
-                tbl_erreurIdentification.Text = "Un utilisateur est déjà connecté. Veuillez réessayer plus tard.";
+                tbl_erreurIdentification.Text = "Un utilisateur est déjà connecté. Veuillez réessayer.";
             }
 
         }
-       
 
         // Réinitialiser les champs du ContentDialog
 
