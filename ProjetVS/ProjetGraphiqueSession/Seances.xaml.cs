@@ -24,17 +24,21 @@ namespace ProjetGraphiqueSession
     /// </summary>
     public sealed partial class Seances : Page
     {
+        Seance uneSeance;
         Activite activite;
         public Seances()
         {
             this.InitializeComponent();
-            activite = new Activite("aucun", 2);
-           
+            uneSeance = new Seance();
+            activite = new Activite("sport", 2);
+
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-
+            Button btn = sender as Button;
+            uneSeance = btn.DataContext as Seance;
+            Frame.Navigate(typeof(ModifierSeance), uneSeance);
         }
 
         private void delete_Click(object sender, RoutedEventArgs e)

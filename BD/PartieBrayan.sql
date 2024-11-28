@@ -181,10 +181,10 @@ DELIMITER //
 CREATE  PROCEDURE AffActivite ()
 BEGIN
    SELECT nomActivite,
-           ROUND( AVG(note),2) moyenneNote
+            ifnull(ROUND( AVG(note),2) ,0) as moyenneNote
 FROM seances
-INNER JOIN seances_adherents_noteappreciation san on seances.idSeance = san.idSeance
-INNER JOIN noteappreciation n on san.idNote = n.idNote
+left join seances_adherents_noteappreciation san on seances.idSeance = san.idSeance
+left join noteappreciation n on san.idNote = n.idNote
 GROUP BY nomActivite;
 end //
 DELIMITER ;
@@ -222,6 +222,9 @@ BEGIN
     SET nomActivite=nomAct
     where nomActivite=nomActPrec;
 
+      SET FOREIGN_KEY_CHECKS=0;
+
+
     ALTER TABLE seances
     ADD  CONSTRAINT fk_Seances_Activites FOREIGN KEY (nomActivite) REFERENCES Activites(nom);
 
@@ -234,6 +237,7 @@ CALL ModifActivite("Football",20,10,"admin_unique",2,"Soccer");
 
 --Procedure qui permet de supprimer une acivite à partir de son nom
 
+
 DELIMITER //
 CREATE  PROCEDURE SuppActivite (IN  nomAct varchar(50))
 BEGIN
@@ -244,9 +248,20 @@ BEGIN
      alter table seances_adherents_noteappreciation
     drop FOREIGN KEY fk_SANA_Seances ;
 
+      alter table seances_adherents_noteappreciation
+    drop FOREIGN KEY fk_SANA_NotesAppreciation ;
+
+     DELETE  FROM noteappreciation WHERE idNote=(SELECT  idNote FROM seances_adherents_noteappreciation
+                                                               WHERE idSeance=(select idSeance from seances where nomActivite=nomAct));
+
+     DELETE FROM seances_adherents_noteappreciation WHERE idSeance=(select idSeance from seances where nomActivite=nomAct);
+
     DELETE FROM activites WHERE nom=nomAct;
 
     DELETE FROM seances WHERE nomActivite=nomAct;
+
+
+
 
     SET FOREIGN_KEY_CHECKS=0;
 
@@ -255,10 +270,12 @@ BEGIN
 
       ALTER TABLE seances_adherents_noteappreciation
     ADD   CONSTRAINT fk_SANA_Seances FOREIGN KEY (idSeance) REFERENCES Seances(idSeance);
+
+     ALTER TABLE seances_adherents_noteappreciation
+    ADD   CONSTRAINT fk_SANA_NotesAppreciation FOREIGN KEY (idNote) REFERENCES noteAppreciation(idNote);
+
 end //
 DELIMITER ;
-
-call SuppActivite("Chanson Française");
 
 --Procedure qui permet d'afficher une seance avec son nombre de places restantes à partir de son nom d'activité
 
@@ -272,3 +289,21 @@ DELIMITER ;
 
 
 CALL AffSeance('Yoga');
+
+--Procédure qui permet de modifier une séance a partir de son id
+
+
+DELIMITER //
+CREATE  PROCEDURE ModifSeance (IN  dateForm DATE,IN hrDebut TIME,
+IN hrFin TIME,IN nomAct varchar(50),IN id INT)
+BEGIN
+
+    update seances
+    SET nomActivite=nomAct,date=dateForm,heureDebut=hrDebut,heureFin=hrFin
+    where idSeance=id;
+
+
+end //
+DELIMITER ;
+
+call ModifSeance('2020-10-11','12:00','13:00','Peinture',2);

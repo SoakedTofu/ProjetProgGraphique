@@ -56,11 +56,17 @@ namespace ProjetGraphiqueSession
             MySqlDataReader r = commande.ExecuteReader();
             while (r.Read())
             {
-
+                Double note = 0;
 
                 //int id = (int)r["id"];
-
-                Double note = Convert.ToDouble(r["moyenneNote"].ToString());
+                if (r["moyenneNote"] == null)
+                {
+                    note = 0;
+                }
+                else
+                {
+                        note = Convert.ToDouble(r["moyenneNote"].ToString());
+                }
                 string nom = r["NomActivite"].ToString();
 
 
@@ -353,6 +359,75 @@ namespace ProjetGraphiqueSession
                 commande.Parameters.AddWithValue("nomAdmin", activiteForm.NomAdmin);
                 commande.Parameters.AddWithValue("nbPlaces", activiteForm.NbPlacesMaxi);
                 commande.Parameters.AddWithValue("nomActPrec", nomActPrec);
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+
+        }
+
+        //methode qui permet de recupérer l'id d'une seance
+
+        public int idSeance(seanceForm uneSeance)
+        {
+            int idSeance = 1;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("idSeance");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("dateForm", uneSeance.Date);
+                commande.Parameters.AddWithValue("hrDebut", uneSeance.HeureDebut);
+                commande.Parameters.AddWithValue("hrFin", uneSeance.HeureFin);
+                commande.Parameters.AddWithValue("nomAct", uneSeance.NomActivite);
+           
+
+                con.Open();
+                commande.Prepare();
+                MySqlDataReader r = commande.ExecuteReader();
+                while (r.Read())
+                {
+
+
+                 
+                    idSeance = Convert.ToInt32(r["idSeance"].ToString());
+
+
+               
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return idSeance;
+        }
+
+        //methode qui modifie une seance
+
+        public void modifierSeance(seanceForm uneSeance)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("ModifSeance");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("dateForm", uneSeance.Date);
+                commande.Parameters.AddWithValue("hrDebut", uneSeance.HeureDebut);
+                commande.Parameters.AddWithValue("hrFin", uneSeance.HeureFin);
+                commande.Parameters.AddWithValue("nomAct", uneSeance.NomActivite);
+                commande.Parameters.AddWithValue("id", idSeance(uneSeance));
+                
                 con.Open();
                 commande.Prepare();
                 int i = commande.ExecuteNonQuery();

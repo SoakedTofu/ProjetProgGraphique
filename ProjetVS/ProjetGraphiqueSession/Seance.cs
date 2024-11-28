@@ -15,7 +15,13 @@ namespace ProjetGraphiqueSession
         int nbPlaces;
 
 
-
+        public Seance()
+        {
+            date = "2020-12-1";
+            heureDebut = "12:20";
+            heureFin = "12:50";
+            nbPlaces = 1;
+        }
         public Seance(string date, string heureDebut, string heureFin, int nbPlaces)
         {
             this.date = date;
