@@ -709,7 +709,7 @@ namespace ProjetGraphiqueSession
             return exportActivites;
         }
 
-        // Pour assigner la mainwindow
+        // Pour gérer la mainwindow
 
         public void SetMainWindow(MainWindow mainwindow)
         {
@@ -719,6 +719,42 @@ namespace ProjetGraphiqueSession
         public MainWindow GetMainWindow()
         {
             return window;
+        }
+
+        // Pour vérifier si quelqu'un est connecté au programme
+
+        public bool VerifierConnecte()
+        {
+            bool connecte = false;
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "VerifierConnecte";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+
+                con.Open();
+                commande.Prepare();
+                var resultat = commande.ExecuteScalar();
+
+                // Vérifier que la commande renvoie bien un résultat
+
+                if (resultat != null)
+                {
+                    connecte = Convert.ToBoolean(resultat);
+                }
+
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return connecte;
         }
 
 
