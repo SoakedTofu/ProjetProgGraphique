@@ -24,7 +24,16 @@
         <TextBlock x:Name="titre" Text="Activités"
                    HorizontalAlignment="Center" Grid.Row="0" Margin="0 20 0 0" FontWeight="Black" FontSize="50"/>
 
-        <Grid Grid.Row="1" Margin="0 20 0 0">
+        <Button
+            x:Name="btn_Exporter"
+            Content="Exporter les activités"
+            VerticalAlignment="Bottom"
+            Margin=" 10 0 0 0"
+            Padding="10"
+            Click="btn_Exporter_Click"
+            />
+
+            <Grid Grid.Row="1" Margin="0 20 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
 

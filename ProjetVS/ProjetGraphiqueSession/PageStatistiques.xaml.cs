@@ -47,6 +47,19 @@ namespace ProjetGraphiqueSession
             // Moyenne des notes d'appréciation par activité
 
             tbl_moyenneNote.Text = Singleton.getInstance().StatMoyenneNote();
+
+            // Participant ayant le plus de séances
+
+            tbl_participantPopulaire.Text = Singleton.getInstance().StatParticipantPopulaire();
+
+            // Activité la mieux noté
+
+            tbl_activitePopulaire.Text = Singleton.getInstance().StatActivitePopulaire();
+
+            // L'activité avec le plus de séances
+
+            tbl_ActivitePlusSeances.Text = Singleton.getInstance().StatActivitePlusSeances();
+
         }
 
     }

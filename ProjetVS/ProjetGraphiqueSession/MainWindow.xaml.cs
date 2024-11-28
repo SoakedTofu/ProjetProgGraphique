@@ -28,7 +28,8 @@ namespace ProjetGraphiqueSession
             this.InitializeComponent();
             SingletonNavigation.getInstance().NavigationView = navView;     // Assigner l'attribut de la NavigationView
             mainFrame.Navigate(typeof(Affichage));      // Naviguer à la page d'affichage
-            Singleton.getInstance().SetTextblock(tbl_usager);
+            Singleton.getInstance().SetTextblock(tbl_usager);   // Pour afficher l'utilisateur connecté
+            Singleton.getInstance().SetMainWindow(this);    // Assigner la mainwindow
         }
 
 
