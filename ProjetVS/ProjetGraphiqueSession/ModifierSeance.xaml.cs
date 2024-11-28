@@ -50,7 +50,7 @@ namespace ProjetGraphiqueSession
                 uneSeanceForm.NbPlaces = seanceNbP.NbPlaces ;
                 Activite seanceNomActivite=nomActivite.SelectedItem as Activite;
                 uneSeanceForm.NomActivite=seanceNomActivite.Nom;
-                Singleton.getInstance().modifierSeance(uneSeanceForm);
+                Singleton.getInstance().modifierSeance(uneSeanceForm,Singleton.getInstance().idSeance(uneSeance));
                 Frame.Navigate(typeof(Affichage));
             }
         }

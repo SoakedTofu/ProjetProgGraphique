@@ -29,6 +29,8 @@ namespace ProjetGraphiqueSession
 
         Boolean connecte;               // Pour savoir si un utilisateur est connecté
 
+        string nomActivite;
+
         ObservableCollection<String> exportActivites = new ObservableCollection<String>(); // Pour exporter les activités
 
         MainWindow window;
@@ -377,9 +379,16 @@ namespace ProjetGraphiqueSession
 
         }
 
+        //Methode qui stocke le nom de l'activité de la seance
+
+        public void nomActiviteSeance(string nomAct)
+        {
+            nomActivite = nomAct;
+        }
+
         //methode qui permet de recupérer l'id d'une seance
 
-        public int idSeance(seanceForm uneSeance)
+        public int idSeance(Seance uneSeance)
         {
             int idSeance = 1;
             try
@@ -390,7 +399,7 @@ namespace ProjetGraphiqueSession
                 commande.Parameters.AddWithValue("dateForm", uneSeance.Date);
                 commande.Parameters.AddWithValue("hrDebut", uneSeance.HeureDebut);
                 commande.Parameters.AddWithValue("hrFin", uneSeance.HeureFin);
-                commande.Parameters.AddWithValue("nomAct", uneSeance.NomActivite);
+                commande.Parameters.AddWithValue("nomAct", nomActivite);
            
 
                 con.Open();
@@ -419,7 +428,7 @@ namespace ProjetGraphiqueSession
 
         //methode qui modifie une seance
 
-        public void modifierSeance(seanceForm uneSeance)
+        public void modifierSeance(seanceForm uneSeance, int id)
         {
             try
             {
@@ -430,7 +439,7 @@ namespace ProjetGraphiqueSession
                 commande.Parameters.AddWithValue("hrDebut", uneSeance.HeureDebut);
                 commande.Parameters.AddWithValue("hrFin", uneSeance.HeureFin);
                 commande.Parameters.AddWithValue("nomAct", uneSeance.NomActivite);
-                commande.Parameters.AddWithValue("id", idSeance(uneSeance));
+                commande.Parameters.AddWithValue("id", id);
                 
                 con.Open();
                 commande.Prepare();
