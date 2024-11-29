@@ -8,6 +8,7 @@ namespace ProjetGraphiqueSession
 {
     public class Adherent
     {
+        string id;
         string nom;
         string prenom;
         string adresse;
@@ -16,6 +17,7 @@ namespace ProjetGraphiqueSession
         string nomAdministrateur;
 
         public Adherent() {
+            id = "aucun";
             nom = "Aucun";
             prenom = "Aucun";
             adresse = "Aucun";
@@ -23,8 +25,9 @@ namespace ProjetGraphiqueSession
             age = "Aucun";
         }
 
-        public Adherent(string nom, string prenom, string adresse, string dateNaissance, string age)
+        public Adherent(string id, string nom, string prenom, string adresse, string dateNaissance, string age)
         {
+            this.id = id;
             this.nom = nom;
             this.prenom = prenom;
             this.adresse = adresse;
@@ -41,6 +44,8 @@ namespace ProjetGraphiqueSession
             this.age = age;
             this.nomAdministrateur = nomAdministrateur;
         }
+        
+        public string Id { get { return id; } set { id = value; } }
         public string Nom { get { return nom; } set { nom = value; } }
         public string Prenom { get {return prenom; } set { prenom = value; } }
         public string Adresse { get { return adresse; } set { adresse = value; } }  
@@ -50,7 +55,7 @@ namespace ProjetGraphiqueSession
 
         public override string ToString()
         {
-            return nom + prenom + adresse + dateNaissance + age;
+            return id+ nom + prenom + adresse + dateNaissance + age;
         }
 
         public string ToStringCSV()
