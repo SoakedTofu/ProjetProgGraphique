@@ -12,11 +12,30 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Liste des Activites" x:Name="Affichage" Icon="Home"/>
                 <NavigationViewItem Content="Statistiques" x:Name="Stats" Icon="Calculator" Visibility="Collapsed"/>
-                <NavigationViewItem Content="Administrateur" Icon="Contact" ToolTipService.ToolTip="Account" x:Name="Admin">
+                <NavigationViewItem  ToolTipService.ToolTip="Account" x:Name="Admin">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xE7EF;"/>
+                        <TextBlock Margin="12 0 0 0" Text="Administrateur"/>
+                    </StackPanel>
                     <NavigationViewItem.MenuItems>
-                        <NavigationViewItem Content="Comptes" Icon="Contact" ToolTipService.ToolTip="Account" x:Name="comptes"/>
-                        <NavigationViewItem Content="Activités" Icon="List"  x:Name="activite"/>
-                        <NavigationViewItem Content="Séances" Icon="List"  x:Name="seance"/>
+                        <NavigationViewItem ToolTipService.ToolTip="Account" x:Name="comptes">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE902;"/>
+                                <TextBlock Margin="12 0 0 0" Text="Comptes"/>
+                            </StackPanel>
+                        </NavigationViewItem>
+                        <NavigationViewItem  x:Name="activite">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE805;"/>
+                                <TextBlock Margin="12 0 0 0" Text="Activités"/>
+                            </StackPanel>
+                        </NavigationViewItem>
+                        <NavigationViewItem x:Name="seance">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE787;"/>
+                                <TextBlock Margin="12 0 0 0" Text="Séances"/>
+                            </StackPanel>
+                        </NavigationViewItem>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
 
