@@ -173,7 +173,7 @@ namespace ProjetGraphiqueSession
                 int  nbPlaces =Convert.ToInt32( r["nbPMax"].ToString());
 
 
-                listeSeances.Add(new Seance(date, heureDebut,heureFin,nbPlaces));
+                listeSeances.Add(new Seance(date, heureDebut,heureFin,nbPlaces,uneActivite.Nom));
             }
 
 
@@ -202,7 +202,7 @@ namespace ProjetGraphiqueSession
                 string date = r["date"].ToString();
                 string heureDebut = r["heureDebut"].ToString();
                 string heureFin = r["heureFin"].ToString();
-                string nomAct = r["nomAdministrateur"].ToString();
+                string nomAct = r["nomActivite"].ToString();
                 int nbPlaces = Convert.ToInt32(r["nbPlaces"].ToString());
 
 
@@ -524,6 +524,48 @@ namespace ProjetGraphiqueSession
             return idSeance;
 
           
+        }
+
+        //methode qui permet de recupérer l'id d'une seance pour la page AllSeance
+
+        public int idSeanceAll(Seance uneSeance)
+        {
+            int idSeance = 1;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("idSeance");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("dateForm", uneSeance.Date);
+                commande.Parameters.AddWithValue("hrDebut", uneSeance.HeureDebut);
+                commande.Parameters.AddWithValue("hrFin", uneSeance.HeureFin);
+                commande.Parameters.AddWithValue("nomAct", uneSeance.NomAct);
+
+
+                con.Open();
+                commande.Prepare();
+                MySqlDataReader r = commande.ExecuteReader();
+                while (r.Read())
+                {
+
+
+
+                    idSeance = Convert.ToInt32(r["idSeance"].ToString());
+
+
+
+                }
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return idSeance;
+
+
         }
 
         //methode qui modifie une seance

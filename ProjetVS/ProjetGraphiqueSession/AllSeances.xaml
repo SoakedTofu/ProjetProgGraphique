@@ -35,7 +35,7 @@
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="2*"/>
 
                 </Grid.ColumnDefinitions>
@@ -50,15 +50,16 @@
                     <TextBlock Text="heure de Fin"  FontSize="20" HorizontalAlignment="Center"/>
                 </Border>
                 <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="3">
-                    <TextBlock Text="Nombre de places disponibles"  FontSize="20" HorizontalAlignment="Center" TextWrapping="wrap" TextAlignment="Center"/>
+                    <TextBlock Text="Nombre de places "  FontSize="20" HorizontalAlignment="Center" TextWrapping="wrap" TextAlignment="Center"/>
                 </Border>
                 <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="4" >
+                    <TextBlock Text="Activité"  FontSize="20" HorizontalAlignment="Center" />
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="5" >
                     <TextBlock Text="Operations"  FontSize="20" HorizontalAlignment="Center" />
                 </Border>
 
-                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="5" >
-                    <TextBlock Text="Inscriptions"  FontSize="20" HorizontalAlignment="Center" />
-                </Border>
+              
 
             </Grid>
 
@@ -75,7 +76,7 @@
                                 <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="2*"/>
 
 
@@ -87,8 +88,9 @@
                             <TextBlock Text="{x:Bind HeureDebut}" FontSize="20"  Grid.Column="1" HorizontalAlignment="Center"/>
                             <TextBlock Text="{x:Bind HeureFin}" FontSize="20"  Grid.Column="2" HorizontalAlignment="Center"/>
                             <TextBlock Text="{x:Bind NbPlaces}" FontSize="20"  Grid.Column="3" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind NomAct}" FontSize="20"  Grid.Column="4" HorizontalAlignment="Center"/>
 
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Column="4" >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Column="5" >
 
                                 <Button x:Name="edit" Click="edit_Click"   HorizontalAlignment="Left" Foreground="Green">
                                     <SymbolIcon Symbol="Edit"/>

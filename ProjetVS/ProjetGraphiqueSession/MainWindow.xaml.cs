@@ -91,6 +91,10 @@ namespace ProjetGraphiqueSession
                         if (pageCourante != typeof(Activites))
                             mainFrame.Navigate(typeof(Activites));
                         break;
+                    case "seance":
+                        if (pageCourante != typeof(AllSeances))
+                            mainFrame.Navigate(typeof(AllSeances));
+                        break;
 
                     default:
                         break;

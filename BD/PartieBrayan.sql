@@ -242,21 +242,14 @@ DELIMITER //
 CREATE  PROCEDURE SuppActivite (IN  nomAct varchar(50))
 BEGIN
 
-   DECLARE idNt INT;
 
-   SET idNt=(SELECT  idNote FROM seances_adherents_noteappreciation
-                                                               WHERE idSeance=(select idSeance from seances where nomActivite=nomAct));
 
     DELETE FROM seances_adherents_noteappreciation WHERE idSeance=(select idSeance from seances where nomActivite=nomAct);
-
- DELETE  FROM noteappreciation WHERE idNote=(idNt);
 
 
      DELETE FROM seances WHERE nomActivite=nomAct;
 
     DELETE FROM activites WHERE nom=nomAct;
-
-
 
 
 end //
@@ -302,16 +295,10 @@ DELIMITER //
 CREATE  PROCEDURE SuppSeance (IN  id INT)
 BEGIN
 
- DECLARE idNt INT;
-
-   SET idNt=(SELECT  idNote FROM seances_adherents_noteappreciation
-                                                               WHERE idSeance=id);
-
-
 
     DELETE FROM seances_adherents_noteappreciation WHERE idSeance=id;
 
-    DELETE  FROM noteappreciation WHERE idNote=(idNt);
+ 
 
     DELETE FROM seances WHERE idSeance=id;
 

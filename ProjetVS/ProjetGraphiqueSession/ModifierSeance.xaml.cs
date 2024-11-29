@@ -34,7 +34,7 @@ namespace ProjetGraphiqueSession
             this.InitializeComponent();
             uneSeance = new Seance();
             uneSeanceForm = new seanceForm();
-            nomActivite.ItemsSource= Singleton.getInstance().getListeActivites();
+            nomActivite.ItemsSource= Singleton.getInstance().getListeAllActivites();
             listseance= new ObservableCollection<Seance>();
            
         }
@@ -50,7 +50,7 @@ namespace ProjetGraphiqueSession
                 uneSeanceForm.NbPlaces = seanceNbP.NbPlaces ;
                 Activite seanceNomActivite=nomActivite.SelectedItem as Activite;
                 uneSeanceForm.NomActivite=seanceNomActivite.Nom;
-                Singleton.getInstance().modifierSeance(uneSeanceForm,Singleton.getInstance().idSeance(uneSeance));
+                Singleton.getInstance().modifierSeance(uneSeanceForm,Singleton.getInstance().idSeanceAll(uneSeance));
                 Frame.Navigate(typeof(Affichage));
             }
         }
