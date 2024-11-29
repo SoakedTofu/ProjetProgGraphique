@@ -62,7 +62,7 @@ namespace ProjetGraphiqueSession
 
                 uneSeance = btn.DataContext as Seance;
 
-              //  Singleton.getInstance().supprimerActivite(uneActivite);
+                Singleton.getInstance().supprimerSeance(uneSeance,Singleton.getInstance().idSeance(uneSeance));
 
             }
         }

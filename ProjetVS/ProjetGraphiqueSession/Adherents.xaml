@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ProjetGraphiqueSession.Adherents"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProjetGraphiqueSession"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="titre" Text="Comptes"
+               HorizontalAlignment="Center" Grid.Row="0" Margin="0 20 0 0" FontWeight="Black" FontSize="50"/>
+
+            <Button
+        x:Name="btn_Exporter"
+        Content="Exporter les adhérents"
+        VerticalAlignment="Bottom"
+        Margin=" 10 0 0 0"
+        Padding="10"
+        Click="btn_Exporter_Click"
+        />
+
+            <Grid Grid.Row="1" Margin="0 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="2*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Border  BorderBrush="Black" BorderThickness="2" >
+                    <TextBlock Text="Nom" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center" />
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="1">
+                    <TextBlock Text="Prénom"  FontSize="20" HorizontalAlignment="Center"/>
+                </Border>
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="2" >
+                    <TextBlock Text="Adresse"  FontSize="20" HorizontalAlignment="Center" />
+                </Border>
+                
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="3" >
+                    <TextBlock Text="age"  FontSize="20" HorizontalAlignment="Center" />
+                </Border>
+
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="4" >
+                    <TextBlock Text="Opérations"  FontSize="20" HorizontalAlignment="Center" />
+                </Border>
+
+            </Grid>
+
+            <ListView x:Name="liste_adherents" Grid.Row="2" Margin="0 20 0 0" >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Adherent">
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="2*"/>
+
+
+                            </Grid.ColumnDefinitions>
+
+
+
+                            <TextBlock Text="{x:Bind Nom}" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind Prenom}" FontSize="20"  Grid.Column="1" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind Adresse}" FontSize="20"  Grid.Column="2" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind Age}" FontSize="20"  Grid.Column="3" HorizontalAlignment="Center"/>
+
+
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Column="4" >
+
+                                <Button x:Name="edit" Click="edit_Click"   HorizontalAlignment="Left" Foreground="Green">
+                                    <SymbolIcon Symbol="Edit"/>
+                                </Button>
+                                <Button x:Name="delete" Click="delete_Click" Margin="20 0 0 0"  HorizontalAlignment="Right" Foreground="Red">
+                                    <SymbolIcon Symbol="Delete"/>
+                                </Button>
+
+                            </StackPanel>
+
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ScrollViewer>
+</Page>

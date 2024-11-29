@@ -86,6 +86,11 @@ namespace ProjetGraphiqueSession
                         if (pageCourante != typeof(PageStatistiques))
                             mainFrame.Navigate(typeof(PageStatistiques));
                         break;
+                    case "comptes":
+                        if (pageCourante != typeof(Adherents))
+                            mainFrame.Navigate(typeof(Adherents));
+                        break;
+                    
                     default:
                         break;
                 }

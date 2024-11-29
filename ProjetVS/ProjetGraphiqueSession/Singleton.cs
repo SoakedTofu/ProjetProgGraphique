@@ -16,6 +16,7 @@ namespace ProjetGraphiqueSession
 
         ObservableCollection<Activite> listeActivites;
         ObservableCollection<Seance> listeSeances;
+        ObservableCollection<Adherent> listeAdherents;
         MySqlConnection con = new MySqlConnection
             ("Server=cours.cegep3r.info;Database=a2024_420335ri_eq2;Uid='2309444';Pwd='2309444';");
 
@@ -39,6 +40,7 @@ namespace ProjetGraphiqueSession
         {
             listeActivites = new ObservableCollection<Activite>();
             listeSeances = new ObservableCollection<Seance>();
+            listeAdherents = new ObservableCollection<Adherent>();
             getListeActivites();
         }
 
@@ -83,6 +85,39 @@ namespace ProjetGraphiqueSession
 
             con.Close();
             return listeActivites;
+
+        }
+
+        public ObservableCollection<Adherent> getListeAdherents()
+        {
+            listeActivites.Clear();
+            MySqlCommand commande = new MySqlCommand("AffAdherent");
+            commande.Connection = con;
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Double note = 0;
+
+                //int id = (int)r["id"];
+              
+                string nom = r["nom"].ToString();
+                string prenom = r["prenom"].ToString();
+                string adresse = r["adresse"].ToString();
+                string dateNaissance = r["dateNaissance"].ToString();
+                string age = r["age"].ToString();
+
+
+
+                listeAdherents.Add(new Adherent(nom, prenom,adresse,dateNaissance,age));
+            }
+
+
+            con.Close();
+            return listeAdherents;
 
         }
 
@@ -368,7 +403,7 @@ namespace ProjetGraphiqueSession
                 con.Open();
                 commande.Prepare();
                 int i = commande.ExecuteNonQuery();
-
+                con.Close();
 
             }
             catch (Exception ex)
@@ -446,7 +481,7 @@ namespace ProjetGraphiqueSession
                 con.Open();
                 commande.Prepare();
                 int i = commande.ExecuteNonQuery();
-
+                con.Close();
 
             }
             catch (Exception ex)
@@ -479,6 +514,30 @@ namespace ProjetGraphiqueSession
                 con.Close();
             }
             listeActivites.Remove(uneActivite);
+        }
+
+        //Procédure qui permet de supprimer une seance
+        public void supprimerSeance( Seance uneSeance,int idSeance)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("SuppSeance");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("id", idSeance);
+
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            listeSeances.Remove(uneSeance);
+
         }
 
         // Procédures des statistiques

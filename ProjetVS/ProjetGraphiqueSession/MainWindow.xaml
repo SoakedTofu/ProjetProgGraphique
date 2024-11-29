@@ -12,11 +12,11 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Liste des Activites" x:Name="Affichage" Icon="Home"/>
                 <NavigationViewItem Content="Statistiques" x:Name="Stats" Icon="Calculator" Visibility="Collapsed"/>
-                <NavigationViewItem Content="Account" Icon="Contact" ToolTipService.ToolTip="Account" Tag="SamplePage2">
-                    <NavigationViewItem.MenuItems>
+                <NavigationViewItem Content="Comptes" Icon="Contact" ToolTipService.ToolTip="Account" x:Name="comptes">
+                    <!--<NavigationViewItem.MenuItems>
                         <NavigationViewItem Content="Mail" Icon="Mail" ToolTipService.ToolTip="Mail" Tag="SamplePage3"/>
                         <NavigationViewItem Content="Calendar" Icon="Calendar" ToolTipService.ToolTip="Calendar" Tag="SamplePage4"/>
-                    </NavigationViewItem.MenuItems>
+                    </NavigationViewItem.MenuItems>-->
                 </NavigationViewItem>
 
             </NavigationView.MenuItems>
