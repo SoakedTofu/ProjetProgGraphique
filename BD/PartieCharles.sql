@@ -208,7 +208,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE ListeActivites()
 BEGIN
-    SELECT nom
+    SELECT *
     FROM activites;
 END //
 DELIMITER ;
