@@ -31,11 +31,6 @@ namespace ProjetGraphiqueSession
             liste_adherents.ItemsSource = Singleton.getInstance().getListeAdherents();
         }
 
-        private void btn_Exporter_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void edit_Click(object sender, RoutedEventArgs e)
         {
 
@@ -67,6 +62,35 @@ namespace ProjetGraphiqueSession
 
                 Singleton.getInstance().supprimerAdherent(unAdherent);
 
+            }
+        }
+
+        private async void btn_Exporter_Click(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
+
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(Singleton.getInstance().GetMainWindow());
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+
+            picker.SuggestedFileName = "adherents";
+            picker.FileTypeChoices.Add("Fichier texte", new List<string>() { ".csv" });
+
+            Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+
+            var listeAdherents = Singleton.getInstance().getListeAdherentsCSV();
+
+            // La fonction ToString de la classe Client retourne: nom + ";" + prenom
+
+            if (monFichier != null && listeAdherents != null && listeAdherents.Count > 0)
+            {
+                // CSV Header
+                var header = "numeroIdentification,nom,prenom,adresse,dateNaissance,age,NomAdministrateur";         // Pour les entêtes       
+
+                var adherentsString = listeAdherents.Select(x => x.ToStringCSV()).ToList();                        // Exporter la liste en strings
+
+                adherentsString.Insert(0, header);
+
+                await Windows.Storage.FileIO.WriteLinesAsync(monFichier, adherentsString, Windows.Storage.Streams.UnicodeEncoding.Utf8);
             }
         }
     }

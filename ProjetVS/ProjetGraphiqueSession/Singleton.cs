@@ -34,6 +34,8 @@ namespace ProjetGraphiqueSession
 
         ObservableCollection<Activite> ListeActiviteComplete = new ObservableCollection<Activite>();    // Pour la liste complète des activités 
 
+        ObservableCollection<Adherent> ListeAdherents = new ObservableCollection<Adherent>();    // Pour la liste des adhérents 
+
         MainWindow window;
 
         public Singleton()
@@ -136,7 +138,7 @@ namespace ProjetGraphiqueSession
                 string prenom = r["prenom"].ToString();
                 string adresse = r["adresse"].ToString();
                 string dateNaissance = r["dateNaissance"].ToString();
-                string age = r["age"].ToString();
+                string age = r["age"] == null ? "0" : r["age"].ToString();
 
 
 
@@ -921,6 +923,41 @@ namespace ProjetGraphiqueSession
 
             con.Close();
             return ListeActiviteComplete;
+        }
+
+        // Pour exporter la liste des adhérents
+
+        public ObservableCollection<Adherent> getListeAdherentsCSV()
+        {
+            ListeAdherents.Clear();
+            MySqlCommand commande = new MySqlCommand("ListeAdhrents");
+            commande.Connection = con;
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                string numeroIdentification = r["numeroIdentification"].ToString();
+
+                string nom = r["nom"].ToString();
+
+                string prenom = r["prenom"].ToString();
+
+                string adresse = r["adresse"].ToString();
+
+                string dateNaissance = r["dateNaissance"].ToString();
+
+                int age =  r["age"] == null?  0: Convert.ToInt32(r["age"]);
+
+                string nomAdministrateur = r["nomAdministrateur"].ToString();
+
+                ListeAdherents.Add(new Adherent(numeroIdentification,nom, prenom, adresse, dateNaissance, age, nomAdministrateur));
+            }
+
+            con.Close();
+            return ListeAdherents;
         }
 
 
