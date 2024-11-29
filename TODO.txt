@@ -1,0 +1,9 @@
+Charles:
+- gérer inscription à une séance
+- mettre l'horaire d'une séance unique
+- Page note adherents
+
+
+
+
+Bryan:

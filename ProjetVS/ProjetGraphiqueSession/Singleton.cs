@@ -108,7 +108,7 @@ namespace ProjetGraphiqueSession
                 string prenom = r["prenom"].ToString();
                 string adresse = r["adresse"].ToString();
                 string dateNaissance = r["dateNaissance"].ToString();
-                string age = r["age"].ToString();
+                string age = r["age"] == null ? "0" : r["age"].ToString();
 
 
 
@@ -919,11 +919,11 @@ namespace ProjetGraphiqueSession
 
                 string dateNaissance = r["dateNaissance"].ToString();
 
-                string age = r["age"].ToString();
+                int age =  r["age"] == null?  0: Convert.ToInt32(r["age"]);
 
                 string nomAdministrateur = r["nomAdministrateur"].ToString();
 
-                ListeAdherents.Add(new Adherent(nom, prenom, adresse, dateNaissance, age, nomAdministrateur));
+                ListeAdherents.Add(new Adherent(numeroIdentification,nom, prenom, adresse, dateNaissance, age, nomAdministrateur));
             }
 
             con.Close();

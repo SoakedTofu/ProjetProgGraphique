@@ -72,7 +72,7 @@ namespace ProjetGraphiqueSession
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(Singleton.getInstance().GetMainWindow());
             WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
 
-            picker.SuggestedFileName = "activites";
+            picker.SuggestedFileName = "adherents";
             picker.FileTypeChoices.Add("Fichier texte", new List<string>() { ".csv" });
 
             Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
