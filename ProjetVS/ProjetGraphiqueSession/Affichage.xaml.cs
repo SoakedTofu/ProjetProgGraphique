@@ -105,7 +105,12 @@ namespace ProjetGraphiqueSession
 
             // La fonction ToString de la classe Client retourne: nom + ";" + prenom
 
+            if (monFichier!=null)
+            {
             await Windows.Storage.FileIO.WriteLinesAsync(monFichier, Singleton.getInstance().GetActivites(), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                
+            }
+
 
         }
     }

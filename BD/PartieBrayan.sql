@@ -307,3 +307,40 @@ end //
 DELIMITER ;
 
 call ModifSeance('2020-10-11','12:00','13:00','Peinture',2);
+
+--Procédure qui permet de supprimer une séance a partir de son id
+
+DELIMITER //
+CREATE  PROCEDURE SuppSeance (IN  id INT)
+BEGIN
+
+
+
+
+    DELETE FROM seances_adherents_noteappreciation WHERE idSeance=id;
+    
+
+    DELETE FROM seances WHERE idSeance=id;
+
+
+
+
+
+end //
+DELIMITER ;
+
+call  SuppSeance(6);
+
+--Procédure qui permet d'afficher les adhérents
+
+DELIMITER //
+CREATE  PROCEDURE AffAdherent ()
+BEGIN
+
+select *from adherents;
+
+
+end //
+DELIMITER ;
+
+call  AffAdherent();

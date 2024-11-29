@@ -38,12 +38,33 @@ namespace ProjetGraphiqueSession
         {
             Button btn = sender as Button;
             uneSeance = btn.DataContext as Seance;
-            Frame.Navigate(typeof(ModifierSeance), uneSeance);
+            Frame.Navigate(typeof(ModifierSeance), uneSeance) ;
         }
 
-        private void delete_Click(object sender, RoutedEventArgs e)
+        private async void delete_Click(object sender, RoutedEventArgs e)
         {
 
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = liste_Seances.XamlRoot;
+            dialog.Title = "Suppression";
+            dialog.Content = "Voulez vous vraiment supprimer la séance?";
+            dialog.PrimaryButtonText = "Oui";
+            // dialog.SecondaryButtonText = "Non";
+            dialog.CloseButtonText = "Non";
+
+            dialog.DefaultButton = ContentDialogButton.Close;
+
+            var resultat = await dialog.ShowAsync();
+
+            if (resultat == ContentDialogResult.Primary)
+            {
+                Button btn = sender as Button;
+
+                uneSeance = btn.DataContext as Seance;
+
+                Singleton.getInstance().supprimerSeance(uneSeance,Singleton.getInstance().idSeance(uneSeance));
+
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -54,6 +75,8 @@ namespace ProjetGraphiqueSession
                 activite = e.Parameter as Activite;
                 liste_Seances.ItemsSource = Singleton.getInstance().getListeSeances(activite);
                 titre.Text = "Séances de " + activite.Nom;
+
+                Singleton.getInstance().nomActiviteSeance(activite.Nom);
             }
             else
             {
