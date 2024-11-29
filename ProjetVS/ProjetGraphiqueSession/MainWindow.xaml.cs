@@ -87,7 +87,11 @@ namespace ProjetGraphiqueSession
                         if (pageCourante != typeof(Adherents))
                             mainFrame.Navigate(typeof(Adherents));
                         break;
-                    
+                    case "activite":
+                        if (pageCourante != typeof(Activites))
+                            mainFrame.Navigate(typeof(Activites));
+                        break;
+
                     default:
                         break;
                 }

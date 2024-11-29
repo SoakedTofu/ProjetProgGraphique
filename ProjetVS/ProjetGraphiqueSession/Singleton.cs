@@ -86,6 +86,36 @@ namespace ProjetGraphiqueSession
 
         }
 
+        //Méthode qui affiche toute les activités
+        public ObservableCollection<Activite> getListeAllActivites()
+        {
+            listeActivites.Clear();
+            MySqlCommand commande = new MySqlCommand("AffAllActivite");
+            commande.Connection = con;
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+             
+
+              
+                string nom = r["nom"].ToString();
+                double prixOrg = Convert.ToDouble(r["prixOrganisation"].ToString());
+                double prixVente = Convert.ToDouble(r["prixVente"].ToString());
+                int nbPlaces= Convert.ToInt32(r["nbPlacesMax"].ToString());
+
+                listeActivites.Add(new Activite(nom, prixOrg,prixVente, "admin_unique",nbPlaces));
+            }
+
+
+            con.Close();
+            return listeActivites;
+
+        }
+
         public ObservableCollection<Adherent> getListeAdherents()
         {
             listeAdherents.Clear();

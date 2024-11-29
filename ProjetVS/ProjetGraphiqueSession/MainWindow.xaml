@@ -15,7 +15,8 @@
                 <NavigationViewItem Content="Administrateur" Icon="Contact" ToolTipService.ToolTip="Account" x:Name="Admin">
                     <NavigationViewItem.MenuItems>
                         <NavigationViewItem Content="Comptes" Icon="Contact" ToolTipService.ToolTip="Account" x:Name="comptes"/>
-                        <NavigationViewItem Content="Calendar" Icon="Calendar" ToolTipService.ToolTip="Calendar" Tag="SamplePage4"/>
+                        <NavigationViewItem Content="Activités" Icon="List"  x:Name="activite"/>
+                        <NavigationViewItem Content="Séances" Icon="List"  x:Name="seance"/>
                     </NavigationViewItem.MenuItems>
                 </NavigationViewItem>
 

@@ -371,3 +371,17 @@ end //
 DELIMITER ;
 
 call SuppAdherent('SR-1991-127');
+
+--Procedure qui affiche toutes les activites
+
+DELIMITER //
+CREATE  PROCEDURE AffAllActivite ()
+BEGIN
+
+select *from activites;
+
+
+end //
+DELIMITER ;
+
+call  AffAllActivite();
