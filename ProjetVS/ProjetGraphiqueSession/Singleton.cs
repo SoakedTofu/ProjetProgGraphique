@@ -32,7 +32,7 @@ namespace ProjetGraphiqueSession
 
         string nomActivite;
 
-        ObservableCollection<String> exportActivites = new ObservableCollection<String>(); // Pour exporter les activités
+        ObservableCollection<Activite> ListeActiviteComplete = new ObservableCollection<Activite>();    // Pour la liste complète des activités 
 
         MainWindow window;
 
@@ -76,8 +76,6 @@ namespace ProjetGraphiqueSession
                         note = Convert.ToDouble(r["moyenneNote"].ToString());
                 }
                 string nom = r["NomActivite"].ToString();
-
-
 
                 listeActivites.Add(new Activite(nom, note));
             }
@@ -791,38 +789,6 @@ namespace ProjetGraphiqueSession
             return stat;
         }
 
-        // Fonction qui retourne la collection des activités
-
-        public ObservableCollection<String> GetActivites()
-        {
-            exportActivites.Clear();
-
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "ListeActivites";
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-                con.Open();
-                commande.Prepare();
-                MySqlDataReader r = commande.ExecuteReader();
-
-                while (r.Read())
-                {
-                    exportActivites.Add(r[0].ToString());
-                }
-
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-
-            return exportActivites;
-        }
-
         // Pour gérer la mainwindow
 
         public void SetMainWindow(MainWindow mainwindow)
@@ -895,6 +861,36 @@ namespace ProjetGraphiqueSession
             {
                 con.Close();
             }
+        }
+
+        public ObservableCollection<Activite> getListeActivitesComplete()
+        {
+            ListeActiviteComplete.Clear();
+            MySqlCommand commande = new MySqlCommand("ListeActivites");
+            commande.Connection = con;
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                string nom = r["nom"].ToString();
+
+                double prixOrganisation = r["prixOrganisation"] == null ? 0 : Convert.ToDouble(r["prixOrganisation"]);
+
+                double prixVente = r["prixVente"] == null ? 0 : Convert.ToDouble(r["prixVente"]);
+
+                String nomAdministrateur = r["nomAdministrateur"].ToString();
+
+                int nbPlacesMax = r["nbPlacesMax"] == null ? 0 : Convert.ToInt32(r["nbPlacesMax"]);
+
+
+                ListeActiviteComplete.Add(new Activite(nom, prixOrganisation, prixVente, nomAdministrateur, nbPlacesMax));
+            }
+
+            con.Close();
+            return ListeActiviteComplete;
         }
 
 

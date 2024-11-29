@@ -10,6 +10,10 @@ namespace ProjetGraphiqueSession
     {
         string nom;
         double note;
+        double prixOrganisation;
+        double prixVente;
+        string nomAdministrateur;
+        int nbPlacesMax;
 
         public Activite(string nom, double note)
         {
@@ -17,13 +21,36 @@ namespace ProjetGraphiqueSession
             this.note = note;
         }
 
+        public Activite(string nom, double prixOrganisation, double prixVente, string nomAdministrateur, int nbPlacesMax)
+        {
+            Nom = nom;
+            PrixOrganisation = prixOrganisation;
+            PrixVente = prixVente;
+            NomAdministrateur = nomAdministrateur;
+            NbPlacesMax = nbPlacesMax;
+        }
+
         public string Nom { get { return nom; } set { nom = value; } }
-        public double Note { get { return note; }set { note = value; } }
+        public double Note { get { return note; } set { note = value; } }
+
+        public Double PrixOrganisation { get { return prixOrganisation; } set { prixOrganisation = value; } }
+
+        public Double PrixVente { get { return prixVente; } set { prixVente = value; } }
+
+        public String NomAdministrateur { get { return nomAdministrateur; } set { nomAdministrateur = value; } }
+
+        public int NbPlacesMax { get { return nbPlacesMax; } set { nbPlacesMax = value; } }
 
         public override string ToString()
         {
             return nom+" "+note;
         }
+
+        public string ToStringCSV() 
+        {
+            return $"{Nom},{PrixOrganisation},{PrixVente},{NomAdministrateur},{NbPlacesMax}";
+        }
+
 
     }
 }

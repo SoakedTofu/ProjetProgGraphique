@@ -102,16 +102,21 @@ namespace ProjetGraphiqueSession
 
             Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
 
+            var listeActivites = Singleton.getInstance().getListeActivitesComplete();
 
             // La fonction ToString de la classe Client retourne: nom + ";" + prenom
 
-            if (monFichier!=null)
+            if (monFichier!=null && listeActivites != null && listeActivites.Count > 0)
             {
-            await Windows.Storage.FileIO.WriteLinesAsync(monFichier, Singleton.getInstance().GetActivites(), Windows.Storage.Streams.UnicodeEncoding.Utf8);
-                
+                // CSV Header
+                var header = "Nom,PrixOrganisation,PrixVente,NomAdministrateur,NbPlacesMax";        // Pour les entêtes       
+
+                var activitesStrings = listeActivites.Select(x => x.ToStringCSV()).ToList();        // Exporter la liste en strings
+
+                activitesStrings.Insert(0, header);
+
+                await Windows.Storage.FileIO.WriteLinesAsync(monFichier, activitesStrings, Windows.Storage.Streams.UnicodeEncoding.Utf8);
             }
-
-
         }
     }
 }
