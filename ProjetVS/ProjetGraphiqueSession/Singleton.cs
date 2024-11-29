@@ -749,6 +749,32 @@ namespace ProjetGraphiqueSession
         }
 
 
+        // Pour gérer la connection unique au serveur
+
+        public void SetConnecteBD(bool connection)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "ConnecteBD";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("_connecte", connection);
+ 
+                
+                con.Open();
+                commande.Prepare();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+        }
+
+
 
     }
 }

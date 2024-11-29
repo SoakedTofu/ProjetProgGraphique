@@ -52,24 +52,20 @@ namespace ProjetGraphiqueSession
 
                         if (Singleton.getInstance().VerifierAdherent(tb_identification.Text))
                         {
-                            // Mettre à jour les informations de connexions
+                            
 
-                            Singleton.getInstance().SetTBUtilisateur(Singleton.getInstance().GetNomAdherent(tb_identification.Text));
+                            Singleton.getInstance().SetTBUtilisateur(Singleton.getInstance().GetNomAdherent(tb_identification.Text));   // Mettre à jour les informations de connexions
 
                             args.Cancel = false;
 
-                            // Cacher l'invitation de connexion, montre celle de déconnexion
+                            SingletonNavigation.getInstance().VisibiliteConnexion(true);        // Cacher l'invitation de connexion, montre celle de déconnexion                       
 
-                            SingletonNavigation.getInstance().VisibiliteConnexion(true);
-
-                            // Mettre à jour les variables de connexion
-
-                            Singleton.getInstance().SetConnecte(true);
+                            Singleton.getInstance().SetConnecte(true);                          // Mettre à jour les variables de connexion
                             Singleton.getInstance().SetUtilisateur(tb_identification.Text);
 
-                            // Remettre la navigation à la page d'accueil
+                            SingletonNavigation.getInstance().ChangerNavigation();              // Remettre la navigation à la page d'accueil
 
-                            SingletonNavigation.getInstance().ChangerNavigation();
+                            Singleton.getInstance().SetConnecteBD(true);                        // Mettre la jour la BD pour la connection unique
 
                         }
 
@@ -96,29 +92,22 @@ namespace ProjetGraphiqueSession
 
                                 if (Singleton.getInstance().VerififierConnexionAdmin(tb_identification.Text, tb_MDP.Password))
                                 {
-                                    // Mettre à jour les informations de connexions
-
-                                    Singleton.getInstance().SetTBUtilisateur(tb_identification.Text);
+                                    
+                                    Singleton.getInstance().SetTBUtilisateur(tb_identification.Text);   // Mettre à jour les informations de connexions
 
                                     args.Cancel = false;
 
-                                    // Cacher l'invitation de connexion, montre celle de déconnexion
+                                    SingletonNavigation.getInstance().VisibiliteConnexion(true);    // Cacher l'invitation de connexion, montre celle de déconnexion
 
-                                    SingletonNavigation.getInstance().VisibiliteConnexion(true);
-
-                                    // Mettre à jour les variables de connexion
-
-                                    Singleton.getInstance().SetConnecte(true);
+                                    Singleton.getInstance().SetConnecte(true);                      // Mettre à jour les variables de connexion
                                     Singleton.getInstance().SetAdmin(true);
                                     Singleton.getInstance().SetUtilisateur(tb_identification.Text);
+                                   
+                                    SingletonNavigation.getInstance().VisibiliteAdmin(true);        // Montrer les pages exclusives à l'admin
 
-                                    // Montrer les pages exclusives à l'admin
+                                    SingletonNavigation.getInstance().ChangerNavigation();          // Remettre la navigation à la page d'accueil
 
-                                    SingletonNavigation.getInstance().VisibiliteAdmin(true);
-
-                                    // Remettre la navigation à la page d'accueil
-
-                                    SingletonNavigation.getInstance().ChangerNavigation();
+                                    Singleton.getInstance().SetConnecteBD(true);                    // Mettre la jour la BD pour la connection unique
                                 }
 
                                 else

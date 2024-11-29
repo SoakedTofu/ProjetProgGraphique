@@ -62,25 +62,22 @@ namespace ProjetGraphiqueSession
                         ContentDialogResult resultat = await dialog.ShowAsync();
                         break;
                     case "Deconnexion":
-                        // Mettre à jour les informations de connexions
+                        // Mettre à jour les informations de connexion
 
                         Singleton.getInstance().SetTBUtilisateur("");       // Enlever le nom de l'interface
 
                         SingletonNavigation.getInstance().VisibiliteConnexion(false);       // Montrer l'invitation à se connecter, cacher celle de déconnexion
-
-                        // Réinitialiser les valeurs de connexion
-
-                        Singleton.getInstance().SetConnecte(false);
+                       
+                        Singleton.getInstance().SetConnecte(false);                 // Réinitialiser les valeurs de connexion
                         Singleton.getInstance().SetAdmin(false);
-                        Singleton.getInstance().SetUtilisateur("");
+                        Singleton.getInstance().SetUtilisateur("");                        
 
-                        // Cacher les pages de l'administrateur
+                        SingletonNavigation.getInstance().VisibiliteAdmin(false);   // Cacher les pages de l'administrateur                      
 
-                        SingletonNavigation.getInstance().VisibiliteAdmin(false);
+                        SingletonNavigation.getInstance().ChangerNavigation();      // Mettre à jour la navigation
 
-                        // Mettre à jour la navigation
+                        Singleton.getInstance().SetConnecteBD(true);                // Libérer la connexion unique
 
-                        SingletonNavigation.getInstance().ChangerNavigation();
                         break;
                     case "Stats":
                         if (pageCourante != typeof(PageStatistiques))

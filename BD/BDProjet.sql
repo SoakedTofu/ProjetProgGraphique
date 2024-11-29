@@ -543,6 +543,8 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Retourne la liste des activités
+
 DELIMITER //
 CREATE PROCEDURE ListeActivites()
 BEGIN
@@ -561,6 +563,16 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Fonction qui modifie la valeur connecte de la table administrateur
+
+DELIMITER //
+CREATE PROCEDURE ConnecteBD(IN _connecte BOOL)
+BEGIN
+    UPDATE administrateur
+    SET connecte = _connecte
+    WHERE nomAdministrateur = 'admin_unique';
+END //
+DELIMITER ;
 
 
 --Procédure qui permet de modifier une séance a partir de son id
