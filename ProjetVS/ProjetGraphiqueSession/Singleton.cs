@@ -100,10 +100,10 @@ namespace ProjetGraphiqueSession
             MySqlDataReader r = commande.ExecuteReader();
             while (r.Read())
             {
-                Double note = 0;
+              
 
                 //int id = (int)r["id"];
-              
+                string id = r["numeroIdentification"].ToString();
                 string nom = r["nom"].ToString();
                 string prenom = r["prenom"].ToString();
                 string adresse = r["adresse"].ToString();
@@ -112,7 +112,7 @@ namespace ProjetGraphiqueSession
 
 
 
-                listeAdherents.Add(new Adherent(nom, prenom,adresse,dateNaissance,age));
+                listeAdherents.Add(new Adherent(id,nom, prenom,adresse,dateNaissance,age));
             }
 
 
@@ -492,6 +492,34 @@ namespace ProjetGraphiqueSession
 
         }
 
+        //Méthode pour modifier un adhérent
+        public void modifierAdherent(Adherent unAdhrent)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("ModifAdherent");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("nomAd", unAdhrent.Nom);
+                commande.Parameters.AddWithValue("prenomAd", unAdhrent.Prenom);
+                commande.Parameters.AddWithValue("adrs", unAdhrent.Adresse);
+                commande.Parameters.AddWithValue("date", unAdhrent.DateNaissance);
+                commande.Parameters.AddWithValue("id", unAdhrent.Id);
+
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+
+        }
+
         //Methode suppression des activités
 
         public void supprimerActivite( Activite uneActivite)
@@ -516,7 +544,32 @@ namespace ProjetGraphiqueSession
             listeActivites.Remove(uneActivite);
         }
 
-        //Procédure qui permet de supprimer une seance
+        //Methode suppression des activités
+
+        public void supprimerAdherent(Adherent unAdherent)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("SuppAdherent");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("id", unAdherent.Id);
+
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            listeAdherents.Remove(unAdherent);
+        }
+
+
+        //Méthode qui permet de supprimer une seance
         public void supprimerSeance( Seance uneSeance,int idSeance)
         {
             try

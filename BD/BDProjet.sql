@@ -634,6 +634,40 @@ DELIMITER ;
 
 call  AffAdherent();
 
+--procédure qui permet de modifier un adhérent
+
+DELIMITER //
+CREATE  PROCEDURE ModifAdherent (IN  nomAd varchar(50),IN  prenomAd varchar(50),IN  adrs varchar(50),IN  date DATE,in id VARCHAR(11))
+BEGIN
+
+
+
+  update adherents
+      SET nom=nomAd,prenom=prenomAd,adresse=adrs,dateNaissance=date,age=YEAR( CURRENT_DATE)-YEAR(date)
+  where numeroIdentification=id;
+
+
+end //
+DELIMITER ;
+
+call ModifAdherent('Roche','Sophie','34 rue de la Ormeaux','1991-11-12','SR-1991-127');
+
+--Procédure qui permet de supprimer un adhérent
+
+DELIMITER //
+CREATE  PROCEDURE SuppAdherent (IN  id varchar(11))
+BEGIN
+
+    DELETE FROM seances_adherents_noteappreciation WHERE numeroIdentification=id;
+
+ DELETE  FROM adherents WHERE numeroIdentification=id;
+
+
+end //
+DELIMITER ;
+
+call SuppAdherent('SR-1991-127');
+
 
 /********************** FONCTIONS **********************/
 

@@ -9,6 +9,49 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Modifier un adhérent" Grid.Row="0" Margin="0 20 0 20" HorizontalAlignment="Center"
+                FontWeight="Black" FontSize="50"/>
+
+        <TextBox x:Name="nom" Header="Entrer le nom de l'adhérent:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="1" Width="500"/>
+        <TextBlock x:Name="erreurNom" Foreground="red" Grid.Row="2" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+
+        <TextBox x:Name="prenom" Header="Entrer le prénom de l'adhérent:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="3" Width="500"/>
+        <TextBlock x:Name="erreurPrenom" Foreground="red" Grid.Row="4" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+
+        <TextBox x:Name="Adresse" Header="Entrer l'adresse de l'adhérent:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="5" Width="500"/>
+        <TextBlock x:Name="erreurAdresse" Foreground="red" Grid.Row="6" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+
+        <TextBox x:Name="date" Header="Entrer la date de naissance de l'adhérent" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="7" Width="500"/>
+        <TextBlock x:Name="erreurDate" Foreground="red" Grid.Row="8" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+
+       
+
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="9" HorizontalAlignment="Center" Margin="40 0 0 0" Width="500">
+
+            <Button x:Name="modifier" Click="modifier_Click"  Content="sauvegarder"   Background="ForestGreen" HorizontalAlignment="Left"/>
+            <Button x:Name="retour" Click="retour_Click"  Content="Retour"   Background="Red" HorizontalAlignment="Right" Margin="330 0 0 0"/>
+        </StackPanel>
     </Grid>
 </Page>
