@@ -15,6 +15,7 @@
     <None Remove="Adherents.xaml" />
     <None Remove="Affichage.xaml" />
     <None Remove="ModifActivites.xaml" />
+    <None Remove="ModifierAdherants.xaml" />
     <None Remove="ModifierSeance.xaml" />
     <None Remove="PageStatistiques.xaml" />
     <None Remove="Seances.xaml" />
@@ -44,6 +45,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ModifierAdherants.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Adherents.xaml">

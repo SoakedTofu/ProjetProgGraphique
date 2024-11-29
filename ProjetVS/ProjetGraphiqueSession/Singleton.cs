@@ -90,7 +90,7 @@ namespace ProjetGraphiqueSession
 
         public ObservableCollection<Adherent> getListeAdherents()
         {
-            listeActivites.Clear();
+            listeAdherents.Clear();
             MySqlCommand commande = new MySqlCommand("AffAdherent");
             commande.Connection = con;
             commande.CommandType = System.Data.CommandType.StoredProcedure;

@@ -242,40 +242,28 @@ DELIMITER //
 CREATE  PROCEDURE SuppActivite (IN  nomAct varchar(50))
 BEGIN
 
-    alter table seances
-    drop FOREIGN KEY  fk_Seances_Activites ;
+   DECLARE idNt INT;
 
-     alter table seances_adherents_noteappreciation
-    drop FOREIGN KEY fk_SANA_Seances ;
-
-      alter table seances_adherents_noteappreciation
-    drop FOREIGN KEY fk_SANA_NotesAppreciation ;
-
-     DELETE  FROM noteappreciation WHERE idNote=(SELECT  idNote FROM seances_adherents_noteappreciation
+   SET idNt=(SELECT  idNote FROM seances_adherents_noteappreciation
                                                                WHERE idSeance=(select idSeance from seances where nomActivite=nomAct));
 
-     DELETE FROM seances_adherents_noteappreciation WHERE idSeance=(select idSeance from seances where nomActivite=nomAct);
+    DELETE FROM seances_adherents_noteappreciation WHERE idSeance=(select idSeance from seances where nomActivite=nomAct);
+
+ DELETE  FROM noteappreciation WHERE idNote=(idNt);
+
+
+     DELETE FROM seances WHERE nomActivite=nomAct;
 
     DELETE FROM activites WHERE nom=nomAct;
 
-    DELETE FROM seances WHERE nomActivite=nomAct;
 
 
-
-
-    SET FOREIGN_KEY_CHECKS=0;
-
-    ALTER TABLE seances
-    ADD  CONSTRAINT fk_Seances_Activites FOREIGN KEY (nomActivite) REFERENCES Activites(nom);
-
-      ALTER TABLE seances_adherents_noteappreciation
-    ADD   CONSTRAINT fk_SANA_Seances FOREIGN KEY (idSeance) REFERENCES Seances(idSeance);
-
-     ALTER TABLE seances_adherents_noteappreciation
-    ADD   CONSTRAINT fk_SANA_NotesAppreciation FOREIGN KEY (idNote) REFERENCES noteAppreciation(idNote);
 
 end //
 DELIMITER ;
+
+
+call  SuppActivite('Football');
 
 --Procedure qui permet d'afficher une seance avec son nombre de places restantes à partir de son nom d'activité
 
@@ -314,15 +302,18 @@ DELIMITER //
 CREATE  PROCEDURE SuppSeance (IN  id INT)
 BEGIN
 
+ DECLARE idNt INT;
+
+   SET idNt=(SELECT  idNote FROM seances_adherents_noteappreciation
+                                                               WHERE idSeance=id);
 
 
 
     DELETE FROM seances_adherents_noteappreciation WHERE idSeance=id;
-    
+
+    DELETE  FROM noteappreciation WHERE idNote=(idNt);
 
     DELETE FROM seances WHERE idSeance=id;
-
-
 
 
 

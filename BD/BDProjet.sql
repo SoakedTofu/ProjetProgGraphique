@@ -249,16 +249,16 @@ VALUES
 -- Insertion dans la table Seances_Adherents_NoteAppreciation (lien entre les séances, adhérents et notes)
 INSERT INTO Seances_Adherents_NoteAppreciation (idNote, idSeance, numeroIdentification)
 VALUES
-(1, 1, 'AL-1988-239'),
-(2, 2, 'CM-1985-898'),
-(3, 3, 'FC-1997-641'),
-(4, 4, 'IP-1999-454'),
-(5, 5, 'JD-1990-692'),
-(6, 6, 'JD-1994-155'),
-(7, 7, 'LL-1992-658'),
-(8, 8, 'MD-1995-691'),
-(9, 9, 'PB-2000-637'),
-(10, 10, 'SR-1991-518');
+(1, 1, 'AL-1988-413'),
+(2, 2, 'CM-1985-124'),
+(3, 3, 'FC-1997-336'),
+(4, 4, 'IP-1999-545'),
+(5, 5, 'JD-1990-322'),
+(6, 6, 'JD-1994-386'),
+(7, 7, 'LL-1992-934'),
+(8, 8, 'MD-1995-312'),
+(9, 9, 'PB-2000-682'),
+(10, 10, 'SR-1991-127');
 
 /********************** VUES **********************/
 
@@ -424,42 +424,28 @@ DELIMITER //
 CREATE  PROCEDURE SuppActivite (IN  nomAct varchar(50))
 BEGIN
 
-    alter table seances
-    drop FOREIGN KEY  fk_Seances_Activites ;
+   DECLARE idNt INT;
 
-     alter table seances_adherents_noteappreciation
-    drop FOREIGN KEY fk_SANA_Seances ;
-
-      alter table seances_adherents_noteappreciation
-    drop FOREIGN KEY fk_SANA_NotesAppreciation ;
-
-     DELETE  FROM noteappreciation WHERE idNote=(SELECT  idNote FROM seances_adherents_noteappreciation
+   SET idNt=(SELECT  idNote FROM seances_adherents_noteappreciation
                                                                WHERE idSeance=(select idSeance from seances where nomActivite=nomAct));
 
-     DELETE FROM seances_adherents_noteappreciation WHERE idSeance=(select idSeance from seances where nomActivite=nomAct);
+    DELETE FROM seances_adherents_noteappreciation WHERE idSeance=(select idSeance from seances where nomActivite=nomAct);
+
+ DELETE  FROM noteappreciation WHERE idNote=(idNt);
+
+
+     DELETE FROM seances WHERE nomActivite=nomAct;
 
     DELETE FROM activites WHERE nom=nomAct;
 
-    DELETE FROM seances WHERE nomActivite=nomAct;
 
 
-
-
-    SET FOREIGN_KEY_CHECKS=0;
-
-    ALTER TABLE seances
-    ADD  CONSTRAINT fk_Seances_Activites FOREIGN KEY (nomActivite) REFERENCES Activites(nom);
-
-      ALTER TABLE seances_adherents_noteappreciation
-    ADD   CONSTRAINT fk_SANA_Seances FOREIGN KEY (idSeance) REFERENCES Seances(idSeance);
-
-     ALTER TABLE seances_adherents_noteappreciation
-    ADD   CONSTRAINT fk_SANA_NotesAppreciation FOREIGN KEY (idNote) REFERENCES noteAppreciation(idNote);
 
 end //
 DELIMITER ;
 
-call SuppActivite("Chanson Française");
+
+call  SuppActivite('Football');
 
 
 --Procedure qui permet d'afficher une seance avec son nombre de places restantes à partir de son nom d'activité
@@ -602,8 +588,16 @@ DELIMITER //
 CREATE  PROCEDURE SuppSeance (IN  id INT)
 BEGIN
 
+ DECLARE idNt INT;
+
+   SET idNt=(SELECT  idNote FROM seances_adherents_noteappreciation
+                                                               WHERE idSeance=id);
+
+
 
     DELETE FROM seances_adherents_noteappreciation WHERE idSeance=id;
+
+    DELETE  FROM noteappreciation WHERE idNote=(idNt);
 
     DELETE FROM seances WHERE idSeance=id;
 
