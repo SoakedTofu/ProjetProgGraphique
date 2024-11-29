@@ -223,8 +223,16 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Fonction qui modifie la valeur connecte de la table administrateur
 
-
+DELIMITER //
+CREATE PROCEDURE ConnecteBD(IN _connecte BOOL)
+BEGIN
+    UPDATE administrateur
+    SET connecte = _connecte
+    WHERE nomAdministrateur = 'admin_unique';
+END //
+DELIMITER ;
 
 /********************** FONCTIONS **********************/
 
