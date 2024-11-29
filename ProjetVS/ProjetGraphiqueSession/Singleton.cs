@@ -182,6 +182,39 @@ namespace ProjetGraphiqueSession
 
         }
 
+        //Méthode qui récupere toute les séances
+        public ObservableCollection<Seance> getListeAllSeances()
+        {
+            listeSeances.Clear();
+            MySqlCommand commande = new MySqlCommand("AffAllSeance");
+            commande.Connection = con;
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+     
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+
+
+
+
+                string date = r["date"].ToString();
+                string heureDebut = r["heureDebut"].ToString();
+                string heureFin = r["heureFin"].ToString();
+                string nomAct = r["nomAdministrateur"].ToString();
+                int nbPlaces = Convert.ToInt32(r["nbPlaces"].ToString());
+
+
+                listeSeances.Add(new Seance(date, heureDebut, heureFin, nbPlaces,nomAct));
+            }
+
+
+            con.Close();
+            return listeSeances;
+
+        }
+
         public ObservableCollection<Activite> listeActivite()
         {
             return listeActivites;

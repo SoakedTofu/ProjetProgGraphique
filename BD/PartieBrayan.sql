@@ -385,3 +385,17 @@ end //
 DELIMITER ;
 
 call  AffAllActivite();
+
+--Procedure qui affiche toutes les seances
+
+DELIMITER //
+CREATE  PROCEDURE AffAllSeance ()
+BEGIN
+
+select *from seances;
+
+
+end //
+DELIMITER ;
+
+call  AffAllSeance();
