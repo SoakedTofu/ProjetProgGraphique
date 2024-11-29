@@ -539,7 +539,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- Fonction qui vérifie si quelqu'un est connecté
+-- Procédure qui vérifie si quelqu'un est connecté
 
 DELIMITER //
 CREATE PROCEDURE VerifierConnecte()
@@ -549,7 +549,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- Fonction qui modifie la valeur connecte de la table administrateur
+-- Procédure qui modifie la valeur connecte de la table administrateur
 
 DELIMITER //
 CREATE PROCEDURE ConnecteBD(IN _connecte BOOL)
@@ -557,6 +557,16 @@ BEGIN
     UPDATE administrateur
     SET connecte = _connecte
     WHERE nomAdministrateur = 'admin_unique';
+END //
+DELIMITER ;
+
+-- Procédure qui retourne la liste des adhérents
+
+DELIMITER //
+CREATE PROCEDURE ListeAdhrents()
+BEGIN
+    SELECT *
+    FROM adherents;
 END //
 DELIMITER ;
 
