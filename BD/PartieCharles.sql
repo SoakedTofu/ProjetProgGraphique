@@ -310,3 +310,20 @@ BEGIN
     RETURN present;
 end//
 Delimiter ;
+
+-- Fonction qui vérifie si un participant est inscrit à une activité
+
+DELIMITER //
+CREATE function f_verifier_seance_adherent (nom VARCHAR(50), activite VARCHAR(50)) RETURNS BOOLEAN
+BEGIN
+    DECLARE present BOOLEAN;
+
+    SELECT COUNT(*) > 0 INTO present
+    FROM seances_adherents_noteappreciation
+    INNER JOIN a2024_420335ri_eq2.seances s on seances_adherents_noteappreciation.idSeance = s.idSeance
+    WHERE numeroIdentification = nom AND
+          nomActivite = activite;
+
+    RETURN present;
+end//
+Delimiter ;

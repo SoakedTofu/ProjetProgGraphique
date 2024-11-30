@@ -124,11 +124,6 @@ END//
 
 DELIMITER ;
 
-DROP TRIGGER nbAdherentMaxi;
-
-SELECT nbPlaces FROM seances WHERE idSeance=1;
-SELECT nbPlacesMax FROM activites where nom=(select nomActivite from seances where seances.idSeance=1);
-
 /*3.4. Vous pouvez ajouter tout autre déclencheur que vous jugez pertinent pour le
 fonctionnement de la BDD. Justifiez votre choix.*/
 
@@ -154,7 +149,6 @@ END//
 
 DELIMITER ;
 
-drop trigger nbAdherentMaxi;
 
 /********************** INSERTION **********************/
 
@@ -326,7 +320,8 @@ SELECT * FROM nbParticipantMoyParMois;
 
 /********************** PROCEDURES **********************/
 
---Procedure qui permet d'afficher les activites avec leurs moyennes de notes 
+-- Procedure qui permet d'afficher les activites avec leurs moyennes de notes
+
 DELIMITER //
 CREATE  PROCEDURE AffActivite ()
 BEGIN
@@ -376,7 +371,7 @@ SELECT
 end //
 DELIMITER ;
 
---Procedure qui permet d'afficher une acivite a partir de son nom
+-- Procedure qui permet d'afficher une acivite a partir de son nom
 
 DELIMITER //
 CREATE  PROCEDURE Activite (IN  nomAct varchar(50))
@@ -388,7 +383,7 @@ DELIMITER ;
 
 CALL Activite("Football");
 
---Procedure qui permet de modifier une acivite à partir de son nom
+-- Procedure qui permet de modifier une acivite à partir de son nom
 
 DELIMITER //
 CREATE  PROCEDURE ModifActivite (IN  nomAct varchar(50),IN prixOrg double,
@@ -414,11 +409,7 @@ BEGIN
 end //
 DELIMITER ;
 
-
-
-CALL ModifActivite("Football",20,10,"admin_unique",2,"Soccer");
-
---Procedure qui permet de supprimer une acivite à partir de son nom
+-- Procedure qui permet de supprimer une acivite à partir de son nom
 
 DELIMITER //
 CREATE  PROCEDURE SuppActivite (IN  nomAct varchar(50))
@@ -439,16 +430,12 @@ BEGIN
     DELETE FROM activites WHERE nom=nomAct;
 
 
-
-
 end //
 DELIMITER ;
 
 
-call  SuppActivite('Football');
 
-
---Procedure qui permet d'afficher une seance avec son nombre de places restantes à partir de son nom d'activité
+-- Procedure qui permet d'afficher une seance avec son nombre de places restantes à partir de son nom d'activité
 
 DELIMITER //
 CREATE  PROCEDURE AffSeance (IN nomAct VARCHAR(50))
@@ -589,7 +576,7 @@ DELIMITER ;
 
 call ModifSeance('2020-10-11','12:00','13:00','Peinture',2);
 
---Procédure qui permet de récupérer l'id de la seance (lié à la procédure ModifSeance)
+-- Procédure qui permet de récupérer l'id de la seance (lié à la procédure ModifSeance)
 
 DELIMITER //
 CREATE  PROCEDURE idSeance (IN  dateForm DATE,IN hrDebut TIME,
@@ -604,7 +591,7 @@ DELIMITER ;
 
 call idSeance('2020-10-11','12:00','13:00','Peinture');
 
---Procédure qui permet de supprimer une séance a partir de son id
+-- Procédure qui permet de supprimer une séance a partir de son id
 
 DELIMITER //
 CREATE  PROCEDURE SuppSeance (IN  id INT)
@@ -630,7 +617,7 @@ DELIMITER ;
 
 call  SuppSeance(6);
 
---Procédure qui permet d'afficher les adhérents
+-- Procédure qui permet d'afficher les adhérents
 
 DELIMITER //
 CREATE  PROCEDURE AffAdherent ()
@@ -644,7 +631,7 @@ DELIMITER ;
 
 call  AffAdherent();
 
---procédure qui permet de modifier un adhérent
+-- Procédure qui permet de modifier un adhérent
 
 DELIMITER //
 CREATE  PROCEDURE ModifAdherent (IN  nomAd varchar(50),IN  prenomAd varchar(50),IN  adrs varchar(50),IN  date DATE,in id VARCHAR(11))
@@ -662,7 +649,7 @@ DELIMITER ;
 
 call ModifAdherent('Roche','Sophie','34 rue de la Ormeaux','1991-11-12','SR-1991-127');
 
---Procédure qui permet de supprimer un adhérent
+-- Procédure qui permet de supprimer un adhérent
 
 DELIMITER //
 CREATE  PROCEDURE SuppAdherent (IN  id varchar(11))
@@ -678,7 +665,7 @@ DELIMITER ;
 
 call SuppAdherent('SR-1991-127');
 
---Procedure qui affiche toutes les activites
+-- Procedure qui affiche toutes les activites
 
 DELIMITER //
 CREATE  PROCEDURE AffAllActivite ()
@@ -693,7 +680,7 @@ DELIMITER ;
 call  AffAllActivite();
 
 
---Procedure qui affiche toutes les seances
+-- Procedure qui affiche toutes les seances
 
 DELIMITER //
 CREATE  PROCEDURE AffAllSeance ()
@@ -775,6 +762,21 @@ BEGIN
 end//
 Delimiter ;
 
+-- Fonction qui vérifie si un participant est inscrit à une activité
 
+DELIMITER //
+CREATE function f_verifier_seance_adherent (nom VARCHAR(50), activite VARCHAR(50)) RETURNS BOOLEAN
+BEGIN
+    DECLARE present BOOLEAN;
+
+    SELECT COUNT(*) > 0 INTO present
+    FROM seances_adherents_noteappreciation
+    INNER JOIN a2024_420335ri_eq2.seances s on seances_adherents_noteappreciation.idSeance = s.idSeance
+    WHERE numeroIdentification = nom AND
+          nomActivite = activite;
+
+    RETURN present;
+end//
+Delimiter ;
 
 

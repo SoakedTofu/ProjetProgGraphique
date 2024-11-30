@@ -31,7 +31,6 @@ namespace ProjetGraphiqueSession
             this.InitializeComponent();
             uneSeance = new Seance();
             activite = new Activite("sport", 2);
-
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
@@ -77,9 +76,6 @@ namespace ProjetGraphiqueSession
                 titre.Text = "Séances de " + activite.Nom;
 
                 Singleton.getInstance().nomActiviteSeance(activite.Nom);
-            }
-            else
-            {
 
             }
         }
@@ -87,6 +83,54 @@ namespace ProjetGraphiqueSession
         private void retour_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Affichage));
+        }
+
+        private async void btn_Inscription_Click(object sender, RoutedEventArgs e)
+        {
+            // Regarder si il reste des places ou non
+
+            Button btn = sender as Button;
+
+            uneSeance = btn.DataContext as Seance;
+
+            if (uneSeance.NbPlaces != 0)    // S'il y a encore des place disponibles. Sinon, le boutton est désactivé par la propriété calculé PlacesDisponibles
+            {
+                ContentDialog dialog = new ContentDialog();
+                dialog.XamlRoot = this.XamlRoot;
+                dialog.Title = "Réservation";
+                dialog.PrimaryButtonText = "Réserver";
+                dialog.CloseButtonText = "Annuler";
+                dialog.DefaultButton = ContentDialogButton.Primary;
+                dialog.Content = $"Voulez-vous vraiment réserver une place pour l'activité '{uneSeance.NomAct}' le {uneSeance.Date} à {uneSeance.HeureDebut}?";
+
+                ContentDialogResult resultat = await dialog.ShowAsync();
+
+                if (resultat == ContentDialogResult.Primary)
+                {
+                    // Vérifier si l'utilisateur participe déjà à cette séance
+
+                    if (!Singleton.getInstance().VerifierSeanceAdherent(uneSeance.NomAct))
+                    {
+                        ContentDialog dialog2 = new ContentDialog();
+                        dialog.XamlRoot = this.XamlRoot;
+                        dialog.Title = "Désolé";
+                        dialog.PrimaryButtonText = "Ok";
+                        dialog.DefaultButton = ContentDialogButton.Primary;
+                        dialog.Content = "Vous êtes déjà inscrit à cette séance.";
+
+                        ContentDialogResult resultat2 = await dialog.ShowAsync();
+                    }
+                    else    // Si l'adhérent n'est pas déjà inscrit
+                    {
+
+                    }
+                }
+                    
+
+            }
+
+
+
         }
     }
 }

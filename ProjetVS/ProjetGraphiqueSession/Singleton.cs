@@ -5,6 +5,7 @@ using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -1033,6 +1034,72 @@ namespace ProjetGraphiqueSession
 
             con.Close();
             return ListeAdherents;
+        }
+
+        // Vérifier si un adhérent est déjà inscrit à une séance
+
+        public Boolean VerifierSeanceAdherent(string activite)
+        {
+            // Boolean qui indique si l'utilisateur est présent
+
+            Boolean present = false;
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT f_verifier_seance_adherent(@numeroUtil, @activite)";
+                commande.Parameters.AddWithValue("@numeroUtil", utilisateur);
+                commande.Parameters.AddWithValue("@activite", activite);
+
+                con.Open();
+                commande.Prepare();
+
+                var resultat = commande.ExecuteScalar();
+
+                // Vérifier que la commande renvoie bien un résultat
+
+                if (resultat != null)
+                {
+                    present = Convert.ToBoolean(resultat);
+                }
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return present;
+        }
+
+
+
+
+        // Pour inscrire un adhérent à une séance
+
+        public void InscrireAdherent()
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "ConnecteBD";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                
+
+
+                con.Open();
+                commande.Prepare();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
         }
 
 
