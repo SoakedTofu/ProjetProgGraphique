@@ -12,25 +12,25 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Liste des Activites" x:Name="Affichage" Icon="Home"/>
                 <NavigationViewItem Content="Statistiques" x:Name="Stats" Icon="Calculator" Visibility="Collapsed"/>
-                <NavigationViewItem  ToolTipService.ToolTip="Account" x:Name="Admin">
+                <NavigationViewItem  ToolTipService.ToolTip="Compte Admin" x:Name="Admin">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xE7EF;"/>
                         <TextBlock Margin="12 0 0 0" Text="Administrateur"/>
                     </StackPanel>
                     <NavigationViewItem.MenuItems>
-                        <NavigationViewItem ToolTipService.ToolTip="Account" x:Name="comptes">
+                        <NavigationViewItem ToolTipService.ToolTip="Comptes" x:Name="comptes">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE902;"/>
                                 <TextBlock Margin="12 0 0 0" Text="Comptes"/>
                             </StackPanel>
                         </NavigationViewItem>
-                        <NavigationViewItem  x:Name="activite">
+                        <NavigationViewItem  x:Name="activite" ToolTipService.ToolTip="Activités">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE805;"/>
                                 <TextBlock Margin="12 0 0 0" Text="Activités"/>
                             </StackPanel>
                         </NavigationViewItem>
-                        <NavigationViewItem x:Name="seance">
+                        <NavigationViewItem x:Name="seance" ToolTipService.ToolTip="Seances">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE787;"/>
                                 <TextBlock Margin="12 0 0 0" Text="Séances"/>

@@ -478,6 +478,36 @@ namespace ProjetGraphiqueSession
 
         }
 
+        //methode qui modifie une activité
+
+        public void ajouterActivite(ActiviteForm activiteForm)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("AjoutActivite");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("nomAct", activiteForm.Nom);
+                commande.Parameters.AddWithValue("prixOrg", activiteForm.PrixOrg);
+                commande.Parameters.AddWithValue("prixVt", activiteForm.PrixVente);
+                commande.Parameters.AddWithValue("nomAdmin", activiteForm.NomAdmin);
+                commande.Parameters.AddWithValue("nbPlaces", activiteForm.NbPlacesMaxi);
+
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+                con.Close();
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+
+        }
+
         //Methode qui stocke le nom de l'activité de la seance
 
         public void nomActiviteSeance(string nomAct)
@@ -537,7 +567,7 @@ namespace ProjetGraphiqueSession
                 MySqlCommand commande = new MySqlCommand("idSeance");
                 commande.Connection = con;
                 commande.CommandType = System.Data.CommandType.StoredProcedure;
-                commande.Parameters.AddWithValue("dateForm", uneSeance.Date);
+                commande.Parameters.AddWithValue("dateForm", uneSeance.DateDB);
                 commande.Parameters.AddWithValue("hrDebut", uneSeance.HeureDebut);
                 commande.Parameters.AddWithValue("hrFin", uneSeance.HeureFin);
                 commande.Parameters.AddWithValue("nomAct", uneSeance.NomAct);
@@ -597,6 +627,33 @@ namespace ProjetGraphiqueSession
 
 
         }
+        //methode qui ajoute une seance
+
+        public void ajouterSeance(seanceForm uneSeance)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("AjoutSeance");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("dateForm", uneSeance.Date);
+                commande.Parameters.AddWithValue("hrDebut", uneSeance.HeureDebut);
+                commande.Parameters.AddWithValue("hrFin", uneSeance.HeureFin);
+                commande.Parameters.AddWithValue("nomAct", uneSeance.NomActivite);
+    
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+
+        }
 
         //Méthode pour modifier un adhérent
         public void modifierAdherent(Adherent unAdhrent)
@@ -604,6 +661,35 @@ namespace ProjetGraphiqueSession
             try
             {
                 MySqlCommand commande = new MySqlCommand("ModifAdherent");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("nomAd", unAdhrent.Nom);
+                commande.Parameters.AddWithValue("prenomAd", unAdhrent.Prenom);
+                commande.Parameters.AddWithValue("adrs", unAdhrent.Adresse);
+                commande.Parameters.AddWithValue("date", unAdhrent.DateNaissance);
+                commande.Parameters.AddWithValue("id", unAdhrent.Id);
+
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+
+        }
+
+
+        //Méthode pour ajouter un adhérent
+        public void ajouterAdherent(Adherent unAdhrent)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("AjoutAdherent");
                 commande.Connection = con;
                 commande.CommandType = System.Data.CommandType.StoredProcedure;
                 commande.Parameters.AddWithValue("nomAd", unAdhrent.Nom);

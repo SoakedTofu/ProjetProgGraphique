@@ -42,10 +42,15 @@ namespace ProjetGraphiqueSession
 
         private async void delete_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
+
+            unAdherent = btn.DataContext as Adherent;
+
+
             ContentDialog dialog = new ContentDialog();
             dialog.XamlRoot = liste_adherents.XamlRoot;
             dialog.Title = "Suppression";
-            dialog.Content = "Voulez vous vraiment supprimer l'adhérent?";
+            dialog.Content = "Voulez vous vraiment supprimer "+unAdherent.Prenom+"?";
             dialog.PrimaryButtonText = "Oui";
             // dialog.SecondaryButtonText = "Non";
             dialog.CloseButtonText = "Non";
@@ -56,9 +61,7 @@ namespace ProjetGraphiqueSession
 
             if (resultat == ContentDialogResult.Primary)
             {
-                Button btn = sender as Button;
-
-                unAdherent = btn.DataContext as Adherent;
+              
 
                 Singleton.getInstance().supprimerAdherent(unAdherent);
 
@@ -92,6 +95,12 @@ namespace ProjetGraphiqueSession
 
                 await Windows.Storage.FileIO.WriteLinesAsync(monFichier, adherentsString, Windows.Storage.Streams.UnicodeEncoding.Utf8);
             }
+        }
+
+        private void ajout_aherents_Click(object sender, RoutedEventArgs e)
+        {
+       
+            Frame.Navigate(typeof(AjoutsAdherents));
         }
     }
 }

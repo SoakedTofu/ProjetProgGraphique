@@ -1,4 +1,4 @@
-ï»¿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Globalization.DateTimeFormatting;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -21,18 +22,18 @@ namespace ProjetGraphiqueSession
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ModifierAdherants : Page
+    public sealed partial class AjoutsAdherents : Page
     {
         Adherent unAdherent;
-        public ModifierAdherants()
+        public AjoutsAdherents()
         {
             this.InitializeComponent();
             unAdherent = new Adherent();
-            date.MaxDate = new DateTimeOffset(new DateTime((DateTime.Today).Year - 18, 12, 31));
+          date.MaxDate = new DateTimeOffset(new DateTime(  (DateTime.Today).Year-18,12,31));
             date.Date = new DateTimeOffset(DateTime.Today);
         }
 
-        private void modifier_Click(object sender, RoutedEventArgs e)
+        private void ajouter_Click_1(object sender, RoutedEventArgs e)
         {
             if (validation())
             {
@@ -40,7 +41,7 @@ namespace ProjetGraphiqueSession
                 unAdherent.Prenom = prenom.Text;
                 unAdherent.Adresse = Adresse.Text;
                 unAdherent.DateNaissance = date.Date.Value.ToString("d");
-                Singleton.getInstance().modifierAdherent(unAdherent);
+                Singleton.getInstance().ajouterAdherent(unAdherent);
                 Frame.Navigate(typeof(Adherents));
             }
         }
@@ -50,24 +51,7 @@ namespace ProjetGraphiqueSession
             Frame.Navigate(typeof(Adherents));
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-
-            if (e.Parameter is not null)
-            {
-                unAdherent = e.Parameter as Adherent;
-                nom.Text = unAdherent.Nom;
-                prenom.Text = unAdherent.Prenom;
-                Adresse.Text = unAdherent.Adresse;
-                date.Date =new DateTimeOffset( Convert.ToDateTime( unAdherent.DateNaissance));
-
-
-            }
-            else
-            {
-
-            }
-        }
+        
 
         private bool validation()
         {
@@ -75,19 +59,19 @@ namespace ProjetGraphiqueSession
             resetErreurs();
             if (nom.Text.Trim() == String.Empty)
             {
-                erreurNom.Text = "Entrer le nom de l'adhÃ©rent";
+                erreurNom.Text = "Entrer le nom de l'adhérent";
 
                 valide = false;
             }
             if (prenom.Text.Trim() == String.Empty)
             {
-                erreurPrenom.Text = "Entrer le prÃ©nom de l'adhÃ©rent";
+                erreurPrenom.Text = "Entrer le prénom de l'adhérent";
 
                 valide = false;
             }
             if (Adresse.Text.Trim() == String.Empty)
             {
-                erreurAdresse.Text = "Entrer l'adresse de l'adhÃ©rent";
+                erreurAdresse.Text = "Entrer l'adresse de l'adhérent";
 
                 valide = false;
             }
@@ -103,8 +87,10 @@ namespace ProjetGraphiqueSession
             erreurPrenom.Text = string.Empty;
             erreurPrenom.Text = string.Empty;
             erreurAdresse.Text = string.Empty;
-          
+           
 
         }
+
+      
     }
 }

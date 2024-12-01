@@ -40,10 +40,14 @@ namespace ProjetGraphiqueSession
 
         private async void delete_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
+
+            uneActivite = btn.DataContext as Activite;
+
             ContentDialog dialog = new ContentDialog();
             dialog.XamlRoot = liste_activites.XamlRoot;
             dialog.Title = "Suppression";
-            dialog.Content = "Voulez vous vraiment supprimer l'activité?";
+            dialog.Content = "Voulez vous vraiment supprimer l'activité  "+uneActivite.Nom +"?";
             dialog.PrimaryButtonText = "Oui";
             // dialog.SecondaryButtonText = "Non";
             dialog.CloseButtonText = "Non";
@@ -54,9 +58,7 @@ namespace ProjetGraphiqueSession
 
             if (resultat == ContentDialogResult.Primary)
             {
-                Button btn = sender as Button;
-
-                uneActivite = btn.DataContext as Activite;
+   
 
                 Singleton.getInstance().supprimerActivite(uneActivite);
 
@@ -108,6 +110,11 @@ namespace ProjetGraphiqueSession
 
                 await Windows.Storage.FileIO.WriteLinesAsync(monFichier, activitesStrings, Windows.Storage.Streams.UnicodeEncoding.Utf8);
             }
+        }
+
+        private void ajout_activite_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AjoutsActivite));
         }
     }
 }

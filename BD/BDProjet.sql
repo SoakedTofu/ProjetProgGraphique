@@ -695,6 +695,66 @@ DELIMITER ;
 call  AffAllSeance();
 
 
+--Procédure pour ajouter des adhérents
+
+DELIMITER //
+CREATE  PROCEDURE AjoutAdherent (IN  nomAd varchar(50),IN  prenomAd varchar(50),IN  adrs varchar(50),IN  date DATE,in id VARCHAR(11))
+BEGIN
+
+
+
+
+     INSERT INTO adherents ( nom, prenom, adresse, dateNaissance, age, nomAdministrateur)
+     VALUES (nomAd,prenomAd,adrs,date,YEAR( CURRENT_DATE)-YEAR(date), 'admin_unique');
+
+
+
+end //
+DELIMITER ;
+
+call AjoutAdherent('Roche','Sophie','34 rue de la Ormeaux','1991-11-12','SR-1991-127');
+
+--procédure pour ajouter des activités
+
+DELIMITER //
+CREATE  PROCEDURE AjoutActivite (IN  nomAct varchar(50),IN prixOrg double,
+                                 IN prixVt double,IN nomAdmin VARCHAR(50),IN nbPlaces INT )
+BEGIN
+
+
+
+
+    INSERT INTO activites VALUES (nomAct,prixOrg,prixVt,nomAdmin,nbPlaces);
+
+
+
+end //
+DELIMITER ;
+
+
+
+CALL AjoutActivite("Foot",20,10,"admin_unique",2);
+
+--Procédure qui permet d'ajouter des seances 
+
+DELIMITER //
+CREATE  PROCEDURE AjoutSeance (IN  dateForm DATE,IN hrDebut TIME,
+                               IN hrFin TIME,IN nomAct varchar(50))
+BEGIN
+
+
+   INSERT INTO seances (date, heureDebut, heureFin,nbPlaces,  nomActivite, nomAdministrateur)
+   VALUES (dateForm,hrDebut,hrFin,0,nomAct,'admin_unique');
+
+
+
+end //
+DELIMITER ;
+
+
+call AjoutSeance('2020-10-11','18:00','20:00','Théâtre');
+
+
 /********************** FONCTIONS **********************/
 
 -- Fonction qui vérifie qu'un adhérent existe

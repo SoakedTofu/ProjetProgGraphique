@@ -1,15 +1,14 @@
-ï»¿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using MySqlX.XDevAPI;
+using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -24,41 +23,39 @@ namespace ProjetGraphiqueSession
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ModifierSeance : Page
+    public sealed partial class AjouterSeances : Page
     {
         Seance uneSeance;
         seanceForm uneSeanceForm;
         ObservableCollection<Seance> listseance;
-        public ModifierSeance()
+        public AjouterSeances()
         {
             this.InitializeComponent();
             uneSeance = new Seance();
             uneSeanceForm = new seanceForm();
-            nomActivite.ItemsSource= Singleton.getInstance().getListeAllActivites();
-            listseance= new ObservableCollection<Seance>();
+            nomActivite.ItemsSource = Singleton.getInstance().getListeAllActivites();
+            listseance = new ObservableCollection<Seance>();
             date.MinDate = new DateTimeOffset(DateTime.Today);
             date.Date = new DateTimeOffset(DateTime.Today);
-           
-            hrDebut.SelectedTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            hrDebut.SelectedTime =new  TimeSpan (DateTime.Now.Hour,DateTime.Now.Minute,DateTime.Now.Second);
             hrFin.SelectedTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             hrFin.MinuteIncrement = 10;
             hrDebut.MinuteIncrement = 10;
-
         }
 
-        private void modifier_Click(object sender, RoutedEventArgs e)
+   
+
+        private void ajouter_Click(object sender, RoutedEventArgs e)
         {
             if (validation())
             {
                 uneSeanceForm.Date = date.Date.Value.ToString("d");
-                uneSeanceForm.HeureDebut = Convert.ToString(hrDebut.Time);
-                uneSeanceForm.HeureFin = Convert.ToString(hrFin.Time);
-                Seance seanceNbP= nbPlace.SelectedItem as Seance;
-                uneSeanceForm.NbPlaces = seanceNbP.NbPlaces ;
-                Activite seanceNomActivite=nomActivite.SelectedItem as Activite;
-                uneSeanceForm.NomActivite=seanceNomActivite.Nom;
-                Singleton.getInstance().modifierSeance(uneSeanceForm,Singleton.getInstance().idSeanceAll(uneSeance));
-                Frame.Navigate(typeof(Affichage));
+                uneSeanceForm.HeureDebut =Convert.ToString( hrDebut.Time);
+                uneSeanceForm.HeureFin =Convert.ToString( hrFin.Time);
+                Activite seanceNomActivite = nomActivite.SelectedItem as Activite;
+                uneSeanceForm.NomActivite = seanceNomActivite.Nom;
+                Singleton.getInstance().ajouterSeance(uneSeanceForm);
+                Frame.Navigate(typeof(AllSeances));
             }
         }
 
@@ -67,24 +64,7 @@ namespace ProjetGraphiqueSession
             Frame.Navigate(typeof(Affichage));
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-
-            if (e.Parameter is not null)
-            {
-                uneSeance = e.Parameter as Seance;
-                date.Date = new DateTimeOffset(Convert.ToDateTime(uneSeance.DateDB));
-                hrDebut.SelectedTime = TimeSpan.Parse(uneSeance.HeureDebut);
-                hrFin.SelectedTime =  TimeSpan.Parse( uneSeance.HeureFin);
-                listseance.Add(uneSeance);
-                nbPlace.ItemsSource =listseance ;
-
-            }
-            else
-            {
-
-            }
-        }
+       
 
         private bool validation()
         {
@@ -94,25 +74,19 @@ namespace ProjetGraphiqueSession
 
             if (hrFin.SelectedTime <= hrDebut.SelectedTime)
             {
-                erreurHrFin.Text = "L'heure de fin de la sÃ©ance doit Ãªtre superieur Ã  l'heure de dÃ©but ";
+                erreurHrFin.Text = "L'heure de fin de la séance doit être superieur à l'heure de début ";
 
                 valide = false;
             }
             if (hrDebut.SelectedTime < new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) || hrFin.SelectedTime < new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second))
             {
-                erreurHrFin.Text = "la sÃ©ance doit Ãªtre Ã  venir ";
+                erreurHrFin.Text = "la séance doit être à venir ";
 
                 valide = false;
             }
-            if (nbPlace.SelectedIndex==-1)
+            if (nomActivite.SelectedIndex == -1)
             {
-                erreurNbPlace.Text = "Entrer le nombre de place disponible de la sÃ©ance";
-
-                valide = false;
-            }
-            if (nomActivite.SelectedIndex==-1)
-            {
-                erreurNomAct.Text = "Entrer le nom de l'activitÃ©";
+                erreurNomAct.Text = "Entrer le nom de l'activité";
 
                 valide = false;
             }
@@ -123,12 +97,12 @@ namespace ProjetGraphiqueSession
 
         private void resetErreurs()
         {
-          
          
+           
             erreurHrFin.Text = string.Empty;
-            erreurNbPlace.Text = string.Empty;
             erreurNomAct.Text = string.Empty;
 
         }
     }
 }
+

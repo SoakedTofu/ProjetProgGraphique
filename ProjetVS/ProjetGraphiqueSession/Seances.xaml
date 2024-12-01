@@ -95,18 +95,9 @@
                                 <Button x:Name="delete" Click="delete_Click" Margin="20 0 0 0"  HorizontalAlignment="Right" Foreground="Red">
                                     <SymbolIcon Symbol="Delete"/>
                                 </Button>
+
                             </StackPanel>
-
-                            <Button 
-                                Grid.Column="5"
-                                HorizontalAlignment="center"
-                                x:Name="btn_Inscription"
-                                Click="btn_Inscription_Click"
-                                IsEnabled="{x:Bind PlacesDisponibles}"
-                                >
-                                <FontIcon Glyph="&#xED0E;" />
-                            </Button>
-
+                           
 
                         </Grid>
                     </DataTemplate>

@@ -1,5 +1,6 @@
-﻿<Page
-    x:Class="ProjetGraphiqueSession.ModifierSeance"
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ProjetGraphiqueSession.AjouterSeances"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ProjetGraphiqueSession"
@@ -7,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -28,29 +30,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Modifier une seance" Grid.Row="0" Margin="0 20 0 20" HorizontalAlignment="Center"
-                FontWeight="Black" FontSize="50"/>
+        <TextBlock Text="Ajouter une seance" Grid.Row="0" Margin="0 20 0 20" HorizontalAlignment="Center"
+            FontWeight="Black" FontSize="50"/>
 
         <CalendarDatePicker x:Name="date" Header="Entrer la date de la seance:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="1" Width="500"/>
 
         <StackPanel Orientation="Horizontal"  Grid.Row="3" HorizontalAlignment="Center" Width="500">
-        <TimePicker x:Name="hrDebut" Header="Entrer l'heure de début de la seance:" Margin="20 0 0 20"  />
-       
+            <TimePicker x:Name="hrDebut" Header="Entrer l'heure de début de la seance:" Margin="20 0 0 20"  />
 
-        <TimePicker x:Name="hrFin" Header="Entrer l'heure de Fin de la seance:" Margin="10 0 0 20" HorizontalAlignment="Center" Grid.Row="5"/>
-        
+
+            <TimePicker x:Name="hrFin" Header="Entrer l'heure de Fin de la seance:" Margin="10 0 0 20" HorizontalAlignment="Center" Grid.Row="5"/>
+
         </StackPanel>
-        <TextBlock x:Name="erreurHrFin" Foreground="red" Grid.Row="6" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500" />
-        
-        <ComboBox x:Name="nbPlace" Header="nombre de places disponibles:" Grid.Row="7" Margin="40 0 0 20" HorizontalAlignment="Center"  Width="500">
-            <ComboBox.ItemTemplate>
-                <DataTemplate x:DataType="local:Seance">
-                    <TextBlock Text="{x:Bind NbPlaces}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-
-        <TextBlock x:Name="erreurNbPlace" Foreground="red" Grid.Row="8" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+        <TextBlock x:Name="erreurHrFin" Foreground="red" Grid.Row="6" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
 
         <ComboBox x:Name="nomActivite" Header="Activité:" Grid.Row="9" Margin="40 0 0 20" HorizontalAlignment="Center"  Width="500">
             <ComboBox.ItemTemplate>
@@ -66,7 +58,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="11" HorizontalAlignment="Center" Margin="40 0 0 0" Width="500">
 
-            <Button x:Name="modifier" Click="modifier_Click"  Content="sauvegarder"   Background="ForestGreen" HorizontalAlignment="Left"/>
+            <Button x:Name="ajouter" Click="ajouter_Click"  Content="sauvegarder"   Background="ForestGreen" HorizontalAlignment="Left"/>
             <Button x:Name="retour" Click="retour_Click"  Content="Retour"   Background="Red" HorizontalAlignment="Right" Margin="330 0 0 0"/>
         </StackPanel>
     </Grid>

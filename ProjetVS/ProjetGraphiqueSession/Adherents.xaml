@@ -19,22 +19,56 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock x:Name="titre" Text="Comptes"
                HorizontalAlignment="Center" Grid.Row="0" Margin="0 20 0 0" FontWeight="Black" FontSize="50"/>
 
-            <Button
-        x:Name="btn_Exporter"
-        Content="Exporter les adhérents"
-        VerticalAlignment="Bottom"
-        Margin=" 10 0 0 0"
-        Padding="10"
-        Click="btn_Exporter_Click"
-        />
 
-            <Grid Grid.Row="1" Margin="0 20 0 0">
+            <Grid Grid.Row="1" Margin="0 20 0 0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel  HorizontalAlignment="Left" Grid.Row="0">
+
+
+                    <Button x:Name="btn_Exporter" Content="Exporter les adhérents"
+        
+            Margin=" 10 0 0 0"
+             Padding="10"
+             Click="btn_Exporter_Click" HorizontalAlignment="Left"
+                    />
+
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Right" Grid.Column="1">
+
+                    <Button x:Name="ajout_aherents" Content="Ajouter les adhérents"
+
+
+ Padding="10"
+ Click="ajout_aherents_Click"
+            HorizontalAlignment="Right"
+    />
+                </StackPanel>
+
+
+
+
+            </Grid>
+         
+           
+
+            <Grid Grid.Row="2" Margin="0 20 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
 
@@ -68,7 +102,7 @@
 
             </Grid>
 
-            <ListView x:Name="liste_adherents" Grid.Row="2" Margin="0 20 0 0" >
+            <ListView x:Name="liste_adherents" Grid.Row="3" Margin="0 20 0 0" >
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:Adherent">
                         <Grid >

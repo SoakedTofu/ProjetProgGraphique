@@ -80,7 +80,10 @@ namespace ProjetGraphiqueSession
             }
         }
 
-       
+        private void ajout_seance_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AjouterSeances));
+        }
     }
 
 }
