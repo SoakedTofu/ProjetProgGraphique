@@ -803,7 +803,17 @@ namespace ProjetGraphiqueSession
 
                 con.Open();
                 commande.Prepare();
-                stat = commande.ExecuteScalar().ToString();
+
+                var result = commande.ExecuteScalar();
+
+                if (result != null)
+                {
+                    stat = result.ToString();
+                }
+                else
+                {
+                    stat = "-";
+                }
 
                 con.Close();
             }
@@ -830,7 +840,17 @@ namespace ProjetGraphiqueSession
 
                 con.Open();
                 commande.Prepare();
-                stat = commande.ExecuteScalar().ToString();
+
+                var result = commande.ExecuteScalar();
+
+                if (result != null)
+                {
+                    stat = result.ToString();
+                }
+                else
+                {
+                    stat = "-";
+                }
 
                 con.Close();
             }
@@ -921,7 +941,17 @@ namespace ProjetGraphiqueSession
 
                 con.Open();
                 commande.Prepare();
-                stat = commande.ExecuteScalar().ToString();
+
+                var result = commande.ExecuteScalar();
+
+                if (result != null)
+                {
+                    stat = result.ToString();
+                }
+                else
+                {
+                    stat = "-";  
+                }
 
                 con.Close();
             }
@@ -947,7 +977,17 @@ namespace ProjetGraphiqueSession
 
                 con.Open();
                 commande.Prepare();
-                stat = commande.ExecuteScalar().ToString();
+
+                var result = commande.ExecuteScalar();
+
+                if (result != null)
+                {
+                    stat = result.ToString();
+                }
+                else
+                {
+                    stat = "-";
+                }
 
                 con.Close();
             }
@@ -973,7 +1013,17 @@ namespace ProjetGraphiqueSession
 
                 con.Open();
                 commande.Prepare();
-                stat = commande.ExecuteScalar().ToString();
+
+                var result = commande.ExecuteScalar();
+
+                if (result != null)
+                {
+                    stat = result.ToString();
+                }
+                else
+                {
+                    stat = "-";
+                }
 
                 con.Close();
             }
