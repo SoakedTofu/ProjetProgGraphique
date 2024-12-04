@@ -1,3 +1,4 @@
+using ABI.Windows.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -45,7 +46,7 @@ namespace ProjetGraphiqueSession
 
    
 
-        private void ajouter_Click(object sender, RoutedEventArgs e)
+        private async void ajouter_Click(object sender, RoutedEventArgs e)
         {
             if (validation())
             {
@@ -55,13 +56,33 @@ namespace ProjetGraphiqueSession
                 Activite seanceNomActivite = nomActivite.SelectedItem as Activite;
                 uneSeanceForm.NomActivite = seanceNomActivite.Nom;
                 Singleton.getInstance().ajouterSeance(uneSeanceForm);
-                Frame.Navigate(typeof(AllSeances));
+
+                ContentDialog dialog = new ContentDialog();
+              
+                dialog.XamlRoot = ajouter.XamlRoot;
+                dialog.Title = "";
+                dialog.Content = "Séance ajouté avec succè?";
+                
+                dialog.PrimaryButtonText = "Ok";
+             
+                // dialog.SecondaryButtonText = "Non";
+                dialog.CloseButtonText = "Non";
+
+                dialog.DefaultButton = ContentDialogButton.Close;
+
+                var resultat = await dialog.ShowAsync();
+
+                if (resultat == ContentDialogResult.Primary)
+                {
+                    Frame.Navigate(typeof(AllSeances));
+                }
+                
             }
         }
 
         private void retour_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Affichage));
+            Frame.Navigate(typeof(AllSeances));
         }
 
        
