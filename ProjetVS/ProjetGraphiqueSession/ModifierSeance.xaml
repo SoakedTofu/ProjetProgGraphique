@@ -31,6 +31,7 @@
         <TextBlock Text="Modifier une seance" Grid.Row="0" Margin="0 20 0 20" HorizontalAlignment="Center"
                 FontWeight="Black" FontSize="50"/>
 
+        <!--<InfoBar x:Name="infobar" IsOpen="True" Message="Bonjour" Severity="Success" />-->
         <CalendarDatePicker x:Name="date" Header="Entrer la date de la seance:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="1" Width="500"/>
 
         <StackPanel Orientation="Horizontal"  Grid.Row="3" HorizontalAlignment="Center" Width="500">

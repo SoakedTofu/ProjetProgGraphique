@@ -46,7 +46,7 @@ namespace ProjetGraphiqueSession
                 ContentDialog dialog = new ContentDialog();
 
                 dialog.XamlRoot = modifier.XamlRoot;
-                dialog.Title = "Succè";
+                dialog.Title = "Succes";
                 dialog.Content = "L'adhérent " + unAdherent.Nom + " a été modifier avec succè...!";
 
                 dialog.PrimaryButtonText = "Ok";

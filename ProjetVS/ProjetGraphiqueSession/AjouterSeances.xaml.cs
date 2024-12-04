@@ -62,7 +62,7 @@ namespace ProjetGraphiqueSession
                 ContentDialog dialog = new ContentDialog();
               
                 dialog.XamlRoot = ajouter.XamlRoot;
-                dialog.Title = "Succè";
+                dialog.Title = "Succes";
                 dialog.Content ="La séance de "+ uneSeanceForm.NomActivite+" prévue le "+ dateSeance + " à "
                     +uneSeanceForm.HeureDebut+ " a été ajouté avec succè...!";
                 

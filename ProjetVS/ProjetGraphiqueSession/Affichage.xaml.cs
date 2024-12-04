@@ -118,5 +118,7 @@ namespace ProjetGraphiqueSession
                 await Windows.Storage.FileIO.WriteLinesAsync(monFichier, activitesStrings, Windows.Storage.Streams.UnicodeEncoding.Utf8);
             }
         }
+
+       
     }
 }

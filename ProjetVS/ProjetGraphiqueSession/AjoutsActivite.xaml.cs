@@ -47,7 +47,7 @@ namespace ProjetGraphiqueSession
                 ContentDialog dialog = new ContentDialog();
 
                 dialog.XamlRoot = ajouter.XamlRoot;
-                dialog.Title = "Succè";
+                dialog.Title = "Succes";
                 dialog.Content = "L'activité " + activite.Nom+ " a été ajouté avec succè...!";
 
                 dialog.PrimaryButtonText = "Ok";

@@ -57,7 +57,7 @@
 
         </Grid>
 
-        <ListView x:Name="liste_activites" Grid.Row="2" Margin="0 20 0 0" SelectionChanged="liste_activites_SelectionChanged">
+        <ListView x:Name="liste_activites" Grid.Row="2" Margin="0 20 0 0" SelectionChanged="liste_activites_SelectionChanged" >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Activite">
                     <Grid >
@@ -74,9 +74,9 @@
                         </Grid.ColumnDefinitions>
 
 
-
-                        <TextBlock Text="{x:Bind Nom}" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{x:Bind Note}" FontSize="20"  Grid.Column="1" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind Nom}" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center"/>
+                            <RatingControl Value="{x:Bind Note}" Grid.Column="1" HorizontalAlignment="Center" IsEnabled="False"/>
+                            <!--<TextBlock Text="{x:Bind Note}" FontSize="20"  Grid.Column="1" HorizontalAlignment="Center"/>-->
                        
 
 
@@ -94,8 +94,10 @@
 
                     </Grid>
                 </DataTemplate>
+                
             </ListView.ItemTemplate>
-        </ListView>
+                
+            </ListView>
     </Grid>
     </ScrollViewer>
 </Page>

@@ -97,7 +97,11 @@
                                 </Button>
 
                             </StackPanel>
-                           
+
+                            <Button x:Name="btn_Inscription" Click="btn_Inscription_Click" Margin="20 0 0 0"  HorizontalAlignment="Right" Foreground="White" Grid.Column="5" Background="DarkMagenta">
+                                Inscription
+                            </Button>
+
 
                         </Grid>
                     </DataTemplate>

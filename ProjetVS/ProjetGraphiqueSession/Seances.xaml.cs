@@ -110,7 +110,7 @@ namespace ProjetGraphiqueSession
                 {
                     // Vérifier si l'utilisateur participe déjà à cette séance
 
-                    if (!Singleton.getInstance().VerifierSeanceAdherent(uneSeance.NomAct))
+                    if (Singleton.getInstance().VerifierSeanceAdherent(uneSeance.NomAct))
                     {
                         ContentDialog dialog2 = new ContentDialog();
                         dialog.XamlRoot = this.XamlRoot;
@@ -123,7 +123,8 @@ namespace ProjetGraphiqueSession
                     }
                     else    // Si l'adhérent n'est pas déjà inscrit
                     {
-
+                        Singleton.getInstance().inscription(Singleton.getInstance().idSeanceAll(uneSeance),
+                            Singleton.getInstance().GetUtilisateur());
                     }
                 }
                     

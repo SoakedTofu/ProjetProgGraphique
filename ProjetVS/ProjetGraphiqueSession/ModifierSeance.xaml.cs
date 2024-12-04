@@ -60,13 +60,15 @@ namespace ProjetGraphiqueSession
                 Activite seanceNomActivite=nomActivite.SelectedItem as Activite;
                 uneSeanceForm.NomActivite=seanceNomActivite.Nom;
                 Singleton.getInstance().modifierSeance(uneSeanceForm,Singleton.getInstance().idSeanceAll(uneSeance));
-                
-               
+
+                //infobar.IsOpen = true;
+                //infobar.Message = "Avec succes";
+                //infobar.Severity = InfoBarSeverity.Success;
 
                 ContentDialog dialog = new ContentDialog();
 
                 dialog.XamlRoot = modifier.XamlRoot;
-                dialog.Title = "Succè";
+                dialog.Title = "Succes";
                 dialog.Content = "La séance de " + uneSeanceForm.NomActivite + " prévue le " + dateSeance + " à "
                     + uneSeanceForm.HeureDebut + " a été modifié avec succè...!";
 
@@ -100,7 +102,15 @@ namespace ProjetGraphiqueSession
                 date.Date = new DateTimeOffset(Convert.ToDateTime(uneSeance.DateDB));
                 hrDebut.SelectedTime = TimeSpan.Parse(uneSeance.HeureDebut);
                 hrFin.SelectedTime =  TimeSpan.Parse( uneSeance.HeureFin);
-                nomActivite.SelectedItem = uneSeance.NomAct;
+               
+                foreach(Activite activite in Singleton.getInstance().getListeAllActivites() )
+                {
+                        if(activite.Nom == uneSeance.NomAct)
+                    {
+                        nomActivite.SelectedItem = activite;
+                    }
+                }
+                
                 listseance.Add(uneSeance);
                 nbPlace.ItemsSource =listseance ;
 

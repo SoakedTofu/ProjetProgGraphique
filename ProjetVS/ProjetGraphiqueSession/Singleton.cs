@@ -185,6 +185,30 @@ namespace ProjetGraphiqueSession
 
         }
 
+        //Méthode pour l'inscription
+
+        public void inscription(int idSeance,string numIdntification)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("AjoutSANA");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("seanceId", idSeance);
+                commande.Parameters.AddWithValue("numIdentification", numIdntification);
+               
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+        }
+
         //Méthode qui récupere toute les séances
         public ObservableCollection<Seance> getListeAllSeances()
         {
@@ -1187,7 +1211,7 @@ namespace ProjetGraphiqueSession
                 MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
                 commande.CommandText = "SELECT f_verifier_seance_adherent(@numeroUtil, @activite)";
-                commande.Parameters.AddWithValue("@numeroUtil", utilisateur);
+                commande.Parameters.AddWithValue("@numeroUtil", GetUtilisateur());
                 commande.Parameters.AddWithValue("@activite", activite);
 
                 con.Open();
