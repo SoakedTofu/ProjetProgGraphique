@@ -49,7 +49,7 @@ namespace ProjetGraphiqueSession
 
             }
         }
-        private void modifier_Click(object sender, RoutedEventArgs e)
+        private async void modifier_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             if (validation())
@@ -60,7 +60,27 @@ namespace ProjetGraphiqueSession
                 activite.NbPlacesMaxi = Convert.ToInt32(nbPlacesMax.Text);
                 activite.NomAdmin = nomAdmin.SelectedItem as string;
                 Singleton.getInstance().modifierActivite(activite,nomAct);
-                Frame.Navigate(typeof(Affichage));
+
+                ContentDialog dialog = new ContentDialog();
+
+                dialog.XamlRoot = modifier.XamlRoot;
+                dialog.Title = "Succè";
+                dialog.Content = "L'activité " + activite.Nom + " a été modifié avec succè...!";
+
+                dialog.PrimaryButtonText = "Ok";
+
+                // dialog.SecondaryButtonText = "Non";
+
+
+                dialog.DefaultButton = ContentDialogButton.Close;
+
+                var resultat = await dialog.ShowAsync();
+
+                if (resultat == ContentDialogResult.Primary)
+                {
+                    Frame.Navigate(typeof(Activites));
+                }
+                
             }
         }
 

@@ -33,7 +33,7 @@ namespace ProjetGraphiqueSession
         }
 
       
-        private void ajouter_Click(object sender, RoutedEventArgs e)
+        private async void ajouter_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             if (validation())
@@ -44,7 +44,26 @@ namespace ProjetGraphiqueSession
                 activite.NbPlacesMaxi = Convert.ToInt32(nbPlacesMax.Text);
                 activite.NomAdmin = nomAdmin.SelectedItem as string;
                 Singleton.getInstance().ajouterActivite(activite);
-                Frame.Navigate(typeof(Activites));
+                ContentDialog dialog = new ContentDialog();
+
+                dialog.XamlRoot = ajouter.XamlRoot;
+                dialog.Title = "Succè";
+                dialog.Content = "L'activité " + activite.Nom+ " a été ajouté avec succè...!";
+
+                dialog.PrimaryButtonText = "Ok";
+
+                // dialog.SecondaryButtonText = "Non";
+                
+
+                dialog.DefaultButton = ContentDialogButton.Close;
+
+                var resultat = await dialog.ShowAsync();
+
+                if (resultat == ContentDialogResult.Primary)
+                {
+                    Frame.Navigate(typeof(Activites));
+                }
+                
             }
         }
 

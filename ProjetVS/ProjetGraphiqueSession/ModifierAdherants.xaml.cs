@@ -32,7 +32,7 @@ namespace ProjetGraphiqueSession
             date.Date = new DateTimeOffset(DateTime.Today);
         }
 
-        private void modifier_Click(object sender, RoutedEventArgs e)
+        private async void modifier_Click(object sender, RoutedEventArgs e)
         {
             if (validation())
             {
@@ -41,7 +41,28 @@ namespace ProjetGraphiqueSession
                 unAdherent.Adresse = Adresse.Text;
                 unAdherent.DateNaissance = date.Date.Value.ToString("d");
                 Singleton.getInstance().modifierAdherent(unAdherent);
-                Frame.Navigate(typeof(Adherents));
+
+
+                ContentDialog dialog = new ContentDialog();
+
+                dialog.XamlRoot = modifier.XamlRoot;
+                dialog.Title = "Succè";
+                dialog.Content = "L'adhérent " + unAdherent.Nom + " a été modifier avec succè...!";
+
+                dialog.PrimaryButtonText = "Ok";
+
+                // dialog.SecondaryButtonText = "Non";
+
+
+                dialog.DefaultButton = ContentDialogButton.Close;
+
+                var resultat = await dialog.ShowAsync();
+
+                if (resultat == ContentDialogResult.Primary)
+                {
+                    Frame.Navigate(typeof(Adherents));
+                }
+               
             }
         }
 
