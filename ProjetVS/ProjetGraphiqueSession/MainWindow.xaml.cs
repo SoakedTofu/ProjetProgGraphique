@@ -76,7 +76,7 @@ namespace ProjetGraphiqueSession
 
                         SingletonNavigation.getInstance().ChangerNavigation();      // Mettre à jour la navigation
 
-                        Singleton.getInstance().SetConnecteBD(true);                // Libérer la connexion unique
+                        Singleton.getInstance().SetConnecteBD(false);                // Libérer la connexion unique
 
                         break;
                     case "Stats":
