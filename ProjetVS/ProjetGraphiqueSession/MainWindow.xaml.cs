@@ -30,8 +30,6 @@ namespace ProjetGraphiqueSession
             mainFrame.Navigate(typeof(Affichage));      // Naviguer à la page d'affichage
             Singleton.getInstance().SetTextblock(tbl_usager);   // Pour afficher l'utilisateur connecté
             Singleton.getInstance().SetMainWindow(this);    // Assigner la mainwindow
-
-            this.Closed += MainWindow_Closed;       // Fonction qui s'exécute à la fermeture du programme
         }
 
         private async void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -52,31 +50,40 @@ namespace ProjetGraphiqueSession
                         break;
                     case "Connexion": // Pour la boîte de dialogue
 
-                        ContentDialogConnexion dialog = new ContentDialogConnexion();
-                        dialog.XamlRoot = this.Content.XamlRoot;
-                        dialog.Title = "Conneztez-vous";
-                        dialog.PrimaryButtonText = "Se connecter";
-                        dialog.CloseButtonText = "Annuler";
-                        dialog.DefaultButton = ContentDialogButton.Primary;
+                        if(!Singleton.getInstance().GetConnecte())
+                        {
+                            DialogConnexion();
+                        }
+                        else
+                        {                            
+                            // Demander si l'utilisateur veut déconnecter celui connecté
 
-                        ContentDialogResult resultat = await dialog.ShowAsync();
+                            ContentDialog dialog = new ContentDialog();
+                            dialog.XamlRoot = Singleton.getInstance().GetMainWindow().Content.XamlRoot;
+                            dialog.Title = "Déconnecter l'utilisateur actuel";
+                            dialog.PrimaryButtonText = "Oui";
+                            dialog.CloseButtonText = "Non";
+                            dialog.Content = "Un utilisateur est présentement connecté sur cette machine. Voulez-vous le déconnecter?";
+                            dialog.DefaultButton = ContentDialogButton.Primary;
+
+                            ContentDialogResult resultat = await dialog.ShowAsync();
+
+                            if (resultat == ContentDialogResult.Primary)
+                            {
+                                FonctionDeconnexion();      // Déconnecter l'usager et réinitialiser les variables
+                                SingletonNavigation.getInstance().ChangerNavigation();      // Changer la navigation vers la page principale
+                                DialogConnexion();
+                            }
+                            else
+                            {
+                                SingletonNavigation.getInstance().ChangerNavigation();
+                            }
+                            
+                        }
                         break;
                     case "Deconnexion":
-                        // Mettre à jour les informations de connexion
 
-                        Singleton.getInstance().SetTBUtilisateur("");       // Enlever le nom de l'interface
-
-                        SingletonNavigation.getInstance().VisibiliteConnexion(false);       // Montrer l'invitation à se connecter, cacher celle de déconnexion
-                       
-                        Singleton.getInstance().SetConnecte(false);                 // Réinitialiser les valeurs de connexion
-                        Singleton.getInstance().SetAdmin(false);
-                        Singleton.getInstance().SetUtilisateur("");                        
-
-                        SingletonNavigation.getInstance().VisibiliteAdmin(false);   // Cacher les pages de l'administrateur                      
-
-                        SingletonNavigation.getInstance().ChangerNavigation();      // Mettre à jour la navigation
-
-                        Singleton.getInstance().SetConnecteBD(false);                // Libérer la connexion unique
+                        FonctionDeconnexion();
 
                         break;
                     case "Stats":
@@ -106,12 +113,31 @@ namespace ProjetGraphiqueSession
 
         }
 
-        // Fonction qui viendra déconnecter l'utilisateur si ce n'est pas déjà fait
-
-        private void MainWindow_Closed(object sender, WindowEventArgs e)
+        private void FonctionDeconnexion()
         {
-            Singleton.getInstance().SetConnecteBD(false);
+            Singleton.getInstance().SetTBUtilisateur("");       // Enlever le nom de l'interface
+
+            SingletonNavigation.getInstance().VisibiliteConnexion(false);       // Montrer l'invitation à se connecter, cacher celle de déconnexion
+
+            Singleton.getInstance().SetConnecte(false);                 // Réinitialiser les valeurs de connexion
+            Singleton.getInstance().SetAdmin(false);
+            Singleton.getInstance().SetUtilisateur("");
+
+            SingletonNavigation.getInstance().VisibiliteAdmin(false);   // Cacher les pages de l'administrateur                      
+
+            SingletonNavigation.getInstance().ChangerNavigation();      // Mettre à jour la navigation
         }
 
+        private async void DialogConnexion()
+        {
+            ContentDialogConnexion dialog = new ContentDialogConnexion();
+            dialog.XamlRoot = this.Content.XamlRoot;
+            dialog.Title = "Conneztez-vous";
+            dialog.PrimaryButtonText = "Se connecter";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+
+            ContentDialogResult resultat = await dialog.ShowAsync();
+        }
     }
 }
