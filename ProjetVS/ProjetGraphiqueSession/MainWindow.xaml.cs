@@ -30,9 +30,9 @@ namespace ProjetGraphiqueSession
             mainFrame.Navigate(typeof(Affichage));      // Naviguer à la page d'affichage
             Singleton.getInstance().SetTextblock(tbl_usager);   // Pour afficher l'utilisateur connecté
             Singleton.getInstance().SetMainWindow(this);    // Assigner la mainwindow
+
+            this.Closed += MainWindow_Closed;       // Fonction qui s'exécute à la fermeture du programme
         }
-
-
 
         private async void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
@@ -104,6 +104,13 @@ namespace ProjetGraphiqueSession
                 }
             }
 
+        }
+
+        // Fonction qui viendra déconnecter l'utilisateur si ce n'est pas déjà fait
+
+        private void MainWindow_Closed(object sender, WindowEventArgs e)
+        {
+            Singleton.getInstance().SetConnecteBD(false);
         }
 
     }

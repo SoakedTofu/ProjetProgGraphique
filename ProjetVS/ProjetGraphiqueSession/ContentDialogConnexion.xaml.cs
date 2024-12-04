@@ -77,6 +77,8 @@ namespace ProjetGraphiqueSession
 
                             sp_MDP.Visibility = Visibility.Visible;
 
+                            this.tb_MDP.Focus(FocusState.Programmatic);     // Focus sur la textbox du mot de passe
+
                             // Si le mot de passe est entré ou non
 
                             if(String.IsNullOrWhiteSpace(tb_MDP.Password))
