@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="2*"/>
 
                 </Grid.ColumnDefinitions>
@@ -51,7 +51,7 @@
                 <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="3">
                     <TextBlock Text="Nombre de places disponibles"  FontSize="20" HorizontalAlignment="Center" TextWrapping="wrap" TextAlignment="Center"/>
                 </Border>
-                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="4" >
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="4" Visibility="{x:Bind uneSeance.Visible}">
                     <TextBlock Text="Operations"  FontSize="20" HorizontalAlignment="Center" />
                 </Border>
 
@@ -74,7 +74,7 @@
                                 <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="2*"/>
 
 
@@ -87,7 +87,7 @@
                             <TextBlock Text="{x:Bind HeureFin}" FontSize="20"  Grid.Column="2" HorizontalAlignment="Center"/>
                             <TextBlock Text="{x:Bind NbPlaces}" FontSize="20"  Grid.Column="3" HorizontalAlignment="Center"/>
 
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Column="4" >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Column="4" Visibility="{x:Bind Visible}">
 
                                 <Button x:Name="edit" Click="edit_Click"   HorizontalAlignment="Left" Foreground="Green">
                                     <SymbolIcon Symbol="Edit"/>

@@ -25,11 +25,16 @@ namespace ProjetGraphiqueSession
     public sealed partial class Affichage : Page
     {
         Activite uneActivite;
+        string visible;
+        
         public Affichage()
         {
             this.InitializeComponent();
             liste_activites.ItemsSource = Singleton.getInstance().getListeActivites();
             uneActivite = new Activite("sport", 2);
+
+            visible=uneActivite.Visible;
+
         }
 
         // Pour gérer la NavigationView
@@ -47,6 +52,13 @@ namespace ProjetGraphiqueSession
                     SingletonNavigation.getInstance().NavigationView.SelectedItem = navItem;
                     break;
                 }
+            }
+
+            if (Singleton.getInstance().GetAdmin())
+            {
+                BordOperation.Visibility=Visibility.Visible;
+              
+          
             }
         }
 
@@ -84,10 +96,28 @@ namespace ProjetGraphiqueSession
             Frame.Navigate(typeof(ModifActivites), Singleton.getInstance().GetActiviteForm(uneActivite.Nom));
         }
 
-        private void liste_activites_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void liste_activites_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            uneActivite = liste_activites.SelectedItem as Activite;
-            Frame.Navigate(typeof(Seances), uneActivite);
+            
+            if (Singleton.getInstance().GetConnecte())
+            {
+                uneActivite = liste_activites.SelectedItem as Activite;
+                Frame.Navigate(typeof(Seances), uneActivite);
+            }
+            else
+            {
+                ContentDialogConnexion dialog = new ContentDialogConnexion();
+                dialog.XamlRoot = this.Content.XamlRoot;
+                dialog.Title = "Conneztez-vous";
+                dialog.PrimaryButtonText = "Se connecter";
+                dialog.CloseButtonText = "Annuler";
+                dialog.DefaultButton = ContentDialogButton.Primary;
+
+                ContentDialogResult resultat = await dialog.ShowAsync();
+
+                
+            }
+          
         }
 
         private async void btn_Exporter_Click(object sender, RoutedEventArgs e)

@@ -15,6 +15,7 @@ namespace ProjetGraphiqueSession
         string nomAdministrateur;
         int nbPlacesMax;
 
+
         public Activite(string nom, double note)
         {
             this.nom = nom;
@@ -44,6 +45,25 @@ namespace ProjetGraphiqueSession
         public override string ToString()
         {
             return nom+" "+note;
+        }
+
+        public string Visible
+
+        {
+           
+            get {
+
+                if (Singleton.getInstance().GetAdmin())
+                {
+                    return "visible";
+
+                }
+                else
+                {
+                    return "Collapsed";
+                }
+            }
+            
         }
 
         public string ToStringCSV() 

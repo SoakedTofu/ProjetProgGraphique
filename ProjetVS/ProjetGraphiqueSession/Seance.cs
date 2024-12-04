@@ -138,6 +138,22 @@ namespace ProjetGraphiqueSession
         {
             return date+" "+heureDebut+" "+" "+heureFin+" "+nbPlaces;
         }
+        public string Visible
+        {
+            get
+            {
+
+                if (Singleton.getInstance().GetAdmin())
+                {
+                    return "visible";
+
+                }
+                else
+                {
+                    return "Collapsed";
+                }
+            }
+        }
 
         // Pour gérer la visiblité du bouton de réservation
         public bool PlacesDisponibles => NbPlaces > 0;

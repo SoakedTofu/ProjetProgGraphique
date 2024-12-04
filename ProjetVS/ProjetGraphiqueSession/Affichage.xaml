@@ -30,7 +30,7 @@
             VerticalAlignment="Bottom"
             Margin=" 10 0 0 0"
             Padding="10"
-            Click="btn_Exporter_Click"
+            Click="btn_Exporter_Click" Visibility="{x:Bind uneActivite.Visible}"
             />
 
             <Grid Grid.Row="1" Margin="0 20 0 0">
@@ -41,7 +41,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="auto" />
 
             </Grid.ColumnDefinitions>
 
@@ -51,8 +51,8 @@
             <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="1">
                 <TextBlock Text="Note d'appréciation"  FontSize="20" HorizontalAlignment="Center"/>
             </Border>
-            <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="2" >
-                <TextBlock Text="Operations"  FontSize="20" HorizontalAlignment="Center" />
+                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="2" x:Name="BordOperation" Visibility="{x:Bind uneActivite.Visible,Mode=OneWay}">
+                    <TextBlock Text="Operations"  FontSize="20" HorizontalAlignment="Center" />
             </Border>
 
         </Grid>
@@ -68,24 +68,24 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4*"/>
                             <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="auto"/>
 
 
                         </Grid.ColumnDefinitions>
 
 
-                            <TextBlock Text="{x:Bind Nom}" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center"/>
-                            <RatingControl Value="{x:Bind Note}" Grid.Column="1" HorizontalAlignment="Center" IsEnabled="False"/>
+                            <TextBlock Text="{x:Bind Nom}" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center" x:Name="nom" />
+                            <RatingControl Value="{x:Bind Note}" Grid.Column="1" HorizontalAlignment="Center" IsReadOnly="true"/>
                             <!--<TextBlock Text="{x:Bind Note}" FontSize="20"  Grid.Column="1" HorizontalAlignment="Center"/>-->
-                       
 
 
-                        <StackPanel Orientation="Horizontal" Width="200"  Grid.Column="3" >
+
+                            <StackPanel Orientation="Horizontal" x:Name="stkOperation"   Grid.Column="3" Visibility="{x:Bind Visible,Mode=OneWay}" >
 
                             <Button x:Name="edit" Click="edit_Click"   HorizontalAlignment="Left" Foreground="Green">
                                 <SymbolIcon Symbol="Edit"/>
                             </Button>
-                            <Button x:Name="delete" Click="delete_Click"  Margin="100 0 0 0" HorizontalAlignment="Right" Foreground="Red">
+                            <Button x:Name="delete" Click="delete_Click"   HorizontalAlignment="Right" Foreground="Red">
                                 <SymbolIcon Symbol="Delete"/>
                             </Button>
 
