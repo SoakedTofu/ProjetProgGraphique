@@ -46,7 +46,6 @@ namespace ProjetGraphiqueSession
                     if (Singleton.getInstance().VerifierAdherent(tb_identification.Text))
                     {
                             
-
                         Singleton.getInstance().SetTBUtilisateur(Singleton.getInstance().GetNomAdherent(tb_identification.Text));   // Mettre à jour les informations de connexions
 
                         args.Cancel = false;
