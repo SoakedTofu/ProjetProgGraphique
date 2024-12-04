@@ -1071,68 +1071,6 @@ namespace ProjetGraphiqueSession
             return window;
         }
 
-        // Pour vérifier si quelqu'un est connecté au programme
-
-        public bool VerifierConnecte()
-        {
-            bool connecte = false;
-
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "VerifierConnecte";
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-
-                con.Open();
-                commande.Prepare();
-                var resultat = commande.ExecuteScalar();
-
-                // Vérifier que la commande renvoie bien un résultat
-
-                if (resultat != null)
-                {
-                    connecte = Convert.ToBoolean(resultat);
-                }
-
-
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-
-            return connecte;
-        }
-
-
-        // Pour gérer la connection unique au serveur
-
-        public void SetConnecteBD(bool connection)
-        {
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "ConnecteBD";
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-                commande.Parameters.AddWithValue("_connecte", connection);
- 
-                
-                con.Open();
-                commande.Prepare();
-                commande.ExecuteNonQuery();
-
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-        }
-
         public ObservableCollection<Activite> getListeActivitesComplete()
         {
             ListeActiviteComplete.Clear();

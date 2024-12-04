@@ -60,7 +60,7 @@
         <ListView x:Name="liste_activites" Grid.Row="2" Margin="0 20 0 0" SelectionChanged="liste_activites_SelectionChanged" >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Activite">
-                    <Grid >
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
 
