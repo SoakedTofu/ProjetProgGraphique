@@ -11,6 +11,12 @@
         <NavigationView PaneDisplayMode="Left" PaneTitle="Nos Activites" x:Name="navView" SelectionChanged="navView_SelectionChanged" IsSettingsVisible="False" >
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Liste des Activites" x:Name="Affichage" Icon="Home"/>
+                <NavigationViewItem x:Name="NoteSeances" ToolTipService.ToolTip="NoteSeances">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xE8BE;"/>
+                        <TextBlock Margin="12 0 0 0" Text="Vos séances"/>
+                    </StackPanel>
+                </NavigationViewItem>
                 <NavigationViewItem Content="Statistiques" x:Name="Stats" Icon="Calculator" Visibility="Collapsed"/>
                 <NavigationViewItem  ToolTipService.ToolTip="Compte Admin" x:Name="Admin">
                     <StackPanel Orientation="Horizontal">
