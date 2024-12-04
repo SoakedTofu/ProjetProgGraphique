@@ -37,6 +37,7 @@ namespace ProjetGraphiqueSession
         {
             Button btn = sender as Button;
             uneSeance = btn.DataContext as Seance;
+            uneSeance.NomAct = activite.Nom;
             Frame.Navigate(typeof(ModifierSeance), uneSeance) ;
         }
 

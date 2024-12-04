@@ -119,6 +119,8 @@ namespace ProjetGraphiqueSession
 
         }
 
+
+
         public ObservableCollection<Adherent> getListeAdherents()
         {
             listeAdherents.Clear();

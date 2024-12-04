@@ -28,6 +28,7 @@ namespace ProjetGraphiqueSession
     {
         Seance uneSeance;
         seanceForm uneSeanceForm;
+        string dateSeance;
         ObservableCollection<Seance> listseance;
         public AjouterSeances()
         {
@@ -51,6 +52,7 @@ namespace ProjetGraphiqueSession
             if (validation())
             {
                 uneSeanceForm.Date = date.Date.Value.ToString("d");
+                dateSeance = date.Date.Value.ToString("d MMM yyyy");
                 uneSeanceForm.HeureDebut =Convert.ToString( hrDebut.Time);
                 uneSeanceForm.HeureFin =Convert.ToString( hrFin.Time);
                 Activite seanceNomActivite = nomActivite.SelectedItem as Activite;
@@ -60,13 +62,14 @@ namespace ProjetGraphiqueSession
                 ContentDialog dialog = new ContentDialog();
               
                 dialog.XamlRoot = ajouter.XamlRoot;
-                dialog.Title = "";
-                dialog.Content = "Séance ajouté avec succè?";
+                dialog.Title = "Succè";
+                dialog.Content ="La séance de "+ uneSeanceForm.NomActivite+" prévue le "+ dateSeance + " à "
+                    +uneSeanceForm.HeureDebut+ " a été ajouté avec succè...!";
                 
                 dialog.PrimaryButtonText = "Ok";
              
                 // dialog.SecondaryButtonText = "Non";
-                dialog.CloseButtonText = "Non";
+           
 
                 dialog.DefaultButton = ContentDialogButton.Close;
 

@@ -29,6 +29,7 @@ namespace ProjetGraphiqueSession
         Seance uneSeance;
         seanceForm uneSeanceForm;
         ObservableCollection<Seance> listseance;
+        string dateSeance;
         public ModifierSeance()
         {
             this.InitializeComponent();
@@ -46,11 +47,12 @@ namespace ProjetGraphiqueSession
 
         }
 
-        private void modifier_Click(object sender, RoutedEventArgs e)
+        private async void modifier_Click(object sender, RoutedEventArgs e)
         {
             if (validation())
             {
                 uneSeanceForm.Date = date.Date.Value.ToString("d");
+                dateSeance = date.Date.Value.ToString("d MMM yyyy");
                 uneSeanceForm.HeureDebut = Convert.ToString(hrDebut.Time);
                 uneSeanceForm.HeureFin = Convert.ToString(hrFin.Time);
                 Seance seanceNbP= nbPlace.SelectedItem as Seance;
@@ -58,7 +60,29 @@ namespace ProjetGraphiqueSession
                 Activite seanceNomActivite=nomActivite.SelectedItem as Activite;
                 uneSeanceForm.NomActivite=seanceNomActivite.Nom;
                 Singleton.getInstance().modifierSeance(uneSeanceForm,Singleton.getInstance().idSeanceAll(uneSeance));
-                Frame.Navigate(typeof(Affichage));
+                
+               
+
+                ContentDialog dialog = new ContentDialog();
+
+                dialog.XamlRoot = modifier.XamlRoot;
+                dialog.Title = "Succè";
+                dialog.Content = "La séance de " + uneSeanceForm.NomActivite + " prévue le " + dateSeance + " à "
+                    + uneSeanceForm.HeureDebut + " a été modifié avec succè...!";
+
+                dialog.PrimaryButtonText = "Ok";
+
+                // dialog.SecondaryButtonText = "Non";
+
+
+                dialog.DefaultButton = ContentDialogButton.Close;
+
+                var resultat = await dialog.ShowAsync();
+
+                if (resultat == ContentDialogResult.Primary)
+                {
+                    Frame.Navigate(typeof(Affichage));
+                }
             }
         }
 
@@ -76,6 +100,7 @@ namespace ProjetGraphiqueSession
                 date.Date = new DateTimeOffset(Convert.ToDateTime(uneSeance.DateDB));
                 hrDebut.SelectedTime = TimeSpan.Parse(uneSeance.HeureDebut);
                 hrFin.SelectedTime =  TimeSpan.Parse( uneSeance.HeureFin);
+                nomActivite.SelectedItem = uneSeance.NomAct;
                 listseance.Add(uneSeance);
                 nbPlace.ItemsSource =listseance ;
 
