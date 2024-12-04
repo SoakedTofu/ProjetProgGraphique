@@ -134,15 +134,15 @@ namespace ProjetGraphiqueSession
                 }
                 else
                 {
-                    args.Cancel = false;
-                    SingletonNavigation.getInstance().ChangerNavigation();
+                    tbl_erreurIdentification.Visibility = Visibility.Visible;
+                    tbl_erreurIdentification.Text = "Un utilisateur est déjà connecté. Veuillez réessayer plus tard.";
 
                 }
             }
             else
             {
-                tbl_erreurIdentification.Visibility = Visibility.Visible;
-                tbl_erreurIdentification.Text = "Un utilisateur est déjà connecté. Veuillez réessayer.";
+                args.Cancel = false;
+                SingletonNavigation.getInstance().ChangerNavigation();
             }
 
         }
