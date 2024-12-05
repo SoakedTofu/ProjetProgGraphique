@@ -1,0 +1,20 @@
+Schéma relationnel
+
+Activites (nom, prixOrganisation, prixVente, #nomAdministrateur)
+
+Categories (nom, #nomAdministrateur)
+
+Seances (idSeance, date, heureDebut, nbPlaces, heureFin, #nomActivite, #nomAdministrateur)
+Adherents (numeroIdentification, nom, prenom, adresse, dateNaissance, age, #nomAdministrateur)
+
+NoteAppreciation (idNote, note)
+
+Administrateurs (nomAdministrateur, motDePasse)
+
+Categories_Activites (#nomCategorie, #nomActivite)
+
+Seances_Adherents_NoteAppreciation (#idNote, #idSeance, #numeroIdentification)
+
+
+
+
