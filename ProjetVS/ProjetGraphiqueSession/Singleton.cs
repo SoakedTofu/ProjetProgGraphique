@@ -1175,8 +1175,6 @@ namespace ProjetGraphiqueSession
         }
 
 
-
-
         // Pour inscrire un adhérent à une séance
 
         public void InscrireAdherent()

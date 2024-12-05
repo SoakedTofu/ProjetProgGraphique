@@ -39,25 +39,26 @@
                 <StackPanel  HorizontalAlignment="Left" Grid.Row="0">
 
                     <Button
-x:Name="btn_Exporter"
-Content="Exporter les activités"
-VerticalAlignment="Bottom"
-Margin=" 10 0 0 0"
-Padding="10"
-Click="btn_Exporter_Click"
-/>
+                        x:Name="btn_Exporter"
+                        Content="Exporter les activités"
+                        VerticalAlignment="Bottom"
+                        Margin=" 10 0 0 0"
+                        Padding="10"
+                        Click="btn_Exporter_Click"
+                        />
 
                 </StackPanel>
 
                 <StackPanel HorizontalAlignment="Right" Grid.Column="1">
 
-                    <Button x:Name="ajout_activite" Content="Ajouter une activité"
-
-
-Padding="10"
-Click="ajout_activite_Click"
-           HorizontalAlignment="Right"
-   />
+                    <Button 
+                        x:Name="ajout_activite" 
+                        Content="Ajouter une activité"
+                        Padding="10"
+                        Click="ajout_activite_Click"
+                        HorizontalAlignment="Right"
+                        />
+                    
                 </StackPanel>
             </Grid>
 

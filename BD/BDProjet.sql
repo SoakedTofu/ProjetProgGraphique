@@ -414,26 +414,16 @@ DELIMITER ;
 DELIMITER //
 CREATE  PROCEDURE SuppActivite (IN  nomAct varchar(50))
 BEGIN
-
    DECLARE idNt INT;
 
    SET idNt=(SELECT  idNote FROM seances_adherents_noteappreciation
-                                                               WHERE idSeance=(select idSeance from seances where nomActivite=nomAct));
-
+            WHERE idSeance=(select idSeance from seances where nomActivite=nomAct));
     DELETE FROM seances_adherents_noteappreciation WHERE idSeance=(select idSeance from seances where nomActivite=nomAct);
-
- DELETE  FROM noteappreciation WHERE idNote=(idNt);
-
-
-     DELETE FROM seances WHERE nomActivite=nomAct;
-
+    DELETE  FROM noteappreciation WHERE idNote=(idNt);
+    DELETE FROM seances WHERE nomActivite=nomAct;
     DELETE FROM activites WHERE nom=nomAct;
-
-
 end //
 DELIMITER ;
-
-
 
 -- Procedure qui permet d'afficher une seance avec son nombre de places restantes à partir de son nom d'activité
 
@@ -444,9 +434,6 @@ BEGIN
    where nomActivite=nomAct;
 end //
 DELIMITER ;
-
-
-CALL AffSeance('Yoga');
 
 -- Participant qui suit le plus de séances
 
@@ -536,24 +523,17 @@ BEGIN
 END //
 DELIMITER ;
 
-
 --Procédure qui permet de modifier une séance a partir de son id
-
 
 DELIMITER //
 CREATE  PROCEDURE ModifSeance (IN  dateForm DATE,IN hrDebut TIME,
 IN hrFin TIME,IN nomAct varchar(50),IN id INT)
 BEGIN
-
     update seances
     SET nomActivite=nomAct,date=dateForm,heureDebut=hrDebut,heureFin=hrFin
     where idSeance=id;
-
-
 end //
 DELIMITER ;
-
-call ModifSeance('2020-10-11','12:00','13:00','Peinture',2);
 
 -- Procédure qui permet de récupérer l'id de la seance (lié à la procédure ModifSeance)
 
@@ -561,36 +541,22 @@ DELIMITER //
 CREATE  PROCEDURE idSeance (IN  dateForm DATE,IN hrDebut TIME,
 IN hrFin TIME,IN nomAct varchar(50))
 BEGIN
-
     SELECT idSeance FROM seances WHERE  date=dateForm AND heureFin=hrFin AND heureDebut=hrDebut AND nomActivite=nomAct;
-
-
 end //
 DELIMITER ;
-
-call idSeance('2020-10-11','12:00','13:00','Peinture');
 
 -- Procédure qui permet de supprimer une séance a partir de son id
 
 DELIMITER //
 CREATE  PROCEDURE SuppSeance (IN  id INT)
 BEGIN
-
- DECLARE idNt INT;
+    DECLARE idNt INT;
 
    SET idNt=(SELECT  idNote FROM seances_adherents_noteappreciation
-                                                               WHERE idSeance=id);
-
-
-
+            WHERE idSeance=id);
     DELETE FROM seances_adherents_noteappreciation WHERE idSeance=id;
-
     DELETE  FROM noteappreciation WHERE idNote=(idNt);
-
     DELETE FROM seances WHERE idSeance=id;
-
-
-
 end //
 DELIMITER ;
 
@@ -601,10 +567,7 @@ call  SuppSeance(6);
 DELIMITER //
 CREATE  PROCEDURE AffAdherent ()
 BEGIN
-
-select *from adherents;
-
-
+    select *from adherents;
 end //
 DELIMITER ;
 
@@ -615,14 +578,9 @@ call  AffAdherent();
 DELIMITER //
 CREATE  PROCEDURE ModifAdherent (IN  nomAd varchar(50),IN  prenomAd varchar(50),IN  adrs varchar(50),IN  date DATE,in id VARCHAR(11))
 BEGIN
-
-
-
-  update adherents
-      SET nom=nomAd,prenom=prenomAd,adresse=adrs,dateNaissance=date,age=YEAR( CURRENT_DATE)-YEAR(date)
-  where numeroIdentification=id;
-
-
+    update adherents
+    SET nom=nomAd,prenom=prenomAd,adresse=adrs,dateNaissance=date,age=YEAR( CURRENT_DATE)-YEAR(date)
+    where numeroIdentification=id;
 end //
 DELIMITER ;
 
@@ -633,31 +591,19 @@ call ModifAdherent('Roche','Sophie','34 rue de la Ormeaux','1991-11-12','SR-1991
 DELIMITER //
 CREATE  PROCEDURE SuppAdherent (IN  id varchar(11))
 BEGIN
-
     DELETE FROM seances_adherents_noteappreciation WHERE numeroIdentification=id;
-
- DELETE  FROM adherents WHERE numeroIdentification=id;
-
-
+    DELETE  FROM adherents WHERE numeroIdentification=id;
 end //
 DELIMITER ;
-
-call SuppAdherent('SR-1991-127');
 
 -- Procedure qui affiche toutes les activites
 
 DELIMITER //
 CREATE  PROCEDURE AffAllActivite ()
 BEGIN
-
 select *from activites;
-
-
 end //
 DELIMITER ;
-
-call  AffAllActivite();
-
 
 -- Procedure qui affiche toutes les seances
 
@@ -671,27 +617,15 @@ select *from seances;
 end //
 DELIMITER ;
 
-call  AffAllSeance();
-
-
 --Procédure pour ajouter des adhérents
 
 DELIMITER //
 CREATE  PROCEDURE AjoutAdherent (IN  nomAd varchar(50),IN  prenomAd varchar(50),IN  adrs varchar(50),IN  date DATE,in id VARCHAR(11))
 BEGIN
-
-
-
-
      INSERT INTO adherents ( nom, prenom, adresse, dateNaissance, age, nomAdministrateur)
      VALUES (nomAd,prenomAd,adrs,date,YEAR( CURRENT_DATE)-YEAR(date), 'admin_unique');
-
-
-
 end //
 DELIMITER ;
-
-call AjoutAdherent('Roche','Sophie','34 rue de la Ormeaux','1991-11-12','SR-1991-127');
 
 --procédure pour ajouter des activités
 
@@ -699,20 +633,9 @@ DELIMITER //
 CREATE  PROCEDURE AjoutActivite (IN  nomAct varchar(50),IN prixOrg double,
                                  IN prixVt double,IN nomAdmin VARCHAR(50),IN nbPlaces INT )
 BEGIN
-
-
-
-
     INSERT INTO activites VALUES (nomAct,prixOrg,prixVt,nomAdmin,nbPlaces);
-
-
-
 end //
 DELIMITER ;
-
-
-
-CALL AjoutActivite("Foot",20,10,"admin_unique",2);
 
 --Procédure qui permet d'ajouter des seances 
 
@@ -720,19 +643,10 @@ DELIMITER //
 CREATE  PROCEDURE AjoutSeance (IN  dateForm DATE,IN hrDebut TIME,
                                IN hrFin TIME,IN nomAct varchar(50))
 BEGIN
-
-
    INSERT INTO seances (date, heureDebut, heureFin,nbPlaces,  nomActivite, nomAdministrateur)
    VALUES (dateForm,hrDebut,hrFin,0,nomAct,'admin_unique');
-
-
-
 end //
 DELIMITER ;
-
-
-call AjoutSeance('2020-10-11','18:00','20:00','Théâtre');
-
 
 /********************** FONCTIONS **********************/
 
