@@ -523,7 +523,7 @@ BEGIN
 END //
 DELIMITER ;
 
---Procédure qui permet de modifier une séance a partir de son id
+-- Procédure qui permet de modifier une séance a partir de son id
 
 DELIMITER //
 CREATE  PROCEDURE ModifSeance (IN  dateForm DATE,IN hrDebut TIME,
@@ -617,7 +617,7 @@ select *from seances;
 end //
 DELIMITER ;
 
---Procédure pour ajouter des adhérents
+-- Procédure pour ajouter des adhérents
 
 DELIMITER //
 CREATE  PROCEDURE AjoutAdherent (IN  nomAd varchar(50),IN  prenomAd varchar(50),IN  adrs varchar(50),IN  date DATE,in id VARCHAR(11))
@@ -627,7 +627,7 @@ BEGIN
 end //
 DELIMITER ;
 
---procédure pour ajouter des activités
+-- procédure pour ajouter des activités
 
 DELIMITER //
 CREATE  PROCEDURE AjoutActivite (IN  nomAct varchar(50),IN prixOrg double,
@@ -637,7 +637,7 @@ BEGIN
 end //
 DELIMITER ;
 
---Procédure qui permet d'ajouter des seances 
+-- Procédure qui permet d'ajouter des seances 
 
 DELIMITER //
 CREATE  PROCEDURE AjoutSeance (IN  dateForm DATE,IN hrDebut TIME,
@@ -647,6 +647,42 @@ BEGIN
    VALUES (dateForm,hrDebut,hrFin,0,nomAct,'admin_unique');
 end //
 DELIMITER ;
+
+-- Procédure pour allez chercher les séances d'un adhérent et leur note
+
+DELIMITER //
+CREATE  PROCEDURE SeanceAdherent (IN  utilisateur VARCHAR(50))
+BEGIN
+    SELECT
+        nomActivite,
+        note,
+        s.idSeance
+    FROM seances_adherents_noteappreciation
+    INNER JOIN seances s on seances_adherents_noteappreciation.idSeance = s.idSeance
+    INNER JOIN noteappreciation n on seances_adherents_noteappreciation.idNote = n.idNote
+    WHERE numeroIdentification = utilisateur;
+end //
+DELIMITER ;
+
+-- Procédure pour insérer une note dans la BD
+
+DELIMITER //
+CREATE  PROCEDURE NoterSeance (IN  note2 INT, IN idseance2 INT, IN utilisateur VARCHAR(50))
+BEGIN
+    DECLARE idNoteAppreciation INT;
+
+    INSERT INTO noteappreciation (note)
+    VALUES (note2);
+
+    SET idNoteAppreciation = LAST_INSERT_ID();
+
+    UPDATE seances_adherents_noteappreciation
+    SET idNote = idNoteAppreciation
+    WHERE idSeance = idseance2
+    AND numeroIdentification = utilisateur;
+end //
+DELIMITER ;
+
 
 /********************** FONCTIONS **********************/
 

@@ -223,6 +223,41 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Procédure pour allez chercher les séances d'un adhérent et leur note
+
+DELIMITER //
+CREATE  PROCEDURE SeanceAdherent (IN  utilisateur VARCHAR(50))
+BEGIN
+    SELECT
+        nomActivite,
+        note,
+        s.idSeance
+    FROM seances_adherents_noteappreciation
+    INNER JOIN seances s on seances_adherents_noteappreciation.idSeance = s.idSeance
+    INNER JOIN noteappreciation n on seances_adherents_noteappreciation.idNote = n.idNote
+    WHERE numeroIdentification = utilisateur;
+end //
+DELIMITER ;
+
+-- Procédure pour insérer une note dans la BD
+
+DELIMITER //
+CREATE  PROCEDURE NoterSeance (IN  note2 INT, IN idseance2 INT, IN utilisateur VARCHAR(50))
+BEGIN
+    DECLARE idNoteAppreciation INT;
+
+    INSERT INTO noteappreciation (note)
+    VALUES (note2);
+
+    SET idNoteAppreciation = LAST_INSERT_ID();
+
+    UPDATE seances_adherents_noteappreciation
+    SET idNote = idNoteAppreciation
+    WHERE idSeance = idseance2
+    AND numeroIdentification = utilisateur;
+end //
+DELIMITER ;
+
 /********************** FONCTIONS **********************/
 
 -- Fonction qui vérifie qu'un adhérent existe
