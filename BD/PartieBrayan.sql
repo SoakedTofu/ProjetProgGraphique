@@ -23,7 +23,7 @@ END//
 
 DELIMITER ;
 
-DROP TRIGGER nbAdherentMaxi;
+
 
 SELECT nbPlaces FROM seances WHERE idSeance=1;
 SELECT nbPlacesMax FROM activites where nom=(select nomActivite from seances where seances.idSeance=1);
@@ -53,7 +53,7 @@ END//
 
 DELIMITER ;
 
-drop trigger nbAdherentMaxi;
+
 
 /*Charger la base avec des données réalistes (chaque base devra comporter entre 50 et 100
 occurrences) à partir des sites web fournis dans le cours (10 données par table à peu près)*/
@@ -295,17 +295,23 @@ DELIMITER //
 CREATE  PROCEDURE SuppSeance (IN  id INT)
 BEGIN
 
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '23000'
 
-    DELETE FROM seances_adherents_noteappreciation WHERE idSeance=id;
 
- 
+BEGIN
+    RESIGNAL set message_text = 'Il existe dans la table seances_adherents_noteappreciation!';
 
-    DELETE FROM seances WHERE idSeance=id;
+END;
+
+  DELETE FROM seances_adherents_noteappreciation WHERE idSeance in (id);
+
+    DELETE FROM seances WHERE idSeance in (id);
 
 
 
 end //
 DELIMITER ;
+
 
 call  SuppSeance(6);
 
@@ -413,7 +419,13 @@ CREATE  PROCEDURE AjoutActivite (IN  nomAct varchar(50),IN prixOrg double,
                                  IN prixVt double,IN nomAdmin VARCHAR(50),IN nbPlaces INT )
 BEGIN
 
+   DECLARE EXIT HANDLER FOR 1062
 
+
+BEGIN
+      RESIGNAL set message_text = 'Erreur l activité  existe déja!';
+
+END;
 
 
     INSERT INTO activites VALUES (nomAct,prixOrg,prixVt,nomAdmin,nbPlaces);

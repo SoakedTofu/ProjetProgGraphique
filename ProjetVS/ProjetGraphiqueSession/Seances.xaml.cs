@@ -137,7 +137,7 @@ namespace ProjetGraphiqueSession
                         }
                         else
                         {
-                            if(uneSeance.DateDB < new DateTimeOffset(DateTime.Today) || TimeSpan.Parse(uneSeance.HeureFin) < new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second))
+                            if(uneSeance.DateDB < new DateTimeOffset(DateTime.Today) && TimeSpan.Parse(uneSeance.HeureFin) < new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second))
                             {
                                 ContentDialog dialog3 = new ContentDialog();
                                 dialog3.XamlRoot = this.XamlRoot;
