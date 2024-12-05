@@ -171,6 +171,18 @@ namespace ProjetGraphiqueSession
 
             }
 
+            else
+            {
+                ContentDialog dialog5 = new ContentDialog();
+                dialog5.XamlRoot = this.XamlRoot;
+                dialog5.Title = "Désolé";
+                dialog5.PrimaryButtonText = "Ok";
+                dialog5.DefaultButton = ContentDialogButton.Primary;
+                dialog5.Content = "Plus aucune place disponible.";
+
+                ContentDialogResult resultat2 = await dialog5.ShowAsync();
+            }
+
 
 
         }

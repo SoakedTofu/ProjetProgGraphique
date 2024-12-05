@@ -25,9 +25,6 @@ DELIMITER ;
 
 
 
-SELECT nbPlaces FROM seances WHERE idSeance=1;
-SELECT nbPlacesMax FROM activites where nom=(select nomActivite from seances where seances.idSeance=1);
-
 /*3.4. Vous pouvez ajouter tout autre déclencheur que vous jugez pertinent pour le
 fonctionnement de la BDD. Justifiez votre choix.*/
 
@@ -419,14 +416,21 @@ CREATE  PROCEDURE AjoutActivite (IN  nomAct varchar(50),IN prixOrg double,
                                  IN prixVt double,IN nomAdmin VARCHAR(50),IN nbPlaces INT )
 BEGIN
 
-   DECLARE EXIT HANDLER FOR 1062
+  DECLARE EXIT HANDLER FOR 1062
 
 
 BEGIN
-      RESIGNAL set message_text = 'Erreur l activité  existe déja!';
+    RESIGNAL set message_text = 'Erreur l activité  existe déja!';
 
 END;
 
+   DECLARE EXIT HANDLER FOR 1048
+
+
+BEGIN
+    RESIGNAL set message_text = 'Le nom de l activite ne peut etre null';
+
+END;
 
     INSERT INTO activites VALUES (nomAct,prixOrg,prixVt,nomAdmin,nbPlaces);
 
@@ -457,3 +461,4 @@ DELIMITER ;
 
 
 call AjoutSeance('2020-10-11','18:00','20:00','Théâtre');
+

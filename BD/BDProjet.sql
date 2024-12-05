@@ -644,7 +644,27 @@ DELIMITER //
 CREATE  PROCEDURE AjoutActivite (IN  nomAct varchar(50),IN prixOrg double,
                                  IN prixVt double,IN nomAdmin VARCHAR(50),IN nbPlaces INT )
 BEGIN
+
+  DECLARE EXIT HANDLER FOR 1062
+
+
+BEGIN
+    RESIGNAL set message_text = 'Erreur l activité  existe déja!';
+
+END;
+
+   DECLARE EXIT HANDLER FOR 1048
+
+
+BEGIN
+    RESIGNAL set message_text = 'Le nom de l activite ne peut etre null';
+
+END;
+
     INSERT INTO activites VALUES (nomAct,prixOrg,prixVt,nomAdmin,nbPlaces);
+
+
+
 end //
 DELIMITER ;
 
