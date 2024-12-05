@@ -26,6 +26,16 @@ namespace ProjetGraphiqueSession
         public PageNotesSeances()
         {
             this.InitializeComponent();
+            liste.ItemsSource = Singleton.getInstance().GetSeanceNote();
+        }
+
+        // Pour insérer la note dans la BD
+        private void RatingControl_ValueChanged(RatingControl sender, object args)
+        {
+
+
+
+            //Singleton.getInstance().NoteSeance();
         }
     }
 }

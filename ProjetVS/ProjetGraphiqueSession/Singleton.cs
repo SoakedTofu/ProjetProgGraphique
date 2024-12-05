@@ -35,7 +35,9 @@ namespace ProjetGraphiqueSession
 
         ObservableCollection<Activite> ListeActiviteComplete = new ObservableCollection<Activite>();    // Pour la liste complète des activités 
 
-        ObservableCollection<Adherent> ListeAdherents = new ObservableCollection<Adherent>();    // Pour la liste des adhérents 
+        ObservableCollection<Adherent> ListeAdherents = new ObservableCollection<Adherent>();           // Pour la liste des adhérents 
+
+        ObservableCollection<SeanceNote> ListeSeanceNote = new ObservableCollection<SeanceNote>();      // Pour les séances et leur note
 
         MainWindow window;
 
@@ -1200,7 +1202,59 @@ namespace ProjetGraphiqueSession
             }
         }
 
+        // Pour avoir la liste des séances d'un adhérent et leur note
 
+        public ObservableCollection<SeanceNote> GetSeanceNote()
+        {
+            ListeSeanceNote.Clear();
+            MySqlCommand commande = new MySqlCommand("SeanceAdherent");
+            commande.Connection = con;
+            commande.Parameters.AddWithValue("@utilisateur", GetUtilisateur());
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+            con.Open();
+            commande.Prepare();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                string nom = r[0].ToString();
+
+                int note = Convert.ToInt32(r[1]);
+
+                int idseance = Convert.ToInt32(r[2]);
+
+                ListeSeanceNote.Add(new SeanceNote { Nom = nom, Note = note, IdSeance = idseance});
+            }
+
+            con.Close();
+
+            return ListeSeanceNote;
+        }
+
+        // Pour inscrire la note d'une séance
+
+        public void NoteSeance(int note, int idseance)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("NoterSeance");
+                commande.Connection = con;
+                commande.Parameters.AddWithValue("@note2", note);
+                commande.Parameters.AddWithValue("@idseance2", idseance);
+                commande.Parameters.AddWithValue("@utilisateur", GetUtilisateur());
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                commande.Prepare();
+                int i = commande.ExecuteNonQuery();
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+        }
 
     }
 }

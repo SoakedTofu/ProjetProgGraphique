@@ -34,27 +34,24 @@
 
             </Grid>
 
-            <ListView x:Name="liste_activites" Grid.Row="3" Margin="0 20 0 0" >
+            <ListView x:Name="liste" Grid.Row="3" Margin="0 20 0 0">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="local:Seance">
+                    <DataTemplate x:DataType="local:SeanceNote">
                         <Grid >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
 
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="{x:Bind NomAct}" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind Nom}" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center"/>
 
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Column="4" >
 
-                                
+                                <RatingControl Value="{x:Bind Note}" Grid.Column="1" HorizontalAlignment="Center" ValueChanged="RatingControl_ValueChanged" />
 
                             </StackPanel>
 
