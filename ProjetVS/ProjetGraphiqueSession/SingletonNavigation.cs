@@ -76,11 +76,11 @@ namespace ProjetGraphiqueSession
             if (navigationView != null)
             {
                 // Variables des items
-                var ItemStatistiques = (NavigationViewItem)navigationView.FindName("Stats");
+                var PagesAdmin = (NavigationViewItem)navigationView.FindName("Admin");
 
-                if (ItemStatistiques != null)
+                if (PagesAdmin != null)
                 {
-                    ItemStatistiques.Visibility = admin ? Visibility.Visible : Visibility.Collapsed;
+                    PagesAdmin.Visibility = admin ? Visibility.Visible : Visibility.Collapsed;
                 }
             }
         }
