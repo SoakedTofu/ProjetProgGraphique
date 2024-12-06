@@ -10,7 +10,7 @@ namespace ProjetGraphiqueSession
     {
         public String Nom { get; set; }
 
-        public int Note { get; set; }
+        public double Note { get; set; }
 
         public int IdSeance { get; set; }
     }

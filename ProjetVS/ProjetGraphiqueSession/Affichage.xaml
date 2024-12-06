@@ -48,11 +48,11 @@
             <Border  BorderBrush="Black" BorderThickness="2" >
                 <TextBlock Text="Activité" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center" />
             </Border>
-            <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="1">
+            <Border  BorderBrush="Black" BorderThickness="0 2 2 2"  Grid.Column="1">
                 <TextBlock Text="Note d'appréciation"  FontSize="20" HorizontalAlignment="Center"/>
             </Border>
-                <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="2" x:Name="BordOperation" Visibility="{x:Bind uneActivite.Visible,Mode=OneWay}">
-                    <TextBlock Text="Operations"  FontSize="20" HorizontalAlignment="Center" />
+            <Border  BorderBrush="Black" BorderThickness="0 2 2 2"  Grid.Column="2" x:Name="BordOperation" Visibility="{x:Bind uneActivite.Visible,Mode=OneWay}">
+                    <TextBlock Text="Opérations"  FontSize="20" HorizontalAlignment="Center" Margin="10 0 10 0" />
             </Border>
 
         </Grid>
@@ -80,12 +80,12 @@
 
 
 
-                            <StackPanel Orientation="Horizontal" x:Name="stkOperation"   Grid.Column="3" Visibility="{x:Bind Visible,Mode=OneWay}" >
+                            <StackPanel Orientation="Horizontal" x:Name="stkOperation" Margin="10 0 10 0"  Grid.Column="3" Visibility="{x:Bind Visible,Mode=OneWay}" >
 
-                            <Button x:Name="edit" Click="edit_Click"   HorizontalAlignment="Left" Foreground="Green">
+                            <Button x:Name="edit" Click="edit_Click" Margin="2"  HorizontalAlignment="Left" Foreground="Green">
                                 <SymbolIcon Symbol="Edit"/>
                             </Button>
-                            <Button x:Name="delete" Click="delete_Click"   HorizontalAlignment="Right" Foreground="Red">
+                            <Button x:Name="delete" Click="delete_Click" Margin="2"  HorizontalAlignment="Right" Foreground="Red">
                                 <SymbolIcon Symbol="Delete"/>
                             </Button>
 

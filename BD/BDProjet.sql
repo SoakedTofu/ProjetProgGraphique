@@ -159,7 +159,7 @@ occurrences) à partir des sites web fournis dans le cours (10 données par tabl
 
 INSERT INTO Administrateur (nomAdministrateur, motDePasse)
 VALUES
-('admin_unique', 'motdepasse123');
+('admin_unique', 'admin');
 
 -- Insertion dans la table Categories (catégories diverses)
 INSERT INTO Categories (nom)
@@ -229,30 +229,26 @@ VALUES
 -- Insertion dans la table noteAppreciation (dix notes d'appréciation fictives)
 INSERT INTO noteAppreciation (idNote, note)
 VALUES
-(1, 5),
-(2, 4),
+(1, 1),
+(2, 2),
 (3, 3),
 (4, 4),
-(5, 5),
-(6, 2),
-(7, 5),
-(8, 3),
-(9, 4),
-(10, 4);
+(5, 5);
 
 -- Insertion dans la table Seances_Adherents_NoteAppreciation (lien entre les séances, adhérents et notes)
+
 INSERT INTO Seances_Adherents_NoteAppreciation (idNote, idSeance, numeroIdentification)
 VALUES
-(1, 1, 'AL-1988-413'),
-(2, 2, 'CM-1985-124'),
-(3, 3, 'FC-1997-336'),
-(4, 4, 'IP-1999-545'),
-(5, 5, 'JD-1990-322'),
-(6, 6, 'JD-1994-386'),
-(7, 7, 'LL-1992-934'),
-(8, 8, 'MD-1995-312'),
-(9, 9, 'PB-2000-682'),
-(10, 10, 'SR-1991-127');
+(3, 1, 'AL-1988-519'),
+(3, 2, 'CM-1985-738'),
+(4, 3, 'FC-1997-412'),
+(5, 4, 'IP-1999-845'),
+(2, 5, 'JD-1990-728'),
+(3, 6, 'JD-1994-128'),
+(4, 7, 'LL-1992-398'),
+(5, 8, 'MD-1995-955'),
+(1, 9, 'PB-2000-594'),
+(3, 10, 'SR-1991-264');
 
 /********************** VUES **********************/
 
@@ -700,17 +696,17 @@ DELIMITER ;
 DELIMITER //
 CREATE  PROCEDURE NoterSeance (IN  note2 INT, IN idseance2 INT, IN utilisateur VARCHAR(50))
 BEGIN
-    DECLARE idNoteAppreciation INT;
+    DECLARE idNote2 INT;
 
-    INSERT INTO noteappreciation (note)
-    VALUES (note2);
+    SET idNote2 = (SELECT idNote
+                    FROM seances_adherents_noteappreciation
+                    WHERE numeroIdentification = utilisateur AND
+                            idSeance = idseance2);
 
-    SET idNoteAppreciation = LAST_INSERT_ID();
+    UPDATE noteappreciation
+    SET note = note2
+    WHERE idNote = idNote2;
 
-    UPDATE seances_adherents_noteappreciation
-    SET idNote = idNoteAppreciation
-    WHERE idSeance = idseance2
-    AND numeroIdentification = utilisateur;
 end //
 DELIMITER ;
 

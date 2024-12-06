@@ -49,9 +49,20 @@
 
                             <TextBlock Text="{x:Bind Nom}" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center"/>
 
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Column="4" >
+                            <StackPanel 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center"  
+                                Grid.Column="4" 
+                                >
 
-                                <RatingControl Value="{x:Bind Note}" Grid.Column="1" HorizontalAlignment="Center" ValueChanged="RatingControl_ValueChanged" />
+                                <RatingControl 
+                                    Value="{x:Bind Note}" 
+                                    Grid.Column="1" 
+                                    HorizontalAlignment="Center" 
+                                    IsClearEnabled="False"
+                                    ValueChanged="RatingControl_ValueChanged" 
+                                    x:Name="rc_note" 
+                                    />
 
                             </StackPanel>
 

@@ -56,9 +56,7 @@ namespace ProjetGraphiqueSession
 
             if (Singleton.getInstance().GetAdmin())
             {
-                BordOperation.Visibility=Visibility.Visible;
-              
-          
+                BordOperation.Visibility=Visibility.Visible;             
             }
         }
 

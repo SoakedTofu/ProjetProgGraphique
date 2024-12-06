@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using Mysqlx.Session;
 using MySqlX.XDevAPI.Common;
+using Org.BouncyCastle.Asn1.BC;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,8 +17,11 @@ namespace ProjetGraphiqueSession
     {
 
         ObservableCollection<Activite> listeActivites;
+
         ObservableCollection<Seance> listeSeances;
+
         ObservableCollection<Adherent> listeAdherents;
+
         MySqlConnection con = new MySqlConnection
             ("Server=cours.cegep3r.info;Database=a2024_420335ri_eq2;Uid='2309444';Pwd='2309444';");
 
@@ -1233,8 +1237,9 @@ namespace ProjetGraphiqueSession
 
         // Pour inscrire la note d'une séance
 
-        public void NoteSeance(int note, int idseance)
+        public void NoteSeance(double note, int idseance)
         {
+
             try
             {
                 MySqlCommand commande = new MySqlCommand("NoterSeance");
@@ -1246,9 +1251,10 @@ namespace ProjetGraphiqueSession
 
                 con.Open();
                 commande.Prepare();
-                int i = commande.ExecuteNonQuery();
-                con.Close();
+                commande.ExecuteNonQuery();
 
+
+                con.Close();
             }
             catch (Exception ex)
             {

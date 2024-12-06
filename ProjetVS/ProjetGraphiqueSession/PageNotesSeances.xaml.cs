@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -32,10 +33,21 @@ namespace ProjetGraphiqueSession
         // Pour insérer la note dans la BD
         private void RatingControl_ValueChanged(RatingControl sender, object args)
         {
+            var ratingControl = sender as RatingControl;
 
+            if (ratingControl != null)
+            {
+                var dataContext = ratingControl.DataContext as SeanceNote;
 
+                if (dataContext != null)
+                {
+                    
+                    int idSeance = dataContext.IdSeance;
+                    double note = ratingControl.Value;
 
-            //Singleton.getInstance().NoteSeance();
+                    Singleton.getInstance().NoteSeance(note, idSeance);
+                }
+            }            
         }
     }
 }

@@ -52,7 +52,7 @@ namespace ProjetGraphiqueSession
 
                         if(!Singleton.getInstance().GetConnecte())
                         {
-                            DialogConnexion();
+                            DialogConnexion();                            
                         }
                         else
                         {                            
@@ -77,13 +77,13 @@ namespace ProjetGraphiqueSession
                             else
                             {
                                 SingletonNavigation.getInstance().ChangerNavigation();
-                            }
-                            
+                            }                           
                         }
                         break;
                     case "Deconnexion":
 
                         FonctionDeconnexion();
+                        mainFrame.Navigate(typeof(Affichage), null);
 
                         break;
                     case "Stats":
@@ -138,6 +138,8 @@ namespace ProjetGraphiqueSession
             dialog.DefaultButton = ContentDialogButton.Primary;
 
             ContentDialogResult resultat = await dialog.ShowAsync();
+
+            mainFrame.Navigate(typeof(Affichage), null);
         }
     }
 }

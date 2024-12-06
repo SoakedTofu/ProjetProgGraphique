@@ -244,17 +244,17 @@ DELIMITER ;
 DELIMITER //
 CREATE  PROCEDURE NoterSeance (IN  note2 INT, IN idseance2 INT, IN utilisateur VARCHAR(50))
 BEGIN
-    DECLARE idNoteAppreciation INT;
+    DECLARE idNote2 INT;
 
-    INSERT INTO noteappreciation (note)
-    VALUES (note2);
+    SET idNote2 = (SELECT idNote
+                    FROM seances_adherents_noteappreciation
+                    WHERE numeroIdentification = utilisateur AND
+                            idSeance = idseance2);
 
-    SET idNoteAppreciation = LAST_INSERT_ID();
+    UPDATE noteappreciation
+    SET note = note2
+    WHERE idNote = idNote2;
 
-    UPDATE seances_adherents_noteappreciation
-    SET idNote = idNoteAppreciation
-    WHERE idSeance = idseance2
-    AND numeroIdentification = utilisateur;
 end //
 DELIMITER ;
 
