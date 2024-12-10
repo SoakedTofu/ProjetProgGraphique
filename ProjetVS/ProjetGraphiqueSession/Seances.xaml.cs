@@ -161,6 +161,7 @@ namespace ProjetGraphiqueSession
                                 dialog4.Content = " Votre réservation a été éffectuer avec succè.\n Nous vous" +
                                     $" prions de bien vouloir vous présenter à parti votre activité de '{uneSeance.NomAct}' le {uneSeance.Date} à {uneSeance.HeureDebut}."+"\n\nÀ bientôt...";
                                 ContentDialogResult resultat2 = await dialog4.ShowAsync();
+                                liste_Seances.ItemsSource = Singleton.getInstance().getListeSeances(activite);
                             }
 
                         

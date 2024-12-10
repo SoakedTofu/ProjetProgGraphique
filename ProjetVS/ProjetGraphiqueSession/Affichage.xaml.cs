@@ -25,7 +25,7 @@ namespace ProjetGraphiqueSession
     public sealed partial class Affichage : Page
     {
         Activite uneActivite;
-        string visible;
+
         
         public Affichage()
         {
@@ -33,7 +33,7 @@ namespace ProjetGraphiqueSession
             liste_activites.ItemsSource = Singleton.getInstance().getListeActivites();
             uneActivite = new Activite("sport", 2);
 
-            visible=uneActivite.Visible;
+           
 
         }
 
