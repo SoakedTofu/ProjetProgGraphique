@@ -43,17 +43,11 @@
         </StackPanel>
         <TextBlock x:Name="erreurHrFin" Foreground="red" Grid.Row="6" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500" />
         
-        <ComboBox x:Name="nbPlace" Header="nombre de places disponibles:" Grid.Row="7" Margin="40 0 0 20" HorizontalAlignment="Center"  Width="500">
-            <ComboBox.ItemTemplate>
-                <DataTemplate x:DataType="local:Seance">
-                    <TextBlock Text="{x:Bind NbPlaces}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+       
 
-        <TextBlock x:Name="erreurNbPlace" Foreground="red" Grid.Row="8" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+        <TextBlock x:Name="erreurNbPlace" Foreground="red" Grid.Row="7" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
 
-        <ComboBox x:Name="nomActivite" Header="Activité:" Grid.Row="9" Margin="40 0 0 20" HorizontalAlignment="Center"  Width="500">
+        <ComboBox x:Name="nomActivite" Header="Activité:" Grid.Row="8" Margin="40 0 0 20" HorizontalAlignment="Center"  Width="500">
             <ComboBox.ItemTemplate>
                 <DataTemplate x:DataType="local:Activite">
                     <TextBlock Text="{x:Bind Nom}"/>
@@ -61,11 +55,11 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <TextBlock x:Name="erreurNomAct" Foreground="red" Grid.Row="10" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+        <TextBlock x:Name="erreurNomAct" Foreground="red" Grid.Row="9" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
 
 
 
-        <StackPanel Orientation="Horizontal" Grid.Row="11" HorizontalAlignment="Center" Margin="40 0 0 0" Width="500">
+        <StackPanel Orientation="Horizontal" Grid.Row="10" HorizontalAlignment="Center" Margin="40 0 0 0" Width="500">
 
             <Button x:Name="modifier" Click="modifier_Click"  Content="sauvegarder"   Background="ForestGreen" HorizontalAlignment="Left"/>
             <Button x:Name="retour" Click="retour_Click"  Content="Retour"   Background="Red" HorizontalAlignment="Right" Margin="330 0 0 0"/>
