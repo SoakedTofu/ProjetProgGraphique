@@ -73,6 +73,7 @@
                     FontSize="20"  
                     HorizontalAlignment="Center" 
                     Margin="5"
+                    Foreground="DarkTurquoise"
                     />
             </Border>
 
@@ -101,6 +102,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="5"
+                    Foreground="DarkTurquoise"
                     />
             </Border>
 
@@ -129,6 +131,7 @@
                     HorizontalAlignment="center"
                     VerticalAlignment="Center"
                     Margin="5"
+                    Foreground="DarkTurquoise"
                     />
             </Border>
 
@@ -157,6 +160,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="5"
+                    Foreground="DarkTurquoise"
                     />
             </Border>
 
@@ -185,6 +189,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="5"
+                    Foreground="DarkTurquoise"
                     />
             </Border>
 
@@ -213,6 +218,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="5"
+                    Foreground="DarkTurquoise"
                     />
             </Border>
 
