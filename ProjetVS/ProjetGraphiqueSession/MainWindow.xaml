@@ -57,11 +57,13 @@
             </NavigationView.FooterMenuItems>
 
             <NavigationView.PaneFooter>
-                <StackPanel Margin="12">
+                <StackPanel Margin="12" Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE910;" Margin="0 0 5 0" />
                     <TextBlock 
                         Text="" 
                         IsHitTestVisible="False" 
-                        FontSize="14"
+                        FontSize="16"
+                        FontWeight="Bold"
                         x:Name="tbl_usager"
                         />
                 </StackPanel>
