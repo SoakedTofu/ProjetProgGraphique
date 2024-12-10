@@ -11,7 +11,7 @@
         <NavigationView PaneDisplayMode="Left" PaneTitle="Nos Activites" x:Name="navView" SelectionChanged="navView_SelectionChanged" IsSettingsVisible="False" >
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Liste des Activites" x:Name="Affichage" Icon="Home"/>
-                <NavigationViewItem x:Name="NoteSeances" ToolTipService.ToolTip="NoteSeances">
+                <NavigationViewItem x:Name="NoteSeances" ToolTipService.ToolTip="NoteSeances" Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
                         <FontIcon Glyph="&#xE8BE;"/>
                         <TextBlock Margin="12 0 0 0" Text="Vos séances"/>

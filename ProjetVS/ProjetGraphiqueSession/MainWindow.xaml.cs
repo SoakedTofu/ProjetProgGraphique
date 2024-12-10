@@ -126,6 +126,8 @@ namespace ProjetGraphiqueSession
             SingletonNavigation.getInstance().VisibiliteAdmin(false);   // Cacher les pages de l'administrateur                      
 
             SingletonNavigation.getInstance().ChangerNavigation();      // Mettre à jour la navigation
+
+            SingletonNavigation.getInstance().VisibiliteSeance(false);   // Cache la page des séances
         }
 
         private async void DialogConnexion()

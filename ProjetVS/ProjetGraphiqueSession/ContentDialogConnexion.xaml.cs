@@ -57,6 +57,8 @@ namespace ProjetGraphiqueSession
 
                         SingletonNavigation.getInstance().ChangerNavigation();              // Remettre la navigation à la page d'accueil
 
+                        SingletonNavigation.getInstance().VisibiliteSeance(true);           // Cache la page des séances
+
                     }
 
                     // Vérifier si c'est un admin
