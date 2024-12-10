@@ -59,6 +59,8 @@ namespace ProjetGraphiqueSession
 
                         SingletonNavigation.getInstance().VisibiliteSeance(true);           // Cache la page des séances
 
+                        SingletonNavigation.getInstance().VisibiliteNom(true);              // Montre le nom de l'utilisateur
+
                     }
 
                     // Vérifier si c'est un admin
@@ -100,6 +102,8 @@ namespace ProjetGraphiqueSession
                                 SingletonNavigation.getInstance().VisibiliteAdmin(true);        // Montrer les pages exclusives à l'admin
 
                                 SingletonNavigation.getInstance().ChangerNavigation();          // Remettre la navigation à la page d'accueil
+
+                                SingletonNavigation.getInstance().VisibiliteNom(true);              // Montre le nom de l'utilisateur
 
                             }
 

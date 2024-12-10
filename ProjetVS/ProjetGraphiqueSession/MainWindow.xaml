@@ -8,7 +8,13 @@
     mc:Ignorable="d">
 
     <Grid>
-        <NavigationView PaneDisplayMode="Left" PaneTitle="Nos Activites" x:Name="navView" SelectionChanged="navView_SelectionChanged" IsSettingsVisible="False" >
+        <NavigationView PaneDisplayMode="Left" PaneTitle="Nos Activites" x:Name="navView" 
+                        SelectionChanged="navView_SelectionChanged" 
+                        IsSettingsVisible="False" 
+                        IsBackEnabled="True" 
+                        IsBackButtonVisible="Visible" 
+                        BackRequested="navView_BackRequested"
+                        >
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Liste des Activites" x:Name="Affichage" Icon="Home"/>
                 <NavigationViewItem x:Name="NoteSeances" ToolTipService.ToolTip="NoteSeances" Visibility="Collapsed">
@@ -57,7 +63,7 @@
             </NavigationView.FooterMenuItems>
 
             <NavigationView.PaneFooter>
-                <StackPanel Margin="12" Orientation="Horizontal">
+                <StackPanel Margin="12" Orientation="Horizontal" Visibility="Collapsed" x:Name="nomUtilisateur">
                     <FontIcon Glyph="&#xE910;" Margin="0 0 5 0" />
                     <TextBlock 
                         Text="" 
@@ -65,6 +71,7 @@
                         FontSize="16"
                         FontWeight="Bold"
                         x:Name="tbl_usager"
+                        Foreground="Aqua"
                         />
                 </StackPanel>
             </NavigationView.PaneFooter>

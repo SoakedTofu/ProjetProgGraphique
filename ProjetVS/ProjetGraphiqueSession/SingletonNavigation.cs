@@ -101,6 +101,22 @@ namespace ProjetGraphiqueSession
             }
         }
 
+        // Montrer/cache le nom de l'utilsateur
+        public void VisibiliteNom(bool connecte)
+        {
+            if (navigationView != null)
+            {
+                // Variables des items
+                var Nom = (StackPanel)navigationView.FindName("nomUtilisateur");
+
+                if (Nom != null)
+                {
+                    Nom.Visibility = connecte ? Visibility.Visible : Visibility.Collapsed;
+                }
+            }
+        }
+
+
 
 
     }
