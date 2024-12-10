@@ -55,8 +55,7 @@ namespace ProjetGraphiqueSession
                 dateSeance = date.Date.Value.ToString("d MMM yyyy");
                 uneSeanceForm.HeureDebut = Convert.ToString(hrDebut.Time);
                 uneSeanceForm.HeureFin = Convert.ToString(hrFin.Time);
-                Seance seanceNbP= nbPlace.SelectedItem as Seance;
-                uneSeanceForm.NbPlaces = seanceNbP.NbPlaces ;
+                uneSeanceForm.NbPlaces=uneSeance.NbPlaces;
                 Activite seanceNomActivite=nomActivite.SelectedItem as Activite;
                 uneSeanceForm.NomActivite=seanceNomActivite.Nom;
                 Singleton.getInstance().modifierSeance(uneSeanceForm,Singleton.getInstance().idSeanceAll(uneSeance));
@@ -118,7 +117,7 @@ namespace ProjetGraphiqueSession
                 }
                 
                 listseance.Add(uneSeance);
-                nbPlace.ItemsSource =listseance ;
+           
 
             }
             else
@@ -145,12 +144,7 @@ namespace ProjetGraphiqueSession
 
                 valide = false;
             }
-            if (nbPlace.SelectedIndex==-1)
-            {
-                erreurNbPlace.Text = "Entrer le nombre de place disponible de la séance";
-
-                valide = false;
-            }
+            
             if (nomActivite.SelectedIndex==-1)
             {
                 erreurNomAct.Text = "Entrer le nom de l'activité";

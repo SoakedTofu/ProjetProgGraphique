@@ -40,14 +40,11 @@
         <TextBox x:Name="prixVente" Header="Entrer le prix de vente de l'activité:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="5" Width="500"/>
         <TextBlock x:Name="erreurPrixVente" Foreground="red" Grid.Row="6" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
 
-        <ComboBox x:Name="nomAdmin" Header="nom Administrateur:" Grid.Row="7" Margin="40 0 0 20" HorizontalAlignment="Center"  Width="500">
-            <x:String>admin_unique</x:String>
-        </ComboBox>
 
-        <TextBox x:Name="nbPlacesMax" Header="Entrer le nombre de places maximum de l'activité:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="8" Width="500"/>
-        <TextBlock x:Name="erreurNbPlacesMax" Foreground="red" Grid.Row="9" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
+        <TextBox x:Name="nbPlacesMax" Header="Entrer le nombre de places maximum de l'activité:" Margin="40 0 0 20" HorizontalAlignment="Center" Grid.Row="7" Width="500"/>
+        <TextBlock x:Name="erreurNbPlacesMax" Foreground="red" Grid.Row="8" Margin="40 0 0 20" HorizontalAlignment="Center" Width="500"/>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="10" HorizontalAlignment="Center" Margin="40 30 0 0" Width="500">
+        <StackPanel Orientation="Horizontal" Grid.Row="9" HorizontalAlignment="Center" Margin="40 30 0 0" Width="500">
 
             <Button x:Name="ajouter" Click="ajouter_Click"  Content="sauvegarder"   Background="ForestGreen" HorizontalAlignment="Left"/>
             <Button x:Name="retour" Click="retour_Click"  Content="Retour"   Background="Red" HorizontalAlignment="Right" Margin="330 0 0 0"/>

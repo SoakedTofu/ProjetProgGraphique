@@ -42,7 +42,7 @@ namespace ProjetGraphiqueSession
                 activite.PrixOrg = Convert.ToDouble(prixOrg.Text);
                 activite.PrixVente = Convert.ToDouble(prixVente.Text);
                 activite.NbPlacesMaxi = Convert.ToInt32(nbPlacesMax.Text);
-                activite.NomAdmin = nomAdmin.SelectedItem as string;
+                activite.NomAdmin = activite.NomAdmin;
                 Singleton.getInstance().ajouterActivite(activite);
                 ContentDialog dialog = new ContentDialog();
 
@@ -111,8 +111,8 @@ namespace ProjetGraphiqueSession
             }
            if(erreurPrixVente.Text.Trim()=="" && erreurPrixOrg.Text.Trim()=="")
             {
-                if (prixOrg1 > prixVente1) {
-                    erreurPrixVente.Text = "*Le prix de vente ne peut etre inférieur au prix d'organisation";
+                if (prixOrg1 >= prixVente1) {
+                    erreurPrixVente.Text = "*Le prix de vente ne peut etre inférieur ou égal au prix d'organisation";
                     valide = false;
                 }
             }
