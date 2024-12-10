@@ -126,6 +126,10 @@ namespace ProjetGraphiqueSession
             SingletonNavigation.getInstance().VisibiliteAdmin(false);   // Cacher les pages de l'administrateur                      
 
             SingletonNavigation.getInstance().ChangerNavigation();      // Mettre à jour la navigation
+
+            SingletonNavigation.getInstance().VisibiliteSeance(false);   // Cache la page des séances
+
+            SingletonNavigation.getInstance().VisibiliteNom(false);              // Cache le nom de l'utilisateur
         }
 
         private async void DialogConnexion()
@@ -140,6 +144,12 @@ namespace ProjetGraphiqueSession
             ContentDialogResult resultat = await dialog.ShowAsync();
 
             mainFrame.Navigate(typeof(Affichage), null);
+        }
+
+        private void navView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            if (mainFrame.CanGoBack)
+                mainFrame.GoBack();
         }
     }
 }

@@ -85,6 +85,38 @@ namespace ProjetGraphiqueSession
             }
         }
 
+        // Montrer la page des séances lors que la connexion d'un utilisateur
+
+        public void VisibiliteSeance(bool connecte)
+        {
+            if (navigationView != null)
+            {
+                // Variables des items
+                var PageSeance = (NavigationViewItem)navigationView.FindName("NoteSeances");
+
+                if (PageSeance != null)
+                {
+                    PageSeance.Visibility = connecte ? Visibility.Visible : Visibility.Collapsed;
+                }
+            }
+        }
+
+        // Montrer/cache le nom de l'utilsateur
+        public void VisibiliteNom(bool connecte)
+        {
+            if (navigationView != null)
+            {
+                // Variables des items
+                var Nom = (StackPanel)navigationView.FindName("nomUtilisateur");
+
+                if (Nom != null)
+                {
+                    Nom.Visibility = connecte ? Visibility.Visible : Visibility.Collapsed;
+                }
+            }
+        }
+
+
 
 
     }
