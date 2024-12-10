@@ -377,7 +377,6 @@ BEGIN
 end //
 DELIMITER ;
 
-CALL Activite("Football");
 
 -- Procedure qui permet de modifier une acivite à partir de son nom
 
@@ -567,8 +566,6 @@ END;
 end //
 DELIMITER ;
 
-call  SuppSeance(6);
-
 -- Procédure qui permet d'afficher les adhérents
 
 DELIMITER //
@@ -577,8 +574,6 @@ BEGIN
     select *from adherents;
 end //
 DELIMITER ;
-
-call  AffAdherent();
 
 -- Procédure qui permet de modifier un adhérent
 
