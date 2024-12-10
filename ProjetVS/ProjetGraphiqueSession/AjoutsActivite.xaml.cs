@@ -61,7 +61,10 @@ namespace ProjetGraphiqueSession
 
                 if (resultat == ContentDialogResult.Primary)
                 {
-                    Frame.Navigate(typeof(Activites));
+                    if (Frame.CanGoBack)
+                    {
+                        Frame.GoBack();
+                    }
                 }
                 
             }
@@ -70,7 +73,10 @@ namespace ProjetGraphiqueSession
         private void retour_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            Frame.Navigate(typeof(Activites));
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
 
         private bool validation()
@@ -102,6 +108,13 @@ namespace ProjetGraphiqueSession
             {
                 erreurPrixVente.Text = "*Le prix ne peut etre négatif";
                 valide = false;
+            }
+           if(erreurPrixVente.Text.Trim()=="" && erreurPrixOrg.Text.Trim()=="")
+            {
+                if (prixOrg1 > prixVente1) {
+                    erreurPrixVente.Text = "*Le prix de vente ne peut etre inférieur au prix d'organisation";
+                    valide = false;
+                }
             }
 
             if (int.TryParse(nbPlacesMax.Text.Trim(), out nbPlaceMaxi1) == false)

@@ -83,14 +83,20 @@ namespace ProjetGraphiqueSession
 
                 if (resultat == ContentDialogResult.Primary)
                 {
-                    Frame.Navigate(typeof(Affichage));
+                    if (Frame.CanGoBack)
+                    {
+                        Frame.GoBack();
+                    }
                 }
             }
         }
 
         private void retour_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Affichage));
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -133,7 +139,7 @@ namespace ProjetGraphiqueSession
 
                 valide = false;
             }
-            if (hrDebut.SelectedTime < new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) || hrFin.SelectedTime < new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second))
+            if (date.Date<= new DateTimeOffset(DateTime.Today) && (hrDebut.SelectedTime < new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) || hrFin.SelectedTime < new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)))
             {
                 erreurHrFin.Text = "la séance doit être à venir ";
 
