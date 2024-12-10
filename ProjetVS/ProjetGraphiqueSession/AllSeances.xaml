@@ -70,10 +70,10 @@ Click="ajout_seance_Click"
                     <TextBlock Text="Date" FontSize="20"  Grid.Column="1" HorizontalAlignment="Center" />
                 </Border>
                 <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="2">
-                    <TextBlock Text="heure de debut"  FontSize="20" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Heure de debut"  FontSize="20" HorizontalAlignment="Center"/>
                 </Border>
                 <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="3">
-                    <TextBlock Text="heure de Fin"  FontSize="20" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Heure de Fin"  FontSize="20" HorizontalAlignment="Center"/>
                 </Border>
                 <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="4">
                     <TextBlock Text="Nombre de places "  FontSize="20" HorizontalAlignment="Center" TextWrapping="wrap" TextAlignment="Center"/>

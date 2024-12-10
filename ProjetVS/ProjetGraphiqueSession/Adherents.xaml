@@ -93,7 +93,7 @@
                 </Border>
                 
                 <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="3" >
-                    <TextBlock Text="age"  FontSize="20" HorizontalAlignment="Center" />
+                    <TextBlock Text="Age"  FontSize="20" HorizontalAlignment="Center" />
                 </Border>
 
                 <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="4" >
