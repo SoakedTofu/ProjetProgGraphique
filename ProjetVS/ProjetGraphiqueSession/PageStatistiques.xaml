@@ -32,11 +32,12 @@
                 HorizontalAlignment="Center"
                 Text="Statistiques"
                 Grid.ColumnSpan="2"
+                Foreground="LawnGreen"
                 />
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="2" 
+                BorderThickness="0 0 0 2" 
                 Grid.Row="1"
                 >
                 <TextBlock 
@@ -44,18 +45,19 @@
                     FontSize="20"  
                     HorizontalAlignment="Center" 
                     Margin="5"
+                    Foreground="DarkTurquoise"
                     />
             </Border>
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="0 2 2 2"  
+                BorderThickness="0 0 0 2"  
                 Grid.Column="1"
                 Grid.Row="1"
                 >
                 <TextBlock 
                     FontSize="20"
-                    HorizontalAlignment="left"
+                    HorizontalAlignment="center"
                     x:Name="tbl_nbTotalAdherents"
                     Margin="5"
                     />
@@ -63,7 +65,7 @@
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="2 0 2 2" 
+                BorderThickness="0 0 0 2" 
                 Grid.Row="2"
                 >
                 <TextBlock 
@@ -76,13 +78,13 @@
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="0 0 2 2"  
+                BorderThickness="0 0 0 2"  
                 Grid.Column="1"
                 Grid.Row="2"
                 >
                 <TextBlock 
                     FontSize="20"
-                    HorizontalAlignment="left"
+                    HorizontalAlignment="center"
                     x:Name="tbl_nbTotalActivites"
                     Margin="5"
                     />
@@ -90,7 +92,7 @@
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="2 0 2 2" 
+                BorderThickness="0 0 0 2" 
                 Grid.Row="3"
                 >
                 <TextBlock 
@@ -104,27 +106,27 @@
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="0 0 2 2"  
+                BorderThickness="0 0 0 2"  
                 Grid.Column="1"
                 Grid.Row="3"
                 >
                 <TextBlock 
                     FontSize="20"
                     Margin="5"
-                    HorizontalAlignment="left"
+                    HorizontalAlignment="center"
                     x:Name="tbl_nbAdherentsParActivite"
                     />
             </Border>
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="2 0 2 2" 
+                BorderThickness="0 0 0 2" 
                 Grid.Row="4"
                 >
                 <TextBlock 
                     Text="Moyenne des notes d'appréciation par activité" 
                     FontSize="20"  
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="center"
                     VerticalAlignment="Center"
                     Margin="5"
                     />
@@ -132,21 +134,21 @@
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="0 0 2 2"  
+                BorderThickness="0 0 0 2"  
                 Grid.Column="1"
                 Grid.Row="4"
                 >
                 <TextBlock 
                     FontSize="20"
                     Margin="5"
-                    HorizontalAlignment="left"
+                    HorizontalAlignment="center"
                     x:Name="tbl_moyenneNote"
                     />
             </Border>
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="2 0 2 2" 
+                BorderThickness="0 0 0 2" 
                 Grid.Row="5"
                 >
                 <TextBlock 
@@ -160,21 +162,21 @@
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="0 0 2 2"  
+                BorderThickness="0 0 0 2"  
                 Grid.Column="1"
                 Grid.Row="5"
                 >
                 <TextBlock 
                     FontSize="20"
                     Margin="5"
-                    HorizontalAlignment="left"
+                    HorizontalAlignment="center"
                     x:Name="tbl_participantPopulaire"
                     />
             </Border>
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="2 0 2 2" 
+                BorderThickness="0 0 0 2" 
                 Grid.Row="6"
                 >
                 <TextBlock 
@@ -188,21 +190,21 @@
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="0 0 2 2"  
+                BorderThickness="0 0 0 2"  
                 Grid.Column="1"
                 Grid.Row="6"
                 >
                 <TextBlock 
                     FontSize="20"
                     Margin="5"
-                    HorizontalAlignment="left"
+                    HorizontalAlignment="center"
                     x:Name="tbl_activitePopulaire"
                     />
             </Border>
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="2 0 2 2" 
+                BorderThickness="0 0 0 2" 
                 Grid.Row="7"
                 >
                 <TextBlock 
@@ -216,14 +218,14 @@
 
             <Border  
                 BorderBrush="Black" 
-                BorderThickness="0 0 2 2"  
+                BorderThickness="0"  
                 Grid.Column="1"
                 Grid.Row="7"
                 >
                 <TextBlock 
                     FontSize="20"
                     Margin="5"
-                    HorizontalAlignment="left"
+                    HorizontalAlignment="center"
                     x:Name="tbl_ActivitePlusSeances"
                     />
             </Border>

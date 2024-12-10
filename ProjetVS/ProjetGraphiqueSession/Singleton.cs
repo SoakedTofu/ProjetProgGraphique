@@ -972,15 +972,16 @@ namespace ProjetGraphiqueSession
                 con.Open();
                 commande.Prepare();
 
-                var result = commande.ExecuteScalar();
+                MySqlDataReader r = commande.ExecuteReader();
 
-                if (result != null)
+                while (r.Read())
                 {
-                    stat = result.ToString();
+                    stat += r[0] + ": " + r[1];
                 }
-                else
+
+                if (String.IsNullOrWhiteSpace(stat))
                 {
-                    stat = "-";  
+                    stat = "-";
                 }
 
                 con.Close();
@@ -1008,13 +1009,14 @@ namespace ProjetGraphiqueSession
                 con.Open();
                 commande.Prepare();
 
-                var result = commande.ExecuteScalar();
+                MySqlDataReader r = commande.ExecuteReader();
 
-                if (result != null)
+                while (r.Read())
                 {
-                    stat = result.ToString();
+                    stat += r[0] + ": " + ((decimal)r[1]).ToString("F2");
                 }
-                else
+
+                if (String.IsNullOrWhiteSpace(stat))
                 {
                     stat = "-";
                 }
@@ -1044,13 +1046,15 @@ namespace ProjetGraphiqueSession
                 con.Open();
                 commande.Prepare();
 
-                var result = commande.ExecuteScalar();
 
-                if (result != null)
+                MySqlDataReader r = commande.ExecuteReader();
+
+                while (r.Read())
                 {
-                    stat = result.ToString();
+                    stat += r[0] + ": " + r[1];
                 }
-                else
+
+                if (String.IsNullOrWhiteSpace(stat))
                 {
                     stat = "-";
                 }
