@@ -77,16 +77,16 @@
                 </Grid.ColumnDefinitions>
 
                 <Border  BorderBrush="Black" BorderThickness="2" >
-                    <TextBlock Text="nom" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center" />
+                    <TextBlock Text="Nom" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center" />
                 </Border>
                 <Border  BorderBrush="Black" BorderThickness="2" Grid.Column="1">
                     <TextBlock Text="Prix d'organisation" FontSize="20"  Grid.Column="1" HorizontalAlignment="Center" />
                 </Border>
                 <Border  BorderBrush="Black" BorderThickness="2" Grid.Column="2">
-                    <TextBlock Text="prix de vente" FontSize="20"  Grid.Column="2" HorizontalAlignment="Center" />
+                    <TextBlock Text="Prix de vente" FontSize="20"  Grid.Column="2" HorizontalAlignment="Center" />
                 </Border>
                 <Border  BorderBrush="Black" BorderThickness="2" Grid.Column="3" >
-                    <TextBlock Text="nombre de places Maximum" FontSize="20"  Grid.Column="3" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock Text="Nombre de places Maximum" FontSize="20"  Grid.Column="3" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                 </Border>
               
                 <Border  BorderBrush="Black" BorderThickness="2"  Grid.Column="4" >

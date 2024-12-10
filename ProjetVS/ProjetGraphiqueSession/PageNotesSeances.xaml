@@ -12,7 +12,7 @@
     <ScrollViewer>
         <StackPanel>
 
-            <TextBlock x:Name="titre" Text="Notez vos séances"
+            <TextBlock x:Name="titre" Text="Notez vos activités"
                HorizontalAlignment="Center" Margin="0 20 0 0" FontWeight="Black" FontSize="50"/>
 
             <Grid Grid.Row="2" Margin="0 20 0 0">
@@ -26,10 +26,10 @@
                 </Grid.ColumnDefinitions>
 
                 <Border  BorderBrush="Black" BorderThickness="2" >
-                    <TextBlock Text="Séance" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center" />
+                    <TextBlock Text="Activités" FontSize="20"  Grid.Column="0" HorizontalAlignment="Center" />
                 </Border>
                 <Border  BorderBrush="Black" BorderThickness="0 2 2 2" Grid.Column="1">
-                    <TextBlock Text="Note" FontSize="20"  Grid.Column="1" HorizontalAlignment="Center" />
+                    <TextBlock Text="Notes" FontSize="20"  Grid.Column="1" HorizontalAlignment="Center" />
                 </Border>
 
             </Grid>
